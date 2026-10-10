@@ -1,0 +1,489 @@
+{
+    "company": "My Pakistan Trips (SMC Private) Limited",
+    "license_number": "0332473",
+    "contact_numbers": [
+        "0349-4886076",
+        "0349-4369937"
+    ],
+    "email": "info@mypakistantrips.com",
+    "website": "www.mypakistantrips.com",
+    "address": "Office No 1, 1H-Block, G Block Canal Gardens, Lahore, 54600",
+    "pickup_points": {
+        "lahore": "Zoom Petroleum / Zoom Petrol Pump near KFC, Thokar Niaz Baig, Lahore",
+        "islamabad_rawalpindi": "Daewoo Terminal, EME near NUST University"
+    },
+    "children_policy": {
+        "under_3_years": "Free of Charge (Lap or on folding seat if available)",
+        "3_to_8_years": "Half Charges (folding seat)",
+        "above_8_years": "Full Charges"
+    },
+    "discount_policy": {
+        "group_discount": "Group of 10 and above avail 500-1000 per head discount on seats",
+        "children_discount": "50% Discount for age between 3-8",
+        "lifetime_membership_card": "10% flat discount on seat",
+        "traveller_card": "10% flat discount on upcoming trips"
+    },
+    "payment_methods": [
+        {
+            "bank": "Meezan Bank",
+            "account_title": "My Pakistan Trips",
+            "account_number": "64020114907575",
+            "iban": "PK76MEZN0064020114907575"
+        },
+        {
+            "bank": "Habib Bank Limited (HBL)",
+            "account_title": "Shabeer Ahmad",
+            "account_number": "05607901370803"
+        },
+        {
+            "bank": "Meezan Bank (ATM)",
+            "account_title": "Shabeer Ahmad",
+            "account_number": "02140111360325",
+            "iban": "PK84MEZN0002140111360325"
+        },
+        {
+            "wallet": "Easypaisa",
+            "account_title": "Shabeer Ahmad",
+            "account": "03494886076"
+        },
+        {
+            "wallet": "Nayapay",
+            "account_title": "Shabeer Ahmad",
+            "account": "0349-4369937"
+        }
+    ],
+    "trip_packages": [
+        {
+            "title": "3 Days Trip to Naran, Shogran and Babusar top",
+            "duration": "3 Days, 2 Nights",
+            "departure": "Every Monday & Thursday Night departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 19,500/- per head",
+                "standard_2_sharing": "Rs. 22,500/- per head [Total: 45,000]",
+                "deluxe_2_sharing": "Rs. 49,500/- per head [Total: 99,000]"
+            },
+            "hotel_names": [
+                "Kunhar hotel",
+                "Swiss Wood Cottages",
+                "Al-Zaib hotel",
+                "Islamabad Tourism hotel",
+                "Silver Oaks hotel"
+            ],
+            "main_attractions": [
+                "Balakot",
+                "Kewai Waterfall",
+                "Kaghan",
+                "Naran",
+                "Naran Bazar",
+                "Lake Saif ul Maluk",
+                "Kunhar River",
+                "Rafting Point",
+                "Luluser lake",
+                "Babuser Top",
+                "Batakundi",
+                "Shogran / Siri pay"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Joining Participants from Islamabad 5:30 AM, Sightseeing, Breakfast in Balakot, Stay at Kiwai Waterfall, Move to Siri Paye Meadows, Move to Naran valley, Dinner and Night stay",
+                "day_2": "Breakfast in Naran, Visit Bata Kundi & Besal, Visit Lulusar Lake & Babusar Top, River Rafting in Naran (self based), Dinner and Night stay at Naran",
+                "day_3": "Jeep Safari to Saif ul Mulook Lake, Breakfast at Naran, Traveling back with sightseeing"
+            },
+            "services_included": [
+                "AC Private Transportation (Coaster Saloon or Toyota Grand Cabin)",
+                "Quality Hygienic Food (3 Breakfasts, 2 Dinners)",
+                "Fuel / Road Toll Expenses",
+                "Guided tour",
+                "Hotel Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature like cold drinks, tea, Heater, mineral water, Lunch etc",
+                "Jeep charges (Any), Except Deluxe clients"
+            ]
+        },
+        {
+            "title": "5 Days Trip to Hunza Valley",
+            "duration": "5 Days, 4 Nights",
+            "departure": "Every Tuesday & Friday night departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 27,999/- per head",
+                "standard_2_sharing": "Rs. 35,000/- per head [Total: 70,000]",
+                "deluxe_2_sharing": "Rs. 75,000/- per head [Total: 150,000]"
+            },
+            "hotel_names": [
+                "Shangrila Chillas",
+                "Grace Hotel Chillas",
+                "Darbar hunza",
+                "Best Western Hotel",
+                "Hunza Legend",
+                "Chilas inn hotel",
+                "Mountain View"
+            ],
+            "main_attractions": [
+                "Hazar Motorway",
+                "Besham",
+                "Chillas",
+                "Hunza",
+                "Altit Fort",
+                "Royal Garden Cultural Heritage of Hunza",
+                "Attabad Lake",
+                "Gulmit",
+                "Passu",
+                "Naltar Valley",
+                "Khunjerab pass / Pak-China Border",
+                "Rakaposhi View Point",
+                "Karimabad",
+                "Sost",
+                "KKH",
+                "Husaini Bridge"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Pick participants from Islamabad at 5:30 AM, Sightseeing, Breakfast at Besham, Dinner in Chilas, Overnight stay in Chilas",
+                "day_2": "Breakfast in Chilas, Departure for Hunza, Nanga Parbat View Point, junction point of 3 mountain ranges, Rakaposhi View Point, Altit/Baltit Fort, Karimabad Bazar, Dinner and Night stay in Hunza",
+                "day_3": "Breakfast in Hunza, Attabad Lake, Passu Cones photo session, Khunjerab Pass (China Border), Dinner and Overnight Stay in Hunza",
+                "day_4": "Breakfast, Naltar Valley (self-based by 4x4 jeep), Dinner & Night stay in Chillas or Besham",
+                "day_5": "Breakfast early morning, Sightseeing on the way back"
+            },
+            "services_included": [
+                "AC Private Transportation (Coaster Saloon or Toyota Grand Cabin)",
+                "Quality Hygienic Food (5 Breakfasts, 4 Dinners)",
+                "BBQ (Limited + Vegetables/Daal maash) & Bonfire",
+                "Fuel / Toll Expenses",
+                "Guided tour",
+                "Hotel Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature"
+            ]
+        },
+        {
+            "title": "8 Days Trip to Skardu Valley & Hunza",
+            "duration": "8 Days, 7 Nights",
+            "departure": "Every Monday & Friday night departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 42,000/- per head",
+                "standard_2_sharing": "Rs. 47,500/- per head [Total: 95,000]",
+                "deluxe_2_sharing": "Rs. 120,000/- per head [Total: 240,000]"
+            },
+            "hotel_names": [
+                "Shangrila Chillas",
+                "Rigo hotel",
+                "Arish Resort",
+                "Shangrila Resort",
+                "Himalya",
+                "Hysper",
+                "Darbar Hunza",
+                "Best Western Hotel",
+                "Hilton Besham",
+                "Apricot Skardu Resort",
+                "Embassy Hotel",
+                "Glaxy Hotel"
+            ],
+            "main_attractions": [
+                "Hazara Motorway",
+                "Besham",
+                "Chillas",
+                "KKH",
+                "Jaglot-Skardu-Road",
+                "Skardu city",
+                "upper Kachura",
+                "lower Kachura",
+                "Shigar valley",
+                "Sarfaranga cold Desert",
+                "Shigar fort",
+                "Manthoka waterfall",
+                "Bashu Valley",
+                "Hunza",
+                "Rakaposhi view point",
+                "Karimabad Bazar",
+                "Attabad Lake",
+                "Altit fort",
+                "Passu",
+                "Khunjrab Pass"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Pick participants from Islamabad, Breakfast at Besham, Dinner in Chilas, Overnight stay in Chilas",
+                "day_2": "Breakfast in Chilas, Departure to Skardu, Nanga Parbat view, Upper Kachura Lake & Shangrilla Lake, Dinner and Night Stay in Skardu",
+                "day_3": "Breakfast in Skardu, Sarfaranga cold desert, Manthoka waterfall, Shigar Valley, Back to Skardu",
+                "day_4": "Breakfast in Skardu, Departure for Bashu Valley / Deosai plains, Dinner and Night stay in Skardu",
+                "day_5": "Move towards Hunza, Rakaposhi View Point, Karimabad Bazar, Dinner & Night stay in Hunza",
+                "day_6": "Attabad Lake, Passu Cones, Khunjerab Pass / Hooper Valley, Dinner & Overnight stay in Hunza",
+                "day_7": "Altit fort, Dinner & Night stay in Chillas or Besham",
+                "day_8": "Breakfast, Sightseeing during travel, Reach safely to Lahore"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (8 Breakfasts, 7 Dinners)",
+                "BBQ (Limited + Dall mash or Vegetables) and Bonfire",
+                "Fuel/Toll Expenses",
+                "Guided expense",
+                "Hotel Accommodation"
+            ],
+            "services_not_included": [
+                "Any Boating and Fort ticket expenses & entry of any parks/resorts",
+                "Expenses of zip line, chair lift, personal nature",
+                "Jeep charges (Any), Except Deluxe clients"
+            ]
+        },
+        {
+            "title": "6 Days Trip to Skardu Valley",
+            "duration": "6 Days, 5 Nights",
+            "departure": "Every Monday & Friday night departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 36,999/- per head",
+                "standard_2_sharing": "Rs. 40,500/- per head [Total: 81,000]",
+                "deluxe_2_sharing": "Rs. 110,000/- per head [Total: 220,000]"
+            },
+            "hotel_names": [
+                "Shangrila Chillas",
+                "Rigo hotel",
+                "Arish Resort",
+                "Shangrila Resort",
+                "Himalya",
+                "Hysper",
+                "Hilton Besham",
+                "Apricot Skardu Resort",
+                "Embassy Hotel",
+                "Glaxy Hotel",
+                "Chilas inn hotel",
+                "Mountain View"
+            ],
+            "main_attractions": [
+                "Hazara Motorway",
+                "Besham",
+                "Chillas",
+                "KKH",
+                "Jaglot-Skardu-Road",
+                "Skardu city",
+                "Upper Kachura",
+                "Lower Kachura",
+                "Shigar valley",
+                "Sarfaranga cold Desert",
+                "Shigar fort",
+                "Manthoka waterfall",
+                "Bashu Valley"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Pick participants from Islamabad, Breakfast at Besham, Dinner in Chilas, Overnight stay in Chilas",
+                "day_2": "Breakfast in Chilas, Departure to Skardu, Nanga Parbat view, Upper Kachura Lake & Shangrilla Lake, Dinner and Night Stay in Skardu",
+                "day_3": "Breakfast in Skardu, Sarfaranga cold desert, Manthoka waterfall, Shigar Valley, Back to Skardu",
+                "day_4": "Breakfast in Skardu, Departure for Bashu Valley / Deosai plains, Dinner and Night stay in Skardu",
+                "day_5": "Breakfast, Sightseeing during travel, Dinner & Night stay in Chillas or Besham",
+                "day_6": "Breakfast, Sightseeing during travel, Reach safely to Lahore"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (3 Breakfasts, 2 Dinners)",
+                "Fuel / Road Toll Expenses",
+                "Guided tour",
+                "Hotel Accommodation"
+            ],
+            "services_not_included": [
+                "Any Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature",
+                "Jeep charges (Any), Except Deluxe clients"
+            ]
+        },
+        {
+            "title": "4 Days Kumrat, Jahaz Banda and Katora Lake",
+            "duration": "4 Days, 3 Nights",
+            "departure": "Every Wednesday Night",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 24,999/- per head",
+                "standard_2_sharing": "Rs. 30,000/- per head [Total: 60,000]"
+            },
+            "hotel_names": [
+                "Momtouch hotel Kumrat"
+            ],
+            "main_attractions": [
+                "Chakdara",
+                "Thal",
+                "Kumrat",
+                "Kumrat Forest",
+                "Kumrat waterfall",
+                "Safari Jeep ride",
+                "Kala pani",
+                "Camping point",
+                "Jahhaz Banda",
+                "Mini Katora Lake",
+                "Kund Banda",
+                "Katora Lake"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM (Wed), Joining from Islamabad 4:30 AM",
+                "day_1": "Sightseeing on Swat Motorway, Upper Dir breakfast, Reach Thal, Transfer to 4x4, Kumrat Valley, Dinner and Night stay in Kumrat",
+                "day_2": "Breakfast, Visit Kumrat Valley, Kala Chasma, trek in Jungle along Panjkor River, Jandari to Jahhaz Banda trek (3.5 hours), Dinner and Night stay in camps/Huts",
+                "day_3": "Breakfast, Tracking for Katora Lake (3.25 hours), Photography at Mini Katora Lake, Back to Jahhaz Banda, Dinner and Overnight Stay in camps/Huts",
+                "day_4": "Early morning departure, Breakfast at Thal, Return journey to Islamabad and Lahore"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (5 Breakfasts, 4 Dinners)",
+                "BBQ (Limited) & Bonfire",
+                "Fuel / Diesel/Toll Expenses",
+                "Guided tour",
+                "Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Jeep and Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature"
+            ]
+        },
+        {
+            "title": "4 Days Trip to Sharda, Toubat & Aurang Kel (Neelum Valley)",
+            "duration": "4 Days, 3 Nights",
+            "departure": "Every Wednesday departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 24,999/- per head",
+                "standard_2_sharing": "Rs. 30,000/- per head [Total: 60,000]"
+            },
+            "hotel_names": [
+                "Benazir Hotel",
+                "Valley View Hotel",
+                "Shabstan Huts",
+                "Taobut continental",
+                "Corner view cottages"
+            ],
+            "main_attractions": [
+                "Muzafarabad",
+                "Neelum Jhelum Dam",
+                "Dhani Waterfall",
+                "Neelum River",
+                "Kutton",
+                "Athmuqam",
+                "Kundal Shahi",
+                "Keran",
+                "LOC",
+                "Sharda",
+                "Kel",
+                "Sharda Riverside",
+                "Aurang kel",
+                "Helmet Village",
+                "Taobut"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Joining from Islamabad 4:30 AM, Breakfast in Muzaffarabad, Journey to Keran, Dhani waterfall, LOC, Dinner at Sharda / Keran, Overnight stay",
+                "day_2": "Breakfast, Travel towards Toubut, Margala waterfall & Helmet Village, Explore Taubut, Dinner & bonfire, Night stay in Hotel at Taobat",
+                "day_3": "Breakfast, Travel towards Kel & Aurang Kel, Jeep ride photography, Dinner in Sharda/Keran, Overnight Stay in hotel",
+                "day_4": "Early breakfast, Return journey, Dhani waterfall stop, Reach back safely"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (5 Breakfasts, 4 Dinners)",
+                "BBQ (Limited) & Bonfire",
+                "Fuel / Diesel/Toll Expenses",
+                "Guided tour",
+                "Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Jeep and Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature"
+            ]
+        },
+        {
+            "title": "6 Days Trip to Astore & Minimerg & Rama Meadows",
+            "duration": "6 Days, 5 Nights",
+            "departure": "Every Friday departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 45,000/- per head",
+                "standard_2_sharing": "Rs. 55,000/- per head [Total: 110,000]"
+            },
+            "hotel_names": [
+                "Trangfa Chillas",
+                "Mountain View Hotel",
+                "Astore Hotel",
+                "Rupal guest house",
+                "Eagle Resort",
+                "Chillas inn hotel"
+            ],
+            "main_attractions": [
+                "Bhera service area",
+                "Balakot",
+                "Naran",
+                "Chilas",
+                "Astore",
+                "Rama Meadows",
+                "Rama Lake",
+                "Minimarg",
+                "Chillum Chowki",
+                "Burzil Pass",
+                "Rainbow Lake",
+                "Domail",
+                "Trishing valley",
+                "Rupal valley"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore",
+                "day_1": "Pick up from Islamabad, Breakfast at Balakot/Naran, Journey to Chilas, Evening check-in, Dinner and night stay",
+                "day_2": "Breakfast in Chilas, Depart for Astore, Rama Meadows in 4x4, Hike towards Rama Lake, Night stay in camp or Astore Hotel",
+                "day_3": "Breakfast, Depart towards Minimarg in 4x4, Chillum Chowki, Burzil Pass, Rainbow Lake, Domail, Crystal lake hike, Camping in Minimarg",
+                "day_4": "Breakfast, Depart towards Trishing valley by 4x4, Explore landscapes, Check into guesthouse in Traishing",
+                "day_5": "Breakfast, Free time / Rupal valley exploration, Depart towards Chilas or Burawai, Dinner and night stay",
+                "day_6": "Breakfast, Journey back to Islamabad and Lahore"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (5 Breakfasts, 4 Dinners)",
+                "BBQ (Limited) & Bonfire",
+                "Fuel / Diesel/Toll Expenses",
+                "Guided tour",
+                "Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Jeep and Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature"
+            ]
+        },
+        {
+            "title": "3 Days Trip to Swat & Malam Jabba",
+            "duration": "3 Days, 2 Nights",
+            "departure": "Every Monday & Thursday night departure",
+            "pricing": {
+                "standard_4_5_sharing": "Rs. 17,500/- per head",
+                "standard_2_sharing": "Rs. 20,000/- per head [Total: 40,000]",
+                "deluxe_2_sharing": "Rs. 49,500/- per head [Total: 99,000]"
+            },
+            "hotel_names": [
+                "Roomy Kalam",
+                "Green Pak Resort",
+                "New Golden Star Hotel"
+            ],
+            "main_attractions": [
+                "Swat motorway",
+                "Malam Jabba",
+                "Swat river",
+                "kalam",
+                "Ushu forest",
+                "Kalam Bazar",
+                "Mahudand lake",
+                "Baloga Village",
+                "Zip line",
+                "Chair Lift"
+            ],
+            "itinerary": {
+                "day_0": "Departure from Lahore at 11:30 PM",
+                "day_1": "Pick Participants from Islamabad, Breakfast in Mingora, Move to Malam Jabba, Chair lift and zip line, Dinner and Night stay in Swat",
+                "day_2": "Photography at Swat River, Move towards Ushu forest, Mahudand Lake / Baloga village, Dinner and Night stay in Kalam",
+                "day_3": "Breakfast, Travel towards Mingora, Motorway journey back to Islamabad/Lahore"
+            },
+            "services_included": [
+                "AC Private Transportation",
+                "Quality Hygienic Food (5 Breakfasts, 4 Dinners)",
+                "BBQ (Limited) & Bonfire",
+                "Fuel / Diesel/Toll Expenses",
+                "Guided tour",
+                "Accommodation (on sharing basis)"
+            ],
+            "services_not_included": [
+                "Any Jeep and Boating and Fort tickets expenses & entry of any parks/resorts",
+                "Expenses of personal nature"
+            ]
+        }
+    ]
+}
