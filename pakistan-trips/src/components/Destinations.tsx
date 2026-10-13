@@ -14,7 +14,7 @@ const DESTINATIONS = [
     rating: 4.9,
     reviews: 128,
     tag: "skardu-valley",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Gateway to the high Karakoram peaks, famous for Shangrila Lake, Cold Desert, and Deosai Plains.",
     highlight: "Cold Desert & Lakes"
   },
@@ -26,7 +26,7 @@ const DESTINATIONS = [
     rating: 5.0,
     reviews: 210,
     tag: "hunza-valley",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Breathtaking landscapes with centuries-old Altit & Baltit Forts, Attabad Lake, and Passu Cones.",
     highlight: "Culture & Landscapes"
   },
@@ -38,7 +38,7 @@ const DESTINATIONS = [
     rating: 4.8,
     reviews: 95,
     tag: "fairy-meadows",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Lush green plateau offering the most stunning and dramatic views of Nanga Parbat peak.",
     highlight: "Nanga Parbat View"
   },
@@ -50,7 +50,7 @@ const DESTINATIONS = [
     rating: 4.7,
     reviews: 164,
     tag: "swat-valley-kalam",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Known as the Switzerland of Pakistan, offering lush forests, Mahodand Lake, and ski resorts.",
     highlight: "Lakes & Forests"
   },
@@ -62,7 +62,7 @@ const DESTINATIONS = [
     rating: 4.9,
     reviews: 142,
     tag: "neelum-valley",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "A 144km-long bow-shaped valley with cascading waterfalls, thick pine forests, and Arang Kel.",
     highlight: "Greenery & Streams"
   },
@@ -74,7 +74,7 @@ const DESTINATIONS = [
     rating: 4.8,
     reviews: 180,
     tag: "naran-saif-ul-malook",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Home to the legendary Saif-ul-Malook lake, Babusar Top, and scenic Babusar Pass drive.",
     highlight: "Fairytale Lakes"
   },
@@ -86,7 +86,7 @@ const DESTINATIONS = [
     rating: 4.6,
     reviews: 88,
     tag: "gwadar-coastal-highway",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Pristine beaches, Hingol National Park, and Princess of Hope along the Arabian Sea.",
     highlight: "Sea & Desert Cliffs"
   },
@@ -98,7 +98,7 @@ const DESTINATIONS = [
     rating: 4.9,
     reviews: 76,
     tag: "chitral-kalash-valley",
-    images: [PLACEHOLDER_IMAGE,
+    images: [PLACEHOLDER_IMAGE],
     description: "Unique cultural heritage, home to the ancient Kalasha tribe and Tirich Mir Karakoram views.",
     highlight: "Ancient Heritage"
   }
