@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
       >
         <img
           src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=2000"
-          alt="Pakistan Travel"
+          alt="Mountain scenery in Hunza Valley, Pakistan" width={2000} height={1200}
           className="w-full h-full object-cover scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
@@ -110,7 +110,7 @@ export const Hero: React.FC = () => {
             variants={itemVariants}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]"
           >
-            Explore the <br />
+            Luxury Trips in Pakistan <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               Unseen Beauty
             </span>
@@ -213,11 +213,11 @@ export const Hero: React.FC = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   <div className="relative h-60 rounded-2xl overflow-hidden mb-5 group">
-                    <img 
+                    <img height={600} width={800} 
                       src={currentPkg.image} 
-                      alt={currentPkg.title}
+                      alt={`Scenic landscape for ${currentPkg.title}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
+                    loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                     
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">

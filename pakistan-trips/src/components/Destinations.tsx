@@ -234,7 +234,8 @@ export const Destinations: React.FC = () => {
         >
           <AnimatePresence>
             {filteredDestinations.map((item) => (
-              <motion.div
+              <motion.section
+                aria-label={item.name}
                 key={item.id}
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -245,11 +246,11 @@ export const Destinations: React.FC = () => {
               >
                 {/* Destination Image Box with Multiple Images indicator */}
                 <div className="relative h-64 overflow-hidden">
-                  <img
+                  <img height={600} width={800}
                     src={item.images[0]}
-                    alt={item.name}
+                    alt={`${item.name}, ${item.region} — scenic destination in Pakistan`}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
+                  loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
 
                   {/* Rating Tag */}
@@ -269,9 +270,9 @@ export const Destinations: React.FC = () => {
 
                   {/* Name and Region Overlay */}
                   <div className="absolute bottom-3 left-4 right-4">
-                    <h3 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
+                    <h2 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">
                       {item.name}
-                    </h3>
+                    </h2>
                     <p className="text-xs text-slate-300 flex items-center gap-1 mt-1">
                       <MapPin className="w-3.5 h-3.5 text-emerald-400" />
                       {item.region}
@@ -295,7 +296,7 @@ export const Destinations: React.FC = () => {
                     </div>
                   </button>
                 </div>
-              </motion.div>
+              </motion.section>
             ))}
           </AnimatePresence>
         </motion.div>
@@ -350,11 +351,11 @@ export const Destinations: React.FC = () => {
 
               {/* Active Large Image Display */}
               <div className="relative h-72 sm:h-96 bg-slate-950">
-                <img
+                <img height={600} width={800}
                   src={activeGalleryDestination.images[currentImageIdx]}
                   alt={activeGalleryDestination.name}
                   className="w-full h-full object-cover"
-                />
+                loading="lazy" />
 
                 {/* Left/Right Navigation Arrows */}
                 <button
@@ -385,7 +386,7 @@ export const Destinations: React.FC = () => {
                       idx === currentImageIdx ? 'border-emerald-400 scale-105 shadow-lg shadow-emerald-500/20' : 'border-slate-800 opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-cover" />
+                    <img height={600} width={800} src={imgUrl} alt={`Photo ${idx + 1} of ${activeGalleryDestination.name}`} className="w-full h-full object-cover" loading="lazy" />
                   </button>
                 ))}
               </div>

@@ -93,9 +93,9 @@ export const Gallery: React.FC = () => {
                     onClick={() => setSelectedIndex(globalIndex)}
                     className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-md shadow-xl cursor-pointer"
                   >
-                    <img
+                    <img height={600} width={800}
                       src={img.secure_url}
-                      alt="Pakistan Trip"
+                      alt="Travelers exploring scenic destinations in Pakistan"
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                     />
@@ -163,11 +163,11 @@ export const Gallery: React.FC = () => {
               </div>
 
               <div className="relative flex-1 w-full bg-slate-950 rounded-2xl overflow-hidden flex items-center justify-center">
-                <img
+                <img height={600} width={800}
                   src={activeImage.secure_url}
-                  alt="Preview"
+                  alt="Expanded view of a Pakistan trip gallery photo"
                   className="w-full h-full object-contain"
-                />
+                loading="lazy" />
 
                 <button
                   onClick={handlePrev}

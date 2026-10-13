@@ -17,7 +17,7 @@ export const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1.5 seconds timer to hide loader automatically
+    // Keep the branded intro while rendering page content for prerendering and accessibility.
     const timer = setTimeout(() => {
       setLoading(false);
     }, 1500);
@@ -27,27 +27,22 @@ export const App: React.FC = () => {
 
   return (
     <div className="bg-slate-950 text-white min-h-screen selection:bg-emerald-500 selection:text-slate-950">
-      <AnimatePresence mode="wait">
-        {loading ? (
-          <Loader key="loader" />
-        ) : (
-          <>
-            <Navbar />
-            <main>
-              <Hero />
-              <Destinations />
-              <Tours />
-              <Gallery />
-              <About />
-              <Testimonials />
-              <FAQ />
-              <Contact />
-            </main>
-            <Footer />
-            <WhatsAppButton />
-          </>
-        )}
+      <AnimatePresence>
+        {loading && <Loader key="loader" />}
       </AnimatePresence>
+      <Navbar />
+      <main>
+        <Hero />
+        <Destinations />
+        <Tours />
+        <Gallery />
+        <About />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+      </main>
+      <Footer />
+      <WhatsAppButton />
     </div>
   );
 };

@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         
         {/* Brand Logo */}
         <a href="#" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
-          <img
+          <img height={600} width={800}
             src="/my-pakistan-trips-logo.svg"
             alt="My Pakistan Trips"
             className="h-14 sm:h-16 w-auto max-w-[210px] object-contain rounded-md"
