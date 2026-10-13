@@ -21,11 +21,11 @@ export const Footer: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-slate-400 leading-relaxed">
-              {tripData.company} — Your trusted partner for unforgettable and safe adventures across the northern valleys of Pakistan.[cite: 1]
+              {tripData.company} — Your trusted partner for unforgettable and safe adventures across the northern valleys of Pakistan.
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
               <ShieldCheck className="w-4 h-4" />
-              <span>License No: {tripData.license_number}[cite: 1]</span>
+              <span>License No: {tripData.license_number}</span>
             </div>
           </div>
 
@@ -47,15 +47,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-3 text-xs">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>{tripData.contact_numbers?.[0]}, {tripData.contact_numbers?.[1]}[cite: 1]</span>
+                <span>{tripData.contact_numbers?.[0]}, {tripData.contact_numbers?.[1]}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>{tripData.email}[cite: 1]</span>
+                <span>{tripData.email}</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{tripData.address}[cite: 1]</span>
+                <span className="leading-relaxed">{tripData.address}</span>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@ export const Footer: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-block px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400 text-xs font-semibold hover:border-emerald-500/50 transition-colors"
             >
-              {tripData.website}[cite: 1]
+              {tripData.website}
             </a>
           </div>
 
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} {tripData.company}. All rights reserved.[cite: 1]</p>
+          <p>© {new Date().getFullYear()} {tripData.company}. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Pakistan Travelers
           </p>
