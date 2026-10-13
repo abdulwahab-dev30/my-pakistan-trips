@@ -167,7 +167,7 @@ export const Gallery: React.FC = () => {
                   src={activeImage.secure_url}
                   alt="Expanded view of a Pakistan trip gallery photo"
                   className="w-full h-full object-contain"
-                / loading="lazy">
+                loading="lazy" />
 
                 <button
                   onClick={handlePrev}
