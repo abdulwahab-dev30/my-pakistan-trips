@@ -4,7 +4,7 @@ import { MapPin, Compass, Search, Star, ArrowUpRight, ChevronLeft, ChevronRight,
 
 // Destination images are loaded from Cloudinary using each destination's tag.
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'lvv2vfug';
-const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%230f172a'/%3E%3Cpath d='M0 470 L210 250 L340 390 L480 180 L800 500 V600 H0Z' fill='%231e293b'/%3E%3Ccircle cx='620' cy='145' r='48' fill='%23334155'/%3E%3Ctext x='400' y='550' text-anchor='middle' font-family='Arial' font-size='24' fill='%2394a3b8'%3ENo destination photos yet%3C/text%3E%3C/svg%3E';
+const PLACEHOLDER_IMAGE = "https://placehold.co/800x600/0f172a/94a3b8?text=No+destination+photos+yet";
 const DESTINATIONS = [
   {
     id: 1,
