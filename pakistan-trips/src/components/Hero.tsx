@@ -23,7 +23,6 @@ const PACKAGE_IMAGE_TAGS: Record<string, string> = {
 export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [heroBackgroundImage, setHeroBackgroundImage] = useState(localHeroBackground);
   const [packageImages, setPackageImages] = useState<Record<string, string>>({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -36,72 +35,9 @@ export const Hero: React.FC = () => {
     return () => media.removeEventListener('change', updateMobile);
   }, []);
 
-  // Use Cloudinary gallery photos for the hero background. Advance only after
-  // the next image has loaded successfully, so a failed request never advances
-  // the saved position.
-  useEffect(() => {
-    let cancelled = false;
-    const cloudName = "lvv2vfug";
-    const storageIndexKey = "mpt-hero-cloudinary-index";
-    const storageUrlKey = "mpt-hero-cloudinary-url";
-
-    const loadNextBackground = async () => {
-      let lastIndex = -1;
-      let previousUrl = "";
-
-      try {
-        lastIndex = Number(window.localStorage.getItem(storageIndexKey) ?? -1);
-        previousUrl = window.localStorage.getItem(storageUrlKey) ?? "";
-      } catch {
-        // Storage may be unavailable; the background can still load for this visit.
-      }
-
-      // The bundled WebP is shown immediately on first visit. On repeat visits,
-      // reuse the last successful Cloudinary image while the next one loads.
-      if (previousUrl && !cancelled) setHeroBackgroundImage(previousUrl);
-
-      try {
-        const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json`);
-        if (!response.ok) throw new Error("Cloudinary gallery list request failed");
-
-        const data = await response.json();
-        const resources = (data.resources || []).filter(
-          (item: any) => item.public_id && item.format && item.version
-        );
-        if (!resources.length || cancelled) return;
-
-        const nextIndex = (lastIndex + 1) % resources.length;
-        const item = resources[nextIndex];
-        const imageWidth = window.matchMedia("(max-width: 767px)").matches ? 900 : 1600;
-        const nextUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_${imageWidth}/v${item.version}/${item.public_id}.${item.format}`;
-        const preload = new window.Image();
-        preload.onload = () => {
-          if (cancelled) return;
-          setHeroBackgroundImage(nextUrl);
-          try {
-            window.localStorage.setItem(storageIndexKey, String(nextIndex));
-            window.localStorage.setItem(storageUrlKey, nextUrl);
-          } catch {
-            // Keep the successfully loaded image even if storage is unavailable.
-          }
-        };
-        preload.onerror = () => {
-          if (cancelled) return;
-          // Keep the last successful background and retry this same candidate next visit.
-          if (previousUrl) setHeroBackgroundImage(previousUrl);
-        };
-        preload.src = nextUrl;
-      } catch (error) {
-        if (!cancelled && previousUrl) setHeroBackgroundImage(previousUrl);
-        console.error("Could not load the Cloudinary hero background:", error);
-      }
-    };
-
-    loadNextBackground();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  // Keep the locally bundled WebP as the fixed hero background.
+  // Cloudinary remains in use for the separate package carousel images.
+  const heroBackgroundImage = localHeroBackground;
 
   const rawPackages = tripData.trip_packages || [];
 
@@ -215,7 +151,6 @@ export const Hero: React.FC = () => {
             height={1000}
             fetchPriority="high"
             decoding="async"
-            fetchPriority="high"
             className="w-full h-full object-cover scale-105"
           />
         )}
