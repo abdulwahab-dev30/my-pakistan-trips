@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Compass, Sparkles, ArrowRight, Play, ChevronLeft, ChevronRight, MapPin, Clock } from 'lucide-react';
 
-// Import central JSON data
+// Import central JSON data and the optimized local hero image
 import tripData from '../data/trips-data.json';
+import localHeroBackground from '../assets/hero-bg.webp';
 
 // Each package uses its own Cloudinary tag. Add these exact tags to package photos.
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
@@ -22,7 +23,7 @@ const PACKAGE_IMAGE_TAGS: Record<string, string> = {
 export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [heroBackgroundImage, setHeroBackgroundImage] = useState("");
+  const [heroBackgroundImage, setHeroBackgroundImage] = useState(localHeroBackground);
   const [packageImages, setPackageImages] = useState<Record<string, string>>({});
   const [isMobile, setIsMobile] = useState(false);
 
@@ -55,8 +56,8 @@ export const Hero: React.FC = () => {
         // Storage may be unavailable; the background can still load for this visit.
       }
 
-      // Show the last successfully loaded image immediately on repeat visits.
-      // Refresh it in the background; never make the first render wait for the API.
+      // The bundled WebP is shown immediately on first visit. On repeat visits,
+      // reuse the last successful Cloudinary image while the next one loads.
       if (previousUrl && !cancelled) setHeroBackgroundImage(previousUrl);
 
       try {
