@@ -142,10 +142,13 @@ export const CTA: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Full Name */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <label htmlFor="contact-name" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5 text-emerald-400" /> Full Name
                   </label>
                   <input
+                    id="contact-name"
+                    name="name"
+                    autoComplete="name"
                     type="text"
                     required
                     placeholder="Enter your name"
@@ -157,10 +160,13 @@ export const CTA: React.FC = () => {
 
                 {/* Phone / WhatsApp */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <label htmlFor="contact-phone" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5 text-emerald-400" /> WhatsApp Number
                   </label>
                   <input
+                    id="contact-phone"
+                    name="phone"
+                    autoComplete="tel"
                     type="tel"
                     required
                     placeholder="e.g. 03001234567"
@@ -173,10 +179,12 @@ export const CTA: React.FC = () => {
 
               {/* Package Select */}
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                <label htmlFor="contact-trip" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                   <Calendar className="w-3.5 h-3.5 text-emerald-400" /> Select Tour Package
                 </label>
                 <select
+                  id="contact-trip"
+                  name="selectedTrip"
                   value={formData.selectedTrip}
                   onChange={(e) => setFormData({ ...formData, selectedTrip: e.target.value })}
                   className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
@@ -192,10 +200,12 @@ export const CTA: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Departure City */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <label htmlFor="contact-departure-city" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400" /> Departure From
                   </label>
                   <select
+                    id="contact-departure-city"
+                    name="departureCity"
                     value={formData.departureCity}
                     onChange={(e) => setFormData({ ...formData, departureCity: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
@@ -208,10 +218,12 @@ export const CTA: React.FC = () => {
 
                 {/* Group Size */}
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                  <label htmlFor="contact-group-size" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                     <Users className="w-3.5 h-3.5 text-emerald-400" /> Group Size / Persons
                   </label>
                   <select
+                    id="contact-group-size"
+                    name="groupSize"
                     value={formData.groupSize}
                     onChange={(e) => setFormData({ ...formData, groupSize: e.target.value })}
                     className="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors cursor-pointer"
@@ -227,10 +239,12 @@ export const CTA: React.FC = () => {
 
               {/* Special Requests / Notes */}
               <div className="space-y-2">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                <label htmlFor="contact-notes" className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                   <MessageSquare className="w-3.5 h-3.5 text-emerald-400" /> Additional Notes (Optional)
                 </label>
                 <textarea
+                  id="contact-notes"
+                  name="notes"
                   rows={3}
                   placeholder="Ask about private dates, hotel upgrades, or specific requirements..."
                   value={formData.notes}
