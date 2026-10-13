@@ -83,6 +83,8 @@ export const Hero: React.FC = () => {
         <img
           src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=2000"
           alt="Mountain scenery in Hunza Valley, Pakistan" width={2000} height={1200}
+          fetchPriority="high"
+          decoding="async"
           className="w-full h-full object-cover scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
