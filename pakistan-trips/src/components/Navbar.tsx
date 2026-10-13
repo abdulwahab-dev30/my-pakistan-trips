@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Menu, X, Phone, Sparkles } from 'lucide-react';
+import DiscountBanner from './DiscountBanner';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,15 +37,18 @@ export const Navbar: React.FC = () => {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 py-3 shadow-xl'
-          : 'bg-transparent py-5'
+          ? 'bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/80 shadow-xl'
+          : 'bg-slate-950/70 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
-        
+      <div className={`max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-300 ${
+        isScrolled ? 'py-3' : 'py-5'
+      }`}>
         {/* Brand Logo */}
         <a href="#" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
-          <img height={600} width={800}
+          <img
+            height={600}
+            width={800}
             src="/my-pakistan-trips-logo.svg"
             alt="My Pakistan Trips"
             className="h-14 sm:h-16 w-auto max-w-[210px] object-contain rounded-md"
@@ -60,7 +64,6 @@ export const Navbar: React.FC = () => {
               className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors duration-200 relative group py-1"
             >
               {link.name}
-              {/* Subtle underline hover effect */}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full rounded-full" />
             </a>
           ))}
@@ -84,11 +87,14 @@ export const Navbar: React.FC = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           className="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
           aria-label="Toggle Menu"
+          aria-expanded={isMobileMenuOpen}
         >
           {isMobileMenuOpen ? <X className="w-6 h-6 text-emerald-400" /> : <Menu className="w-6 h-6" />}
         </button>
-
       </div>
+
+      {/* Discount banner stays attached to the fixed header while scrolling */}
+      <DiscountBanner />
 
       {/* Mobile Responsive Menu Popup */}
       <AnimatePresence>
