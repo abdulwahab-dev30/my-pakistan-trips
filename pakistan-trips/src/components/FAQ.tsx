@@ -102,8 +102,12 @@ export const FAQ: React.FC = () => {
                 className="rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl overflow-hidden transition-colors"
               >
                 <button
+                  id={`faq-trigger-${idx}`}
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-panel-${idx}`}
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
                 >
                   <span className="text-base sm:text-lg font-bold text-white flex items-center gap-3">
                     <HelpCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
@@ -117,6 +121,9 @@ export const FAQ: React.FC = () => {
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
+                      id={`faq-panel-${idx}`}
+                      role="region"
+                      aria-labelledby={`faq-trigger-${idx}`}
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
