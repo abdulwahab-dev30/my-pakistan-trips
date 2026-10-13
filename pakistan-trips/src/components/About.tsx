@@ -26,11 +26,11 @@ export const About: React.FC = () => {
             
             <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/60 backdrop-blur-xl p-4 sm:p-6 shadow-2xl">
               <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden group">
-                <img 
+                <img height={600} width={800} 
                   src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=1000" 
                   alt="Northern Pakistan Landscape"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                />
+                / loading="lazy">
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                 
                 {/* Floating Official Badge */}
