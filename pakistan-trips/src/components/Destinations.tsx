@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Compass, Search, Star, ArrowUpRight, ChevronLeft, ChevronRight, X, Images } from 'lucide-react';
 
-// Destinations data with multiple images for each place
+// Destination images are loaded from Cloudinary using each destination's tag.
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'lvv2vfug';
+const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%230f172a'/%3E%3Cpath d='M0 470 L210 250 L340 390 L480 180 L800 500 V600 H0Z' fill='%231e293b'/%3E%3Ccircle cx='620' cy='145' r='48' fill='%23334155'/%3E%3Ctext x='400' y='550' text-anchor='middle' font-family='Arial' font-size='24' fill='%2394a3b8'%3ENo destination photos yet%3C/text%3E%3C/svg%3E';
 const DESTINATIONS = [
   {
     id: 1,
@@ -11,11 +13,8 @@ const DESTINATIONS = [
     category: "Valleys",
     rating: 4.9,
     reviews: 128,
-    images: [
-      "https://images.unsplash.com/photo-1627894010300-349071060f64?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "skardu-valley",
+    images: [PLACEHOLDER_IMAGE,
     description: "Gateway to the high Karakoram peaks, famous for Shangrila Lake, Cold Desert, and Deosai Plains.",
     highlight: "Cold Desert & Lakes"
   },
@@ -26,11 +25,8 @@ const DESTINATIONS = [
     category: "Valleys",
     rating: 5.0,
     reviews: 210,
-    images: [
-      "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1627894010300-349071060f64?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "hunza-valley",
+    images: [PLACEHOLDER_IMAGE,
     description: "Breathtaking landscapes with centuries-old Altit & Baltit Forts, Attabad Lake, and Passu Cones.",
     highlight: "Culture & Landscapes"
   },
@@ -41,11 +37,8 @@ const DESTINATIONS = [
     category: "Adventure",
     rating: 4.8,
     reviews: 95,
-    images: [
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "fairy-meadows",
+    images: [PLACEHOLDER_IMAGE,
     description: "Lush green plateau offering the most stunning and dramatic views of Nanga Parbat peak.",
     highlight: "Nanga Parbat View"
   },
@@ -56,11 +49,8 @@ const DESTINATIONS = [
     category: "Valleys",
     rating: 4.7,
     reviews: 164,
-    images: [
-      "https://images.unsplash.com/photo-1609831110757-36e3c5970c7e?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "swat-valley-kalam",
+    images: [PLACEHOLDER_IMAGE,
     description: "Known as the Switzerland of Pakistan, offering lush forests, Mahodand Lake, and ski resorts.",
     highlight: "Lakes & Forests"
   },
@@ -71,11 +61,8 @@ const DESTINATIONS = [
     category: "Valleys",
     rating: 4.9,
     reviews: 142,
-    images: [
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1609831110757-36e3c5970c7e?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1627894010300-349071060f64?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "neelum-valley",
+    images: [PLACEHOLDER_IMAGE,
     description: "A 144km-long bow-shaped valley with cascading waterfalls, thick pine forests, and Arang Kel.",
     highlight: "Greenery & Streams"
   },
@@ -86,11 +73,8 @@ const DESTINATIONS = [
     category: "Lakes",
     rating: 4.8,
     reviews: 180,
-    images: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "naran-saif-ul-malook",
+    images: [PLACEHOLDER_IMAGE,
     description: "Home to the legendary Saif-ul-Malook lake, Babusar Top, and scenic Babusar Pass drive.",
     highlight: "Fairytale Lakes"
   },
@@ -101,11 +85,8 @@ const DESTINATIONS = [
     category: "Coastal",
     rating: 4.6,
     reviews: 88,
-    images: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "gwadar-coastal-highway",
+    images: [PLACEHOLDER_IMAGE,
     description: "Pristine beaches, Hingol National Park, and Princess of Hope along the Arabian Sea.",
     highlight: "Sea & Desert Cliffs"
   },
@@ -116,11 +97,8 @@ const DESTINATIONS = [
     category: "Culture",
     rating: 4.9,
     reviews: 76,
-    images: [
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1627894010300-349071060f64?auto=format&fit=crop&q=80&w=800",
-      "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800"
-    ],
+    tag: "chitral-kalash-valley",
+    images: [PLACEHOLDER_IMAGE,
     description: "Unique cultural heritage, home to the ancient Kalasha tribe and Tirich Mir Karakoram views.",
     highlight: "Ancient Heritage"
   }
@@ -129,12 +107,43 @@ const DESTINATIONS = [
 const CATEGORIES = ["All", "Valleys", "Adventure", "Lakes", "Coastal", "Culture"];
 
 export const Destinations: React.FC = () => {
+  const [destinationsWithImages, setDestinationsWithImages] = useState(DESTINATIONS);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadTaggedImages = async () => {
+      const results = await Promise.all(DESTINATIONS.map(async (destination) => {
+        try {
+          const response = await fetch(
+            `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/list/${destination.tag}.json`
+          );
+          if (!response.ok) return { ...destination, images: [PLACEHOLDER_IMAGE] };
+
+          const data = await response.json();
+          const images = (data.resources || [])
+            .filter((item: any) => item.public_id && item.format)
+            .map((item: any) => `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v${item.version}/${item.public_id}.${item.format}`);
+
+          return { ...destination, images: images.length ? images : [PLACEHOLDER_IMAGE] };
+        } catch (error) {
+          console.error(`Could not load Cloudinary tag "${destination.tag}":`, error);
+          return { ...destination, images: [PLACEHOLDER_IMAGE] };
+        }
+      }));
+
+      if (!cancelled) setDestinationsWithImages(results);
+    };
+
+    loadTaggedImages();
+    return () => { cancelled = true; };
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [activeGalleryDestination, setActiveGalleryDestination] = useState<any | null>(null);
   const [currentImageIdx, setCurrentImageIdx] = useState(0);
 
-  const filteredDestinations = DESTINATIONS.filter((item) => {
+  const filteredDestinations = destinationsWithImages.filter((item) => {
     const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           item.region.toLowerCase().includes(searchQuery.toLowerCase());
