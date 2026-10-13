@@ -108,6 +108,16 @@ const CATEGORIES = ["All", "Valleys", "Adventure", "Lakes", "Coastal", "Culture"
 
 export const Destinations: React.FC = () => {
   const [destinationsWithImages, setDestinationsWithImages] = useState(DESTINATIONS);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Skip card layout/reveal animations on small screens to reduce rendering work.
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const updateMobile = () => setIsMobile(media.matches);
+    updateMobile();
+    media.addEventListener('change', updateMobile);
+    return () => media.removeEventListener('change', updateMobile);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -238,7 +248,7 @@ export const Destinations: React.FC = () => {
 
         {/* Grid of Destinations */}
         <motion.div 
-          layout
+          layout={!isMobile}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           <AnimatePresence>
@@ -246,10 +256,10 @@ export const Destinations: React.FC = () => {
               <motion.section
                 aria-label={item.name}
                 key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
+                layout={!isMobile}
+                initial={isMobile ? false : { opacity: 0, scale: 0.9 }}
+                animate={isMobile ? undefined : { opacity: 1, scale: 1 }}
+                exit={isMobile ? undefined : { opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
                 className="group relative rounded-3xl overflow-hidden bg-slate-900/60 border border-slate-800/80 backdrop-blur-xl hover:border-emerald-500/50 transition-all duration-500 shadow-xl flex flex-col justify-between"
               >
