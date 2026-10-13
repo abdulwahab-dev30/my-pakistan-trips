@@ -217,7 +217,7 @@ export const Hero: React.FC = () => {
                       src={currentPkg.image} 
                       alt={`Scenic landscape for ${currentPkg.title}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    / loading="lazy">
+                    loading="lazy" />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                     
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
