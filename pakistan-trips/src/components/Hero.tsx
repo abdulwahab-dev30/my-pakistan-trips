@@ -20,6 +20,69 @@ const IMAGE_MAPPING = [
 export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [heroBackgroundImage, setHeroBackgroundImage] = useState("");
+
+  // Use Cloudinary gallery photos for the hero background. Advance only after
+  // the next image has loaded successfully, so a failed request never advances
+  // the saved position.
+  useEffect(() => {
+    let cancelled = false;
+    const cloudName = "lvv2vfug";
+    const storageIndexKey = "mpt-hero-cloudinary-index";
+    const storageUrlKey = "mpt-hero-cloudinary-url";
+
+    const loadNextBackground = async () => {
+      let lastIndex = -1;
+      let previousUrl = "";
+
+      try {
+        lastIndex = Number(window.localStorage.getItem(storageIndexKey) ?? -1);
+        previousUrl = window.localStorage.getItem(storageUrlKey) ?? "";
+      } catch {
+        // Storage may be unavailable; the background can still load for this visit.
+      }
+
+      try {
+        const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json`);
+        if (!response.ok) throw new Error("Cloudinary gallery list request failed");
+
+        const data = await response.json();
+        const resources = (data.resources || []).filter(
+          (item: any) => item.public_id && item.format && item.version
+        );
+        if (!resources.length || cancelled) return;
+
+        const nextIndex = (lastIndex + 1) % resources.length;
+        const item = resources[nextIndex];
+        const nextUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_1600/v${item.version}/${item.public_id}.${item.format}`;
+        const preload = new window.Image();
+        preload.onload = () => {
+          if (cancelled) return;
+          setHeroBackgroundImage(nextUrl);
+          try {
+            window.localStorage.setItem(storageIndexKey, String(nextIndex));
+            window.localStorage.setItem(storageUrlKey, nextUrl);
+          } catch {
+            // Keep the successfully loaded image even if storage is unavailable.
+          }
+        };
+        preload.onerror = () => {
+          if (cancelled) return;
+          // Keep the last successful background and retry this same candidate next visit.
+          if (previousUrl) setHeroBackgroundImage(previousUrl);
+        };
+        preload.src = nextUrl;
+      } catch (error) {
+        if (!cancelled && previousUrl) setHeroBackgroundImage(previousUrl);
+        console.error("Could not load the Cloudinary hero background:", error);
+      }
+    };
+
+    loadNextBackground();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const rawPackages = tripData.trip_packages || [];
 
@@ -80,13 +143,17 @@ export const Hero: React.FC = () => {
         style={{ y: yBg, opacity: opacityBg }}
         className="absolute inset-0 z-0"
       >
-        <img
-          src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=2000"
-          alt="Mountain scenery in Hunza Valley, Pakistan" width={2000} height={1200}
-          fetchPriority="high"
-          decoding="async"
-          className="w-full h-full object-cover scale-105"
-        />
+        {heroBackgroundImage && (
+          <img
+            src={heroBackgroundImage}
+            alt="Scenic travel photography from Pakistan"
+            width={1600}
+            height={1000}
+            fetchPriority="high"
+            decoding="async"
+            className="w-full h-full object-cover scale-105"
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
       </motion.div>
