@@ -43,18 +43,12 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between">
         
         {/* Brand Logo */}
-        <a href="#" className="flex items-center gap-2.5 group">
-          <div className="p-2 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-slate-950 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
-            <Compass className="w-6 h-6 animate-spin-slow" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-xl font-extrabold tracking-tight text-white flex items-center gap-1">
-              PAKISTAN <span className="text-emerald-400">TRIPS</span>
-            </span>
-            <span className="text-[10px] text-slate-400 -mt-1 tracking-wider uppercase font-medium">
-              Explore The North
-            </span>
-          </div>
+        <a href="#" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
+          <img
+            src="/my-pakistan-trips-logo.svg"
+            alt="My Pakistan Trips"
+            className="h-14 sm:h-16 w-auto max-w-[210px] object-contain rounded-md"
+          />
         </a>
 
         {/* Desktop Navigation Links */}
