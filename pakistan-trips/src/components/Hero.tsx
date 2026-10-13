@@ -5,22 +5,25 @@ import { Compass, Sparkles, ArrowRight, Play, ChevronLeft, ChevronRight, MapPin,
 // Import central JSON data
 import tripData from '../data/trips-data.json';
 
-// Curated high-resolution images mapping for hero featured items
-const IMAGE_MAPPING = [
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800", // Naran
-  "https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=800", // Hunza
-  "https://images.unsplash.com/photo-1627894010300-349071060f64?auto=format&fit=crop&q=80&w=800", // Skardu & Hunza
-  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800", // Skardu
-  "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=800", // Kumrat
-  "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&q=80&w=800", // Neelum Valley
-  "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800", // Astore
-  "https://images.unsplash.com/photo-1609831110757-36e3c5970c7e?auto=format&fit=crop&q=80&w=800"  // Swat
-];
+// Each package uses its own Cloudinary tag. Add these exact tags to package photos.
+const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
+const PLACEHOLDER_IMAGE = "https://placehold.co/800x600/0f172a/94a3b8?text=Image+Coming+Soon";
+const PACKAGE_IMAGE_TAGS: Record<string, string> = {
+  "3 Days Trip to Naran, Shogran and Babusar top": "package-naran-shogran-babusar",
+  "5 Days Trip to Hunza Valley": "package-hunza-valley",
+  "8 Days Trip to Skardu Valley & Hunza": "package-skardu-hunza",
+  "6 Days Trip to Skardu Valley": "package-skardu-valley",
+  "4 Days Kumrat, Jahaz Banda and Katora Lake": "package-kumrat-jahaz-banda-katora-lake",
+  "4 Days Trip to Sharda, Toubat & Aurang Kel (Neelum Valley)": "package-neelum-valley-sharda-taobat-aurang-kel",
+  "6 Days Trip to Astore & Minimerg & Rama Meadows": "package-astore-minimerg-rama-meadows",
+  "3 Days Trip to Swat & Malam Jabba": "package-swat-malam-jabba"
+};
 
 export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [heroBackgroundImage, setHeroBackgroundImage] = useState("");
+  const [packageImages, setPackageImages] = useState<Record<string, string>>({});
   const [isMobile, setIsMobile] = useState(false);
 
   // Keep desktop motion effects, but avoid costly parallax and entrance animations on phones.
@@ -96,10 +99,55 @@ export const Hero: React.FC = () => {
 
   const rawPackages = tripData.trip_packages || [];
 
-  // Combine JSON data with images and default badges
+  // Fetch only the active package's tagged image, rather than making eight requests on page load.
+  // Missing tags/photos fall back to a neutral placeholder instead of Unsplash images.
+  useEffect(() => {
+    const pkg = rawPackages[currentIndex];
+    if (!pkg) return;
+
+    const tag = PACKAGE_IMAGE_TAGS[pkg.title];
+    if (!tag) {
+      setPackageImages((previous) => ({ ...previous, [pkg.title]: PLACEHOLDER_IMAGE }));
+      return;
+    }
+    if (packageImages[pkg.title]) return;
+
+    let cancelled = false;
+    const loadPackageImage = async () => {
+      try {
+        const response = await fetch(
+          `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/list/${tag}.json`
+        );
+        if (!response.ok) throw new Error(`No public Cloudinary list for tag: ${tag}`);
+
+        const data = await response.json();
+        const item = (data.resources || []).find(
+          (resource: any) => resource.public_id && resource.format && resource.version
+        );
+        const imageUrl = item
+          ? `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${item.version}/${item.public_id}.${item.format}`
+          : PLACEHOLDER_IMAGE;
+
+        if (!cancelled) {
+          setPackageImages((previous) => ({ ...previous, [pkg.title]: imageUrl }));
+        }
+      } catch {
+        if (!cancelled) {
+          setPackageImages((previous) => ({ ...previous, [pkg.title]: PLACEHOLDER_IMAGE }));
+        }
+      }
+    };
+
+    loadPackageImage();
+    return () => {
+      cancelled = true;
+    };
+  }, [currentIndex, rawPackages, packageImages]);
+
+  // Combine package data with its Cloudinary image and default badges.
   const heroPackages = rawPackages.map((pkg: any, idx: number) => ({
     ...pkg,
-    image: IMAGE_MAPPING[idx % IMAGE_MAPPING.length],
+    image: packageImages[pkg.title] || PLACEHOLDER_IMAGE,
     location: pkg.main_attractions?.[0] || "Northern Pakistan",
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
