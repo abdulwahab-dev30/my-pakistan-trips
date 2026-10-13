@@ -55,6 +55,10 @@ export const Hero: React.FC = () => {
         // Storage may be unavailable; the background can still load for this visit.
       }
 
+      // Show the last successfully loaded image immediately on repeat visits.
+      // Refresh it in the background; never make the first render wait for the API.
+      if (previousUrl && !cancelled) setHeroBackgroundImage(previousUrl);
+
       try {
         const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json`);
         if (!response.ok) throw new Error("Cloudinary gallery list request failed");
@@ -67,7 +71,8 @@ export const Hero: React.FC = () => {
 
         const nextIndex = (lastIndex + 1) % resources.length;
         const item = resources[nextIndex];
-        const nextUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_1600/v${item.version}/${item.public_id}.${item.format}`;
+        const imageWidth = window.matchMedia("(max-width: 767px)").matches ? 900 : 1600;
+        const nextUrl = `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_${imageWidth}/v${item.version}/${item.public_id}.${item.format}`;
         const preload = new window.Image();
         preload.onload = () => {
           if (cancelled) return;
@@ -209,6 +214,7 @@ export const Hero: React.FC = () => {
             height={1000}
             fetchPriority="high"
             decoding="async"
+            fetchPriority="high"
             className="w-full h-full object-cover scale-105"
           />
         )}
