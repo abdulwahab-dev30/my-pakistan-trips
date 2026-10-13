@@ -82,7 +82,7 @@ export const Hero: React.FC = () => {
       >
         <img
           src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=2000"
-          alt="Pakistan Travel"
+          alt="Mountain scenery in Hunza Valley, Pakistan" width={2000} height={1200}
           className="w-full h-full object-cover scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
@@ -110,7 +110,7 @@ export const Hero: React.FC = () => {
             variants={itemVariants}
             className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]"
           >
-            Explore the <br />
+            Luxury Trips in Pakistan <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
               Unseen Beauty
             </span>
