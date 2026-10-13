@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "./components/Loader";
 import Navbar from "./components/Navbar";
-import DiscountBanner from "./components/DiscountBanner";
 import Hero from "./components/Hero";
 import Destinations from "./components/Destinations";
 import Tours from "./components/Tours";
@@ -32,10 +31,7 @@ export const App: React.FC = () => {
         {loading && <Loader key="loader" />}
       </AnimatePresence>
       <Navbar />
-      <div className="pt-20 sm:pt-24">
-        <DiscountBanner />
-      </div>
-      <main>
+      <main className="pt-[148px]">
         <Hero />
         <Destinations />
         <Tours />
