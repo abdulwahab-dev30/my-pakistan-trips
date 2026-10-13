@@ -28,7 +28,7 @@ export const Gallery: React.FC = () => {
           const data = await response.json();
           const formattedImages = data.resources.map((item: any) => ({
             public_id: item.public_id,
-            secure_url: `https://res.cloudinary.com/${cloudName}/image/upload/v${item.version}/${item.public_id}.${item.format}`,
+            secure_url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_1000/v${item.version}/${item.public_id}.${item.format}`,
           }));
           setImages(formattedImages);
         }
@@ -98,6 +98,7 @@ export const Gallery: React.FC = () => {
                       alt="Travelers exploring scenic destinations in Pakistan"
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      decoding="async"
                     />
                     
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
