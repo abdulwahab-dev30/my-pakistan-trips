@@ -21,6 +21,16 @@ export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [heroBackgroundImage, setHeroBackgroundImage] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Keep desktop motion effects, but avoid costly parallax and entrance animations on phones.
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const updateMobile = () => setIsMobile(media.matches);
+    updateMobile();
+    media.addEventListener('change', updateMobile);
+    return () => media.removeEventListener('change', updateMobile);
+  }, []);
 
   // Use Cloudinary gallery photos for the hero background. Advance only after
   // the next image has loaded successfully, so a failed request never advances
@@ -140,7 +150,7 @@ export const Hero: React.FC = () => {
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
       {/* Background Parallax */}
       <motion.div 
-        style={{ y: yBg, opacity: opacityBg }}
+        style={isMobile ? undefined : { y: yBg, opacity: opacityBg }}
         className="absolute inset-0 z-0"
       >
         {heroBackgroundImage && (
@@ -165,7 +175,7 @@ export const Hero: React.FC = () => {
         <motion.div 
           className="lg:col-span-7 space-y-8"
           variants={containerVariants}
-          initial="hidden"
+          initial={isMobile ? false : "hidden"}
           animate="visible"
         >
           <motion.div variants={itemVariants} className="inline-flex">
@@ -276,9 +286,9 @@ export const Hero: React.FC = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentPkg.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
+                  initial={isMobile ? false : { opacity: 0, x: 20 }}
+                  animate={isMobile ? undefined : { opacity: 1, x: 0 }}
+                  exit={isMobile ? undefined : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   <div className="relative h-60 rounded-2xl overflow-hidden mb-5 group">
