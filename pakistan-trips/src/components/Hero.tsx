@@ -213,11 +213,11 @@ export const Hero: React.FC = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   <div className="relative h-60 rounded-2xl overflow-hidden mb-5 group">
-                    <img 
+                    <img height={600} width={800} 
                       src={currentPkg.image} 
-                      alt={currentPkg.title}
+                      alt={`Scenic landscape for ${currentPkg.title}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    />
+                    / loading="lazy">
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                     
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
