@@ -123,7 +123,7 @@ export const Destinations: React.FC = () => {
           const data = await response.json();
           const images = (data.resources || [])
             .filter((item: any) => item.public_id && item.format)
-            .map((item: any) => `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/v${item.version}/${item.public_id}.${item.format}`);
+            .map((item: any) => `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1000/v${item.version}/${item.public_id}.${item.format}`);
 
           return { ...destination, images: images.length ? images : [PLACEHOLDER_IMAGE] };
         } catch (error) {
