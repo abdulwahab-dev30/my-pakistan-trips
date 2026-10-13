@@ -30,7 +30,7 @@ export const About: React.FC = () => {
                   src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=1000" 
                   alt="Northern Pakistan Landscape"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                / loading="lazy">
+                loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
                 
                 {/* Floating Official Badge */}
