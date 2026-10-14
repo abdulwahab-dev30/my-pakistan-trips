@@ -26,7 +26,20 @@ export async function saveTour(tour, id) {
   if (!supabaseConfigured) throw new Error("Supabase is not configured.");
   const slug = (tour.slug || tour.title || "").toLowerCase().trim().normalize("NFKD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   if (!slug) throw new Error("Please provide a tour title or slug.");
-  const payload = {\n    slug, title: tour.title, published: Boolean(tour.published),\n    // Legacy tours columns are still NOT NULL in the production database.\n    location: tour.location || tour.destination || tour.title || "Pakistan",\n    duration: tour.duration || "Not specified",\n    price: Number(tour.price) || 0,\n    description: tour.overview || tour.description || "",\n    full_description: tour.fullDescription || tour.overview || tour.description || "",\n    featured: Boolean(tour.featured),\n    itinerary: tour.itinerary || [],\n    included_services: tour.included || tour.included_services || [],\n    travel_tips: tour.travelTips || tour.travel_tips || [],\n    data: { ...tour, slug, title: tour.title },\n  };
+  const payload = {
+    slug, title: tour.title, published: Boolean(tour.published),
+    // Legacy tours columns are still NOT NULL in the production database.
+    location: tour.location || tour.destination || tour.title || "Pakistan",
+    duration: tour.duration || "Not specified",
+    price: Number(tour.price) || 0,
+    description: tour.overview || tour.description || "",
+    full_description: tour.fullDescription || tour.overview || tour.description || "",
+    featured: Boolean(tour.featured),
+    itinerary: tour.itinerary || [],
+    included_services: tour.included || tour.included_services || [],
+    travel_tips: tour.travelTips || tour.travel_tips || [],
+    data: { ...tour, slug, title: tour.title },
+  };
   const query = id ? supabase.from("tours").update(payload).eq("id", id) : supabase.from("tours").insert(payload);
   const { error } = await query;
   if (error) throw error;
@@ -40,7 +53,19 @@ export async function importLocalTours() {
   const { data: existing, error: readError } = await supabase.from("tours").select("slug");
   if (readError) throw readError;
   const known = new Set((existing || []).map(x => x.slug));
-  const rows = localTours.filter(t => !known.has(t.slug)).map(t => ({\n    slug: t.slug, title: t.title, published: true,\n    location: t.location || t.destination || t.title || "Pakistan",\n    duration: t.duration || "Not specified",\n    price: Number(t.price) || 0,\n    description: t.overview || t.description || "",\n    full_description: t.fullDescription || t.overview || t.description || "",\n    featured: Boolean(t.featured),\n    itinerary: t.itinerary || [],\n    included_services: t.included || t.included_services || [],\n    travel_tips: t.travelTips || t.travel_tips || [],\n    data: t,\n  }));
+  const rows = localTours.filter(t => !known.has(t.slug)).map(t => ({
+    slug: t.slug, title: t.title, published: true,
+    location: t.location || t.destination || t.title || "Pakistan",
+    duration: t.duration || "Not specified",
+    price: Number(t.price) || 0,
+    description: t.overview || t.description || "",
+    full_description: t.fullDescription || t.overview || t.description || "",
+    featured: Boolean(t.featured),
+    itinerary: t.itinerary || [],
+    included_services: t.included || t.included_services || [],
+    travel_tips: t.travelTips || t.travel_tips || [],
+    data: t,
+  }));
   if (!rows.length) return 0;
   const { error } = await supabase.from("tours").insert(rows);
   if (error) throw error;
