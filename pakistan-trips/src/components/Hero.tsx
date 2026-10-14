@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Compass, Sparkles, ArrowRight, Play, ChevronLeft, ChevronRight, MapPin, Clock } from 'lucide-react';
+import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronRight, MapPin, Clock } from 'lucide-react';
 
 // Import central JSON data
 import tripData from '../data/trips-data.json';
@@ -207,13 +207,14 @@ export const Hero: React.FC = () => {
             </motion.a>
 
             <motion.a
-              href="#destinations"
+              href="#contact"
+              aria-label="Customize your Pakistan tour package"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white/10 border border-white/25 hover:bg-white/15 hover:border-white/40 text-white font-semibold flex items-center gap-3 backdrop-blur-xl transition-all duration-300"
             >
-              <Play className="w-4 h-4 fill-current text-emerald-400" />
-              View Wonders
+              <SlidersHorizontal className="w-4 h-4 text-emerald-400" />
+              Customize Your Tour
             </motion.a>
           </motion.div>
 
