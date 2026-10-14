@@ -484,6 +484,39 @@
                 "Any Jeep and Boating and Fort tickets expenses & entry of any parks/resorts",
                 "Expenses of personal nature"
             ]
+        },
+        {
+            "title": "4 Days Skardu Valley Tour by Air",
+            "duration": "4 Days, 3 Nights",
+            "departure": "Available on request; confirm flight and hotel availability before booking",
+            "pricing": {
+                "standard": "Rs. 110,000/- per couple",
+                "deluxe": "Rs. 175,000/- per couple",
+                "luxury": "Rs. 240,000/- per couple",
+                "premium": "Rs. 300,000/- per couple",
+                "airfare": "Air tickets excluded; charged separately at actual fare"
+            },
+            "hotel_names": [],
+            "main_attractions": [
+                "Upper Kachura Lake",
+                "Shangrila Resort",
+                "Manthoka Waterfall",
+                "Sarfaranga Cold Desert"
+            ],
+            "itinerary": {
+                "day_1": "Arrive in Skardu by air, transfer to hotel and explore nearby attractions as time permits",
+                "day_2": "Visit Upper Kachura Lake and Shangrila Resort; sightseeing around Skardu",
+                "day_3": "Visit Manthoka Waterfall and Sarfaranga Cold Desert, subject to road and weather conditions",
+                "day_4": "Breakfast, checkout and transfer to Skardu Airport for return flight"
+            },
+            "services_included": [
+                "3 nights accommodation according to the selected package tier",
+                "Local sightseeing as per the confirmed itinerary"
+            ],
+            "services_not_included": [
+                "Air tickets; charged separately at actual fare",
+                "Personal expenses and activities not specifically listed as included"
+            ]
         }
     ]
 }
