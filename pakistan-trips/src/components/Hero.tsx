@@ -207,7 +207,7 @@ export const Hero: React.FC = () => {
             </motion.a>
 
             <motion.a
-              href="#contact"
+              href="#contact-form"
               aria-label="Customize your Pakistan tour package"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
