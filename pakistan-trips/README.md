@@ -47,3 +47,20 @@ npm run preview
 - Typography: Cormorant Garamond (serif headings) + Outfit (body)
 - Easing: custom cubic-bezier [0.22, 1, 0.36, 1] for premium feel
 - Animations prioritize transform & opacity for 60fps performance
+
+
+## Tour CMS setup
+
+The private tour editor lives at `/admin/tours`; login is at `/admin/login`. There is no public signup page.
+
+1. Create a Supabase project for My Pakistan Trips.
+2. In Supabase SQL Editor, run `supabase/tour-cms.sql` from this repository.
+3. In Supabase Auth, create the admin user privately (do not add a signup page to the website). Disable public signups in Auth settings.
+4. Copy the admin user's UUID from Supabase Auth and run the membership insert shown at the end of `supabase/tour-cms.sql`.
+5. Add these Vercel environment variables for the website project: `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` (or `VITE_SUPABASE_ANON_KEY`). Use the Supabase Project URL and publishable/anon key; never expose a service-role key in Vite/client variables.
+6. Redeploy the site after setting environment variables.
+7. Log in at `/admin/login`, click **Import existing tours**, and then edit or publish packages. Tour data is stored in the Supabase `tours` table.
+
+The admin UI supports tour title/slug, page H1, duration, departure, price and pricing notes, overview, best-time guidance, WhatsApp URL, SEO title/description, Cloudinary image tag, images, itinerary, attractions, hotels, included/excluded services, FAQs, and publish/draft status. The public tours listing, homepage cards, and tour detail route read published records from Supabase once configured.
+
+**First-time setup note:** Until the Supabase project, table, environment variables, and admin membership are configured, the public site continues to use the existing local tour data. New CMS edits are not live until the project is connected and deployed.
