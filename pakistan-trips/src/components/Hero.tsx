@@ -8,7 +8,7 @@ import localHeroBackground from '../assets/hero-bg.webp';
 
 // Each package uses its own Cloudinary tag. Add these exact tags to package photos.
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
-const PLACEHOLDER_IMAGE = "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3EImage Coming Soon%3C%2Ftext%3E%3C%2Fsvg%3E";
+const PLACEHOLDER_IMAGE = "https://placehold.co/800x600/0f172a/94a3b8?text=Image+Coming+Soon";
 const PACKAGE_IMAGE_TAGS: Record<string, string> = {
   "3 Days Trip to Naran, Shogran and Babusar top": "package-naran-shogran-babusar",
   "5 Days Trip to Hunza Valley": "package-hunza-valley",
