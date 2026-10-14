@@ -53,7 +53,6 @@ export const Navbar: React.FC = () => {
             alt=""
             className="h-9 sm:h-10 w-auto object-contain"
           />
-          <span className="mt-0.5 text-[10px] sm:text-[11px] font-bold tracking-wide text-white whitespace-nowrap">My Pakistan Trips</span>
         </a>
 
         {/* Desktop Navigation Links */}

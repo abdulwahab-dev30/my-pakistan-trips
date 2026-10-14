@@ -15,7 +15,6 @@ export const Footer: React.FC = () => {
             <a href="/" className="inline-flex items-center" aria-label="My Pakistan Trips home">
               <div className="flex flex-col items-center leading-none">
                 <img src="/my-pakistan-trips-logo.svg" alt="" width="99" height="56" className="h-10 w-auto object-contain" />
-                <span className="mt-1 text-xs font-bold tracking-wide text-white">My Pakistan Trips</span>
               </div>
             </a>
             <p className="text-xs text-slate-400 leading-relaxed">
