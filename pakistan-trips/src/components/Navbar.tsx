@@ -22,12 +22,12 @@ export const Navbar: React.FC = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#' },
-    { name: 'Tours', href: '#tours' },
-    { name: 'Destinations', href: '#destinations' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'About', href: '#about' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Home', href: '/' },
+    { name: 'Tours', href: '/tours' },
+    { name: 'Destinations', href: '/#destinations' },
+    { name: 'Gallery', href: '/#gallery' },
+    { name: 'About', href: '/#about' },
+    { name: 'FAQ', href: '/#faq' },
   ];
 
   return (
@@ -45,7 +45,7 @@ export const Navbar: React.FC = () => {
         isScrolled ? 'py-3' : 'py-5'
       }`}>
         {/* Brand Logo */}
-        <a href="#" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
+        <a href="/" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
           <img
             height={600}
             width={800}
@@ -72,7 +72,7 @@ export const Navbar: React.FC = () => {
         {/* Right Action CTA Button */}
         <div className="hidden md:flex items-center gap-4">
           <motion.a
-            href="#contact"
+            href="/#contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold text-sm flex items-center gap-2 shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all duration-300 border border-emerald-400/30"
