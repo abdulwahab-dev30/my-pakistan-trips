@@ -1,14 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500">
-<rect width="1000" height="500" fill="#fff"/>
-<g fill="#005744">
-<path d="M110 280 305 160 385 215 510 70 580 235 670 130 745 235 815 165 900 280 900 295 740 250 670 205 590 315 510 165 430 330 305 230 110 295Z"/>
-<path d="M230 100 260 92 305 70 342 63 355 69 336 82 300 96 275 113 285 95 255 109 264 96Z"/>
-</g>
-<g fill="#F5A900">
-<path d="M110 280 305 160 293 180 110 290Z"/>
-<path d="M510 70 580 235 550 215 510 92Z"/>
-<path d="M670 130 745 235 722 219 670 145Z"/>
-<path d="M815 165 900 280 875 270 815 184Z"/>
-</g>
-<text x="500" y="420" font-family="Arial, Helvetica, sans-serif" font-size="77" font-weight="700" text-anchor="middle" fill="#005744">My Pakistan Trips</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="198" height="112" viewBox="0 0 99 56" fill="none"><path d="M2 34 19 26 29 19 37 25 51 7 63 22 69 27 76 16 95 38 82 31 76 25 68 32 59 38 52 25 47 41 37 33 29 29 20 31Z" fill="#015943"/><path d="M2 34 19 26 29 19 27 23 2 35Z M51 7 59 38 53 31 51 11Z M76 16 95 38 89 35 76 20Z" fill="#FCA910"/><path d="M24 12 29 11 35 8 39 7 35 11 29 14 26 16 28 12Z" fill="#015943"/></svg>

@@ -12,14 +12,9 @@ export const Footer: React.FC = () => {
           
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="p-2 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                <Compass className="w-5 h-5" />
-              </div>
-              <span className="text-lg font-extrabold text-white tracking-tight">
-                My Pakistan Trips
-              </span>
-            </div>
+            <a href="/" className="inline-flex items-center" aria-label="My Pakistan Trips home">
+              <img src="/my-pakistan-trips-logo.svg" alt="My Pakistan Trips" width="99" height="56" className="h-12 w-auto object-contain" />
+            </a>
             <p className="text-xs text-slate-400 leading-relaxed">
               {tripData.company} — Your trusted partner for unforgettable and safe adventures across the northern valleys of Pakistan.
             </p>
