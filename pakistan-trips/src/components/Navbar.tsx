@@ -23,8 +23,8 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Tours', href: '/tours' },
     { name: 'Destinations', href: '/#destinations' },
+    { name: 'Tours', href: '/tours' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'About', href: '/#about' },
     { name: 'FAQ', href: '/#faq' },
@@ -51,7 +51,7 @@ export const Navbar: React.FC = () => {
             width={99}
             src="/my-pakistan-trips-logo.svg"
             alt=""
-            className="h-9 sm:h-10 w-auto object-contain"
+            className="h-12 sm:h-14 w-auto object-contain"
           />
         </a>
 
