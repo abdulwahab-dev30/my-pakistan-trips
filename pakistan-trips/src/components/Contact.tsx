@@ -136,8 +136,8 @@ export const CTA: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl shadow-2xl space-y-6">
-              <h3 className="text-xl font-bold text-white mb-2">Book Your Seat / Inquire</h3>
+            <form id="contact-form" onSubmit={handleSubmit} className="scroll-mt-36 p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900/95 to-slate-900/75 border border-emerald-500/20 backdrop-blur-xl shadow-[0_20px_70px_-20px_rgba(16,185,129,0.16)] space-y-6">
+              <div className="mb-3"><span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-xs font-semibold tracking-wide text-emerald-300"><Sparkles className="w-3.5 h-3.5" /> PERSONALIZED TRIP PLANNING</span><h3 className="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">Customize Your Pakistan Tour</h3><p className="mt-2 text-sm leading-relaxed text-slate-400">Share your trip preferences and our team will help you plan a journey that fits your group and needs.</p></div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {/* Full Name */}
