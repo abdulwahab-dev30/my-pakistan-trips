@@ -97,12 +97,12 @@ export const tours=[
       "Islamabad Tourism hotel",
       "Silver Oaks hotel"
     ],
-    "imageTag": "naran-shogran-babusar-top",
+    "imageTag": "package-naran-shogran-babusar",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "3 Days Trip to Naran, Shogran and Babusar top tour photo",
-        "tag": "naran-shogran-babusar-top"
+        "tag": "package-naran-shogran-babusar"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%203%20Days%20Trip%20to%20Naran%2C%20Shogran%20and%20Babusar%20top"
@@ -197,12 +197,12 @@ export const tours=[
       "Chilas inn hotel",
       "Mountain View"
     ],
-    "imageTag": "hunza-valley",
+    "imageTag": "package-hunza-valley",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "5 Days Trip to Hunza Valley tour photo",
-        "tag": "hunza-valley"
+        "tag": "package-hunza-valley"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%205%20Days%20Trip%20to%20Hunza%20Valley"
@@ -322,12 +322,12 @@ export const tours=[
       "Embassy Hotel",
       "Glaxy Hotel"
     ],
-    "imageTag": "skardu-valley-hunza",
+    "imageTag": "package-skardu-hunza",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "8 Days Trip to Skardu Valley & Hunza tour photo",
-        "tag": "skardu-valley-hunza"
+        "tag": "package-skardu-hunza"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%208%20Days%20Trip%20to%20Skardu%20Valley%20%26%20Hunza"
@@ -429,12 +429,12 @@ export const tours=[
       "Chilas inn hotel",
       "Mountain View"
     ],
-    "imageTag": "skardu-valley",
+    "imageTag": "package-skardu-valley",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "6 Days Trip to Skardu Valley tour photo",
-        "tag": "skardu-valley"
+        "tag": "package-skardu-valley"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%206%20Days%20Trip%20to%20Skardu%20Valley"
@@ -513,12 +513,12 @@ export const tours=[
     "hotelNames": [
       "Momtouch hotel Kumrat"
     ],
-    "imageTag": "kumrat-jahaz-banda-katora-lake",
+    "imageTag": "package-kumrat-jahaz-banda-katora-lake",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "4 Days Kumrat, Jahaz Banda and Katora Lake tour photo",
-        "tag": "kumrat-jahaz-banda-katora-lake"
+        "tag": "package-kumrat-jahaz-banda-katora-lake"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%204%20Days%20Kumrat%2C%20Jahaz%20Banda%20and%20Katora%20Lake"
@@ -604,12 +604,12 @@ export const tours=[
       "Taobut continental",
       "Corner view cottages"
     ],
-    "imageTag": "neelum-valley-sharda-taobat-aurang-kel",
+    "imageTag": "package-neelum-valley-sharda-taobat-aurang-kel",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "4 Days Trip to Sharda, Toubat & Aurang Kel (Neelum Valley) tour photo",
-        "tag": "neelum-valley-sharda-taobat-aurang-kel"
+        "tag": "package-neelum-valley-sharda-taobat-aurang-kel"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%204%20Days%20Trip%20to%20Sharda%2C%20Toubat%20%26%20Aurang%20Kel%20(Neelum%20Valley)"
@@ -705,12 +705,12 @@ export const tours=[
       "Eagle Resort",
       "Chillas inn hotel"
     ],
-    "imageTag": "astore-minimerg-rama-meadows",
+    "imageTag": "package-astore-minimerg-rama-meadows",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "6 Days Trip to Astore & Minimerg & Rama Meadows tour photo",
-        "tag": "astore-minimerg-rama-meadows"
+        "tag": "package-astore-minimerg-rama-meadows"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%206%20Days%20Trip%20to%20Astore%20%26%20Minimerg%20%26%20Rama%20Meadows"
@@ -785,12 +785,12 @@ export const tours=[
       "Green Pak Resort",
       "New Golden Star Hotel"
     ],
-    "imageTag": "swat-malam-jabba",
+    "imageTag": "package-swat-malam-jabba",
     "images": [
       {
-        "src": "https://placehold.co/1200x800/0f172a/94a3b8?text=Add+Cloudinary+images",
+        "src": "data:image/svg+xml,%3Csvg xmlns=%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221200%22 height=%22800%22 viewBox=%220 0 1200 800%22%3E%3Crect width=%221200%22 height=%22800%22 fill=%22%230f172a%22%2F%3E%3Cpath d=%22M0 650L280 300L470 520L680 220L1200 650V800H0Z%22 fill=%22%231e293b%22%2F%3E%3Cpath d=%22M0 720L360 450L590 620L850 390L1200 700V800H0Z%22 fill=%22%23334155%22%2F%3E%3Ctext x=%22600%22 y=%22760%22 font-family=%22Arial%22 font-size=%2234%22 fill=%22%23cbd5e1%22 text-anchor=%22middle%22%3ETour photos coming soon%3C%2Ftext%3E%3C%2Fsvg%3E",
         "alt": "3 Days Trip to Swat & Malam Jabba tour photo",
-        "tag": "swat-malam-jabba"
+        "tag": "package-swat-malam-jabba"
       }
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%203%20Days%20Trip%20to%20Swat%20%26%20Malam%20Jabba"
