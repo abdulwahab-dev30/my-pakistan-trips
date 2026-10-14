@@ -35,10 +35,10 @@ export const Navbar: React.FC = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#F5F5F5] text-slate-900 ${
         isScrolled
-          ? 'bg-slate-950/95 backdrop-blur-xl border-b border-slate-800/80 shadow-xl'
-          : 'bg-slate-950/70 backdrop-blur-md'
+          ? 'backdrop-blur-xl border-b border-slate-200 shadow-sm'
+          : 'backdrop-blur-md'
       }`}
     >
       <div className={`max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between transition-all duration-300 ${
@@ -61,10 +61,10 @@ export const Navbar: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-emerald-400 transition-colors duration-200 relative group py-1"
+              className="text-sm font-medium text-slate-700 hover:text-emerald-700 transition-colors duration-200 relative group py-1"
             >
               {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300 group-hover:w-full rounded-full" />
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full rounded-full" />
             </a>
           ))}
         </nav>
@@ -85,11 +85,11 @@ export const Navbar: React.FC = () => {
         {/* Mobile Menu Toggle Button */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+          className="md:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-emerald-700 hover:bg-slate-100 transition-colors"
           aria-label="Toggle Menu"
           aria-expanded={isMobileMenuOpen}
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6 text-emerald-400" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-6 h-6 text-emerald-600" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
@@ -104,7 +104,7 @@ export const Navbar: React.FC = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-950/95 border-b border-slate-800/80 backdrop-blur-2xl overflow-hidden"
+            className="md:hidden bg-[#F5F5F5] border-b border-slate-200 overflow-hidden"
           >
             <div className="px-6 py-6 space-y-4 flex flex-col">
               {navLinks.map((link) => (
@@ -112,17 +112,17 @@ export const Navbar: React.FC = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-medium text-slate-300 hover:text-emerald-400 transition-colors py-2 border-b border-slate-800/50 flex items-center justify-between"
+                  className="text-base font-medium text-slate-700 hover:text-emerald-700 transition-colors py-2 border-b border-slate-200 flex items-center justify-between"
                 >
                   <span>{link.name}</span>
-                  <Sparkles className="w-4 h-4 text-emerald-500/40" />
+                  <Sparkles className="w-4 h-4 text-emerald-600/50" />
                 </a>
               ))}
               <div className="pt-2">
                 <a
                   href="#contact"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold text-center block shadow-lg shadow-emerald-500/20"
+                  className="w-full py-3 rounded-xl bg-emerald-500 text-white font-bold text-center block shadow-lg shadow-emerald-500/20"
                 >
                   Book Inquiries
                 </a>
