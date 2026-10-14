@@ -4,6 +4,7 @@ import { Compass, Sparkles, ArrowRight, Play, ChevronLeft, ChevronRight, MapPin,
 
 // Import central JSON data and the optimized local hero image
 import tripData from '../data/trips-data.json';
+import { tours } from '../data/tours.js';
 import localHeroBackground from '../assets/hero-bg.webp';
 
 // Each package uses its own Cloudinary tag. Add these exact tags to package photos.
@@ -316,7 +317,7 @@ export const Hero: React.FC = () => {
                       </p>
                     </div>
                     <motion.a
-                      href="#tours"
+                      href={`/tours/${tours.find((tour) => tour.title === currentPkg.title)?.slug || ''}`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-colors shadow-md shadow-emerald-500/20"
