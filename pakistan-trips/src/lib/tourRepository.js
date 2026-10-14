@@ -7,12 +7,12 @@ export async function getPublishedTours() {
   if (!supabaseConfigured) return localTours;
   const { data, error } = await supabase.from("tours").select("id,slug,title,published,data,updated_at").eq("published", true).order("title");
   if (error) { console.error("Unable to load CMS tours:", error.message); return localTours; }
-  return data?.length ? data.map(clean) : localTours;
+  return (data || []).map(clean);
 }
 export async function getTourBySlug(slug) {
   if (supabaseConfigured) {
     const { data, error } = await supabase.from("tours").select("id,slug,title,published,data").eq("slug", slug).eq("published", true).maybeSingle();
-    if (!error && data) return clean(data);
+    if (!error) return data ? clean(data) : null;
   }
   return localTours.find(t => t.slug === slug) || null;
 }
