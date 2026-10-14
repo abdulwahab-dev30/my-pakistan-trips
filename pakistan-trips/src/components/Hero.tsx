@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Compass, Sparkles, ArrowRight, Play, ChevronLeft, ChevronRight, MapPin, Clock } from 'lucide-react';
 
-// Import central JSON data and the optimized local hero image
+// Import central JSON data
 import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
-import localHeroBackground from '../assets/hero-bg.webp';
+const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=2400&q=85';
 
 // Each package uses its own Cloudinary tag. Add these exact tags to package photos.
 const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
@@ -36,10 +36,7 @@ export const Hero: React.FC = () => {
     return () => media.removeEventListener('change', updateMobile);
   }, []);
 
-  // Keep the locally bundled WebP as the fixed hero background.
-  // Cloudinary remains in use for the separate package carousel images.
-  const heroBackgroundImage = localHeroBackground;
-
+  // Use a wide, high-resolution Hunza Valley landscape for the hero background.
   const rawPackages = tripData.trip_packages || [];
 
   // Fetch only the active package's tagged image, rather than making eight requests on page load.
