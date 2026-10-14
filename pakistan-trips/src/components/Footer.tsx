@@ -3,6 +3,7 @@ import { Compass, Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 // Import central JSON data for official footer info
 import tripData from '../data/trips-data.json';
+import newLogo from '../assets/IMG-20261014-WA0033.jpg';
 
 export const Footer: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ export const Footer: React.FC = () => {
           <div className="space-y-4">
             <a href="/" className="inline-flex items-center" aria-label="My Pakistan Trips home">
               <div className="flex flex-col items-center leading-none">
-                <img src="/my-pakistan-trips-logo.svg" alt="" width="99" height="56" className="h-10 w-auto object-contain" />
+                <img src={newLogo} alt="My Pakistan Trips" width="99" height="56" className="h-10 w-auto object-contain" />
               </div>
             </a>
             <p className="text-xs text-slate-400 leading-relaxed">
