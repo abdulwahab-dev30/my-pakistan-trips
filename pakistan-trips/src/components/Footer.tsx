@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2 text-xs">
               <li><a href="#tours" className="hover:text-emerald-700 transition-colors">Tour Packages</a></li>
-              <li><a href="#destinations" className="hover:text-emerald-400 transition-colors">Explore Destinations</a></li>
+              <li><a href="#destinations" className="text-slate-700 hover:text-emerald-700 transition-colors">Explore Destinations</a></li>
               <li><a href="#gallery" className="hover:text-emerald-400 transition-colors">Visual Journal</a></li>
               <li><a href="#about" className="hover:text-emerald-400 transition-colors">Our Philosophy</a></li>
               <li><a href="#faq" className="hover:text-emerald-400 transition-colors">FAQs & Policies</a></li>
@@ -41,14 +41,14 @@ export const Footer: React.FC = () => {
 
           {/* Col 3: Contact Info */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Contact Us</h4>
+            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Contact Us</h4>
             <div className="space-y-3 text-xs">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-700 flex-shrink-0" />
                 <span>{tripData.contact_numbers?.[0]}, {tripData.contact_numbers?.[1]}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <Mail className="w-4 h-4 text-emerald-700 flex-shrink-0" />
                 <span>{tripData.email}</span>
               </div>
               <div className="flex items-start gap-2">
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
 
           {/* Col 4: Website Info */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Official Portal</h4>
+            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Official Portal</h4>
             <p className="text-xs text-slate-600 leading-relaxed">
               Visit our official website for instant bookings and live schedule updates:
             </p>
