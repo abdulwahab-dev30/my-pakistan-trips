@@ -139,7 +139,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-20">
+    <div className="relative min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-24 pb-10">
       {/* Background Parallax */}
       <motion.div 
         style={isMobile ? undefined : { y: yBg, opacity: opacityBg }}
@@ -156,42 +156,43 @@ export const Hero: React.FC = () => {
             className="w-full h-full object-cover scale-105"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 to-slate-950/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061510]/95 via-slate-950/75 to-slate-950/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/35" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
       </motion.div>
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
         {/* Left Side: Hero Text */}
         <motion.div 
-          className="lg:col-span-7 space-y-8"
+          className="lg:col-span-7 space-y-6 sm:space-y-8"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
         >
           <motion.div variants={itemVariants} className="inline-flex">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 backdrop-blur-md text-emerald-400 text-sm font-medium shadow-lg shadow-emerald-500/5">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide shadow-lg shadow-black/10">
               <Sparkles className="w-4 h-4 animate-pulse" />
-              {tripData.company || "My Pakistan Trips"}
+              Explore Pakistan · {tripData.company || "My Pakistan Trips"}
             </span>
           </motion.div>
 
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]"
+            className="text-[2.65rem] sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-lg"
           >
-            Luxury Trips in Pakistan <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
-              Unseen Beauty
+            Find Your Escape in <br />
+            <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
+              Northern Pakistan
             </span>
           </motion.h1>
 
           <motion.p 
             variants={itemVariants}
-            className="text-lg sm:text-xl text-slate-300 max-w-2xl font-light leading-relaxed"
+            className="text-base sm:text-lg lg:text-xl text-slate-200/95 max-w-xl font-light leading-relaxed"
           >
-            Unforgettable journeys across Hunza, Skardu, Swat, and Kumrat. Luxury transport, premium hotels, and expert guide services.
+            From Hunza’s towering peaks to Skardu’s serene lakes, discover unforgettable journeys with comfortable transport, handpicked stays, and local guidance.
           </motion.p>
 
           <motion.div 
@@ -202,7 +203,7 @@ export const Hero: React.FC = () => {
               href="#tours"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold flex items-center gap-3 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 transition-all duration-300"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-900/30 hover:shadow-emerald-500/30 transition-all duration-300"
             >
               Browse Packages
               <ArrowRight className="w-5 h-5" />
@@ -212,7 +213,7 @@ export const Hero: React.FC = () => {
               href="#destinations"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-xl bg-slate-900/80 border border-slate-700/80 hover:border-slate-500 text-white font-semibold flex items-center gap-3 backdrop-blur-md transition-all duration-300"
+              className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white/10 border border-white/25 hover:bg-white/15 hover:border-white/40 text-white font-semibold flex items-center gap-3 backdrop-blur-xl transition-all duration-300"
             >
               <Play className="w-4 h-4 fill-current text-emerald-400" />
               View Wonders
@@ -222,7 +223,7 @@ export const Hero: React.FC = () => {
           {/* Quick Info Stats */}
           <motion.div 
             variants={itemVariants}
-            className="pt-8 grid grid-cols-3 gap-6 border-t border-slate-800/80 max-w-lg"
+            className="pt-6 sm:pt-8 grid grid-cols-3 gap-4 sm:gap-6 border-t border-white/20 max-w-xl"
           >
             <div>
               <p className="text-2xl sm:text-3xl font-bold text-white">{heroPackages.length}+</p>
@@ -246,12 +247,12 @@ export const Hero: React.FC = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-emerald-500 to-teal-500 opacity-25 blur-2xl -z-10" />
+            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-400/35 via-teal-500/15 to-cyan-400/25 opacity-80 blur-2xl -z-10" />
 
-            <div className="relative p-6 sm:p-8 rounded-3xl bg-slate-900/70 border border-slate-700/60 backdrop-blur-xl shadow-2xl overflow-hidden">
+            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[1.75rem] bg-slate-950/65 border border-white/15 backdrop-blur-2xl shadow-[0_25px_90px_-25px_rgba(0,0,0,0.75)] overflow-hidden">
               
               {/* Header */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-4 gap-3">
                 <span className="text-xs font-semibold tracking-wider text-emerald-400 uppercase flex items-center gap-2">
                   <Compass className="w-4 h-4 animate-spin-slow" />
                   Package ({currentIndex + 1}/{heroPackages.length})
@@ -283,7 +284,7 @@ export const Hero: React.FC = () => {
                   exit={isMobile ? undefined : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <div className="relative h-60 rounded-2xl overflow-hidden mb-5 group">
+                  <div className="relative h-60 sm:h-64 rounded-2xl overflow-hidden mb-5 group ring-1 ring-white/10">
                     <img height={600} width={800} 
                       src={currentPkg.image} 
                       alt={`Scenic landscape for ${currentPkg.title}`}
@@ -330,7 +331,7 @@ export const Hero: React.FC = () => {
               </AnimatePresence>
 
               {/* Navigation Indicators */}
-              <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
                   {heroPackages.map((_, idx) => (
                     <button
