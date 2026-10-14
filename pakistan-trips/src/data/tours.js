@@ -795,5 +795,120 @@ export const tours=[
     ],
     "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20details%20for%203%20Days%20Trip%20to%20Swat%20%26%20Malam%20Jabba"
   }
+  ,
+  {
+    "slug": "skardu-valley-by-air",
+    "title": "4 Days Skardu Valley Tour by Air",
+    "seoTitle": "4 Days Skardu Tour by Air from Pakistan | Skardu Valley Package 2026",
+    "metaDescription": "Plan a 4 days, 3 nights Skardu Valley tour by air with My Pakistan Trips. Explore Upper Kachura Lake, Shangrila Resort, Manthoka Waterfall, Sarfaranga Cold Desert and Skardu City. Compare Standard, Deluxe, Luxury and Premium packages; flight tickets are charged separately.",
+    "h1": "4 Days Skardu Valley Tour by Air",
+    "duration": "4 Days, 3 Nights",
+    "departure": "Flexible dates; final dates are confirmed according to your convenience and flight availability.",
+    "priceNote": "Package prices are per couple. Air tickets are not included and are charged separately at the actual fare available at booking.",
+    "pricingOptions": {
+      "standard": "PKR 110,000 per couple",
+      "deluxe": "PKR 175,000 per couple",
+      "luxury": "PKR 240,000 per couple",
+      "premium": "PKR 300,000 per couple"
+    },
+    "startCity": "Skardu (arrival by air; flight tickets excluded)",
+    "overview": "Discover the beauty of Gilgit-Baltistan on a 4 days, 3 nights Skardu Valley tour by air with My Pakistan Trips. This short Skardu holiday package includes airport transfers, guided sightseeing and accommodation options across Standard, Deluxe, Luxury and Premium tiers. Visit Upper Kachura Lake and Shangrila Resort, see Manthoka Waterfall, explore Sarfaranga Cold Desert and Skardu City, and choose between an excursion to Deosai Top with Sheosar Lake and Sadpara Lake or a visit to Bashu Valley. Airfare is not included; flight tickets are charged separately at the actual fare available when you book.",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "title": "Arrival in Skardu & Kachura Lakes",
+        "description": "Welcome and pickup at Skardu Airport, Visit Shangrila Resort and Upper Kachura Lake, Night stay in Skardu or Kachura"
+      },
+      {
+        "day": "Day 2",
+        "title": "Manthoka Waterfall, Sarfaranga Cold Desert & Skardu City",
+        "description": "Visit scenic Manthoka Waterfall, Explore Sarfaranga Cold Desert, Visit Kharpocho Fort and enjoy a Skardu City tour, Evening walk through Skardu Local Bazaar, Night stay in Skardu"
+      },
+      {
+        "day": "Day 3",
+        "title": "Deosai Plains or Bashu Valley Excursion",
+        "description": "Option A: Visit Deosai Top, Sheosar Lake and Sadpara Lake by 4x4 jeep, Option B: Explore Bashu Valley, Night stay in Skardu"
+      },
+      {
+        "day": "Day 4",
+        "title": "Breakfast & Departure from Skardu",
+        "description": "Enjoy breakfast with mountain views, Transfer to Skardu Airport, Fly back home with memorable views of Skardu"
+      }
+    ],
+    "included": [
+      "Local transport according to selected package tier",
+      "Fuel and toll taxes",
+      "Guide-cum-driver",
+      "Three breakfasts",
+      "Three dinners according to the selected tier",
+      "Hotel accommodation for three nights according to the selected tier",
+      "Entry tickets in Deluxe, Luxury and Premium tiers",
+      "Local excursion jeep charges in Luxury and Premium tiers",
+      "24/7 support"
+    ],
+    "excluded": [
+      "Air tickets; charged separately at the actual fare available at the time of booking",
+      "Local excursion jeep charges in Standard and Deluxe tiers",
+      "Entry tickets in the Standard tier",
+      "Personal expenses and anything not explicitly listed as included"
+    ],
+    "bestTime": "Travel dates are flexible and will be finalized according to your convenience. Confirm weather, flight availability and access to high-altitude excursions before booking.",
+    "faqs": [
+      {
+        "question": "How many days is the Skardu tour by air?",
+        "answer": "The package is for 4 days and 3 nights, with arrival at Skardu Airport on Day 1 and departure from Skardu Airport on Day 4."
+      },
+      {
+        "question": "Are flight tickets included in the Skardu by air package?",
+        "answer": "No. Air tickets are not included. The fare is charged separately at the actual price available when the booking is made."
+      },
+      {
+        "question": "What is the price of the 4 days Skardu tour by air?",
+        "answer": "The PDF lists prices per couple: Standard PKR 110,000, Deluxe PKR 175,000, Luxury PKR 240,000 and Premium PKR 300,000. Airfare is extra."
+      },
+      {
+        "question": "Which places are covered in the Skardu Valley tour?",
+        "answer": "The itinerary includes Upper Kachura Lake, Shangrila Resort, Manthoka Waterfall, Sarfaranga Cold Desert, Kharpocho Fort and Skardu City. Day 3 offers Deosai Top with Sheosar Lake and Sadpara Lake by 4x4 jeep, or Bashu Valley."
+      },
+      {
+        "question": "What is included in the Skardu package?",
+        "answer": "The package lists local transport, fuel and toll taxes, guide-cum-driver, three breakfasts, three dinners, accommodation and 24/7 support. Entry tickets and local excursion jeep charges depend on the selected tier."
+      },
+      {
+        "question": "Can I choose my travel dates?",
+        "answer": "Yes. The PDF says dates are flexible and will be finalized according to your convenience, subject to flight availability."
+      }
+    ],
+    "mainAttractions": [
+      "Skardu Airport",
+      "Skardu City",
+      "Upper Kachura Lake",
+      "Lower Kachura Lake",
+      "Shangrila Resort",
+      "Manthoka Waterfall",
+      "Sarfaranga Cold Desert",
+      "Kharpocho Fort",
+      "Skardu Local Bazaar",
+      "Deosai Top",
+      "Sheosar Lake",
+      "Sadpara Lake",
+      "Bashu Valley"
+    ],
+    "hotelNames": [
+      "Standard: Embassy Hotel, Alnoor Guest House, Lashkar Hotel or Baltistan Resort",
+      "Deluxe: Snowland Hotel, Mountain Lagoon, Dirhla, Qayyam Skardu or Alnoor Starlet",
+      "Luxury: Rivage Resort, Tibet Hotel, Serena Shigar, PC Legacy, Asrish Suite or Rigo",
+      "Premium: Shangrila Resort, Khoj Resort, Himmel by Luxus or Broq Hotel"
+    ],
+    "imageTag": "package-skardu-valley-by-air",
+    "images": [
+      {
+        "src": "https://placehold.co/800x600/0f172a/94a3b8?text=Skardu+Valley+By+Air",
+        "alt": "Skardu Valley by air tour package featuring Upper Kachura Lake and the mountains of Skardu",
+        "tag": "package-skardu-valley-by-air"
+      }
+    ],
+    "whatsappLink": "https://wa.me/923494886076?text=Hello%2C%20please%20share%20availability%20and%20booking%20details%20for%20the%204%20Days%20Skardu%20Valley%20Tour%20by%20Air"
+  }
 ];
 export const tourBySlug=(slug)=>tours.find((tour)=>tour.slug===slug);
