@@ -153,11 +153,11 @@ export const Hero: React.FC = () => {
             height={1000}
             fetchPriority="high"
             decoding="async"
-            className="w-full h-full object-cover scale-105"
+            className="w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#061510]/95 via-slate-950/75 to-slate-950/35" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/35" />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
       </motion.div>
 
@@ -284,13 +284,13 @@ export const Hero: React.FC = () => {
                   exit={isMobile ? undefined : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <div className="relative h-60 sm:h-64 rounded-2xl overflow-hidden mb-5 group ring-1 ring-white/10">
+                  <div className="relative h-[17rem] xs:h-[18rem] sm:h-64 rounded-2xl overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
                     <img height={600} width={800} 
                       src={currentPkg.image} 
                       alt={`Scenic landscape for ${currentPkg.title}`}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      className="w-full h-full object-cover object-center sm:group-hover:scale-105 transition-transform duration-500" 
                     loading="lazy" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
                     
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
                       {currentPkg.tag}
