@@ -227,12 +227,12 @@ export const Hero: React.FC = () => {
               <p className="text-xs sm:text-sm text-slate-400 mt-1">Tour Packages</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">4.9 ★</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Traveler Rating</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">North</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Pakistan Destinations</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">100%</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Guided Experience</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">Trip</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Planning Support</p>
             </div>
           </motion.div>
         </motion.div>
