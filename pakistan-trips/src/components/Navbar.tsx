@@ -52,7 +52,7 @@ export const Navbar: React.FC = () => {
             width={99}
             src={fireflyLogo}
             alt=""
-            className="h-12 sm:h-14 w-auto object-contain"
+            className="h-12 sm:h-14 w-auto object-contain scale-125"
           />
         </a>
 
