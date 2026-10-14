@@ -45,14 +45,15 @@ export const Navbar: React.FC = () => {
         isScrolled ? 'py-3' : 'py-5'
       }`}>
         {/* Brand Logo */}
-        <a href="/" className="flex items-center group shrink-0" aria-label="My Pakistan Trips home">
+        <a href="/" className="flex flex-col items-center justify-center group shrink-0 leading-none" aria-label="My Pakistan Trips home">
           <img
-            height={600}
-            width={800}
+            height={56}
+            width={99}
             src="/my-pakistan-trips-logo.svg"
-            alt="My Pakistan Trips"
-            className="h-14 sm:h-16 w-auto max-w-[210px] object-contain rounded-md"
+            alt=""
+            className="h-9 sm:h-10 w-auto object-contain"
           />
+          <span className="mt-0.5 text-[10px] sm:text-[11px] font-bold tracking-wide text-white whitespace-nowrap">My Pakistan Trips</span>
         </a>
 
         {/* Desktop Navigation Links */}
