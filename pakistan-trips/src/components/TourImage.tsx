@@ -1,0 +1,4 @@
+import React,{useEffect,useState}from"react";
+const CLOUD=import.meta.env.VITE_CLOUDINARY_CLOUD_NAME||"lvv2vfug";
+const FALLBACK="https://placehold.co/1200x800/0f172a/94a3b8?text=Tour+photos+coming+soon";
+export default function TourImage({tag,alt,className="",loading="lazy"}:{tag?:string;alt:string;className?:string;loading?:"lazy"|"eager"}){const[src,setSrc]=useState(FALLBACK);useEffect(()=>{let cancelled=false;if(!tag)return()=>{cancelled=true};fetch(`https://res.cloudinary.com/${CLOUD}/image/list/${tag}.json`).then(r=>r.ok?r.json():null).then(data=>{const item=data?.resources?.[0];if(!cancelled&&item?.public_id)setSrc(`https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_1200/${item.public_id}.${item.format||"jpg"}`)}).catch(()=>{});return()=>{cancelled=true}},[tag]);return <img src={src} alt={alt} width="1200" height="800" loading={loading} decoding="async" className={className}/>;}
