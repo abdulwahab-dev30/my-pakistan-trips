@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Menu, X, Phone, Sparkles } from 'lucide-react';
 import DiscountBanner from './DiscountBanner';
-import fireflyLogo from '../assets/Firefly_RemoveBackground.png';
-import newLogo from '../assets/IMG-20261014-WA0026_1.jpg';
+import newLogo from '../assets/IMG-20261014-WA0033.jpg';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,7 +52,7 @@ export const Navbar: React.FC = () => {
             width={99}
             src={newLogo}
             alt=""
-            className="h-12 sm:h-14 w-auto object-contain scale-125"
+            className="h-12 sm:h-14 w-auto object-contain"
           />
         </a>
 
