@@ -317,7 +317,7 @@ export const Hero: React.FC = () => {
                       </p>
                     </div>
                     <motion.a
-                      href={`/tours/${tours.find((tour) => tour.title === currentPkg.title)?.slug || ''}`}
+                      href={tours.find((tour) => tour.title === currentPkg.title)?.slug ? `/tours/${tours.find((tour) => tour.title === currentPkg.title)!.slug}` : "/tours"}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-colors shadow-md shadow-emerald-500/20"
