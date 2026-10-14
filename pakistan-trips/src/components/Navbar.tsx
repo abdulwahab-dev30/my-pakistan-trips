@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Menu, X, Phone, Sparkles } from 'lucide-react';
 import DiscountBanner from './DiscountBanner';
 import fireflyLogo from '../assets/Firefly_RemoveBackground.png';
+import newLogo from '../assets/IMG-20261014-WA0026_1.jpg';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,7 +51,7 @@ export const Navbar: React.FC = () => {
           <img
             height={56}
             width={99}
-            src={fireflyLogo}
+            src={newLogo}
             alt=""
             className="h-12 sm:h-14 w-auto object-contain scale-125"
           />
