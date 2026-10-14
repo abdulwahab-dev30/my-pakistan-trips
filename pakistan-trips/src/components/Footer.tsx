@@ -3,7 +3,7 @@ import { Compass, Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 // Import central JSON data for official footer info
 import tripData from '../data/trips-data.json';
-import newLogo from '../assets/IMG-20261014-WA0033.jpg';
+import newLogo from '../assets/logosss (1).png';
 
 export const Footer: React.FC = () => {
   return (
