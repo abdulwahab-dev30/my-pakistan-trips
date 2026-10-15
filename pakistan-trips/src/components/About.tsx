@@ -100,7 +100,7 @@ export const About: React.FC = () => {
 
             {/* Official Company Address info */}
             <div className="pt-4 border-t border-slate-800 text-xs text-slate-400">
-              <p>🏢 <strong className="text-slate-300">Head Office:</strong> {tripData.address}</p>
+              <p>🏢 <strong className="text-slate-300">Head Office:</strong> {contact.address}</p>
             </div>
 
           </motion.div>
