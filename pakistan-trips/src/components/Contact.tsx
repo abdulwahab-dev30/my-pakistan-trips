@@ -4,9 +4,11 @@ import { Sparkles, Send, Phone, Mail, MapPin, User, Users, Calendar, MessageSqua
 
 // Import central JSON data
 import tripData from '../data/trips-data.json';
+import { useContactInfo } from '../lib/contactInfo';
 
 export const CTA: React.FC = () => {
   const packages = tripData.trip_packages || [];
+  const contactInfo = useContactInfo();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -17,7 +19,7 @@ export const CTA: React.FC = () => {
     notes: ''
   });
 
-  const rawContact = tripData.contact_numbers?.[0] || '03494886076';
+  const rawContact = contactInfo.whatsapp || contactInfo.phone || contactInfo.contact_numbers[0] || '';
   const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -93,8 +95,8 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Call / WhatsApp</p>
-                    <p className="text-sm font-bold text-white mt-0.5">{tripData.contact_numbers?.[0] || '0349-4886076'}</p>
-                    <p className="text-xs text-emerald-400">{tripData.contact_numbers?.[1] || '0349-4369937'}</p>
+                    <p className="text-sm font-bold text-white mt-0.5">{contactInfo.contact_numbers[0] || contactInfo.phone}</p>
+                    <p className="text-xs text-emerald-400">{contactInfo.contact_numbers[1] || contactInfo.secondary_phone}</p>
                   </div>
                 </div>
 
@@ -104,7 +106,7 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Email Us</p>
-                    <p className="text-sm font-bold text-white mt-0.5">{tripData.email}</p>
+                    <p className="text-sm font-bold text-white mt-0.5">{contactInfo.email}</p>
                   </div>
                 </div>
 
@@ -114,7 +116,7 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Head Office</p>
-                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{tripData.address}</p>
+                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{contactInfo.address}</p>
                   </div>
                 </div>
               </div>
@@ -123,8 +125,8 @@ export const CTA: React.FC = () => {
             {/* Pickup Terminals Card */}
             <div className="p-6 rounded-3xl bg-slate-900/60 border border-slate-800 backdrop-blur-xl space-y-3">
               <h4 className="text-sm font-bold text-white uppercase tracking-wider">Standard Departure Terminals</h4>
-              <p className="text-xs text-slate-300"><strong className="text-emerald-400">Lahore:</strong> {tripData.pickup_points?.lahore}</p>
-              <p className="text-xs text-slate-300"><strong className="text-emerald-400">Islamabad:</strong> {tripData.pickup_points?.islamabad_rawalpindi}</p>
+              <p className="text-xs text-slate-300"><strong className="text-emerald-400">Lahore:</strong> {contactInfo.pickup_points?.lahore}</p>
+              <p className="text-xs text-slate-300"><strong className="text-emerald-400">Islamabad:</strong> {contactInfo.pickup_points?.islamabad_rawalpindi}</p>
             </div>
           </motion.div>
 
