@@ -3,9 +3,11 @@ import { Compass, Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 // Import central JSON data for official footer info
 import tripData from '../data/trips-data.json';
+import { useContactInfo } from '../lib/contactInfo';
 import newLogo from '../assets/logosss (1).png';
 
 export const Footer: React.FC = () => {
+  const contactInfo = useContactInfo();
   return (
     <footer className="bg-[#F5F5F5] text-slate-700 border-t border-slate-200 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 relative z-10">
@@ -19,11 +21,11 @@ export const Footer: React.FC = () => {
               </div>
             </a>
             <p className="text-xs text-slate-600 leading-relaxed">
-              {tripData.company} — Your trusted partner for unforgettable and safe adventures across the northern valleys of Pakistan.
+              {contactInfo.company_name} — Your trusted partner for unforgettable and safe adventures across the northern valleys of Pakistan.
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-700 font-medium">
               <ShieldCheck className="w-4 h-4" />
-              <span>License No: {tripData.license_number}</span>
+              <span>License No: {contactInfo.license_number}</span>
             </div>
           </div>
 
@@ -45,15 +47,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-3 text-xs">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-                <span>{tripData.contact_numbers?.[0]}, {tripData.contact_numbers?.[1]}</span>
+                <span>{contactInfo.contact_numbers.filter(Boolean).join(', ')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-                <span>{tripData.email}</span>
+                <span>{contactInfo.email}</span>
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-emerald-700 flex-shrink-0 mt-0.5" />
-                <span className="leading-relaxed">{tripData.address}</span>
+                <span className="leading-relaxed">{contactInfo.address}</span>
               </div>
             </div>
           </div>
@@ -65,12 +67,12 @@ export const Footer: React.FC = () => {
               Visit our official website for instant bookings and live schedule updates:
             </p>
             <a 
-              href={`https://${tripData.website}`}
+              href={contactInfo.website ? (contactInfo.website.startsWith('http') ? contactInfo.website : `https://${contactInfo.website}`) : '#contact'}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-4 py-2 rounded-xl bg-white border border-slate-200 text-emerald-700 text-xs font-semibold hover:border-emerald-500/50 transition-colors"
             >
-              {tripData.website}
+              {contactInfo.website}
             </a>
           </div>
 
@@ -78,7 +80,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
-          <p>© {new Date().getFullYear()} {tripData.company}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {contactInfo.company_name}. All rights reserved.</p>
           <p className="flex items-center gap-1">
             Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Pakistan Travelers
           </p>
