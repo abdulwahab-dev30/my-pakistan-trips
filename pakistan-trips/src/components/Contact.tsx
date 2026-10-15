@@ -4,10 +4,8 @@ import { Sparkles, Send, Phone, Mail, MapPin, User, Users, Calendar, MessageSqua
 
 // Import central JSON data
 import tripData from '../data/trips-data.json';
-import { useContactInfo } from '../lib/contactInfo';
 
 export const CTA: React.FC = () => {
-  const contact = useContactInfo();
   const packages = tripData.trip_packages || [];
 
   const [formData, setFormData] = useState({
@@ -19,7 +17,7 @@ export const CTA: React.FC = () => {
     notes: ''
   });
 
-  const rawContact = contact.whatsapp || contact.phone || tripData.contact_numbers?.[0] || '03494886076';
+  const rawContact = tripData.contact_numbers?.[0] || '03494886076';
   const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -95,8 +93,8 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Call / WhatsApp</p>
-                    <p className="text-sm font-bold text-white mt-0.5">{contact.phone || contact.contact_numbers[0] || '0349-4886076'}</p>
-                    <p className="text-xs text-emerald-400">{contact.secondary_phone || contact.contact_numbers[1] || '0349-4369937'}</p>
+                    <p className="text-sm font-bold text-white mt-0.5">{tripData.contact_numbers?.[0] || '0349-4886076'}</p>
+                    <p className="text-xs text-emerald-400">{tripData.contact_numbers?.[1] || '0349-4369937'}</p>
                   </div>
                 </div>
 
@@ -106,7 +104,7 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Email Us</p>
-                    <p className="text-sm font-bold text-white mt-0.5">{contact.email}</p>
+                    <p className="text-sm font-bold text-white mt-0.5">{tripData.email}</p>
                   </div>
                 </div>
 
@@ -116,7 +114,7 @@ export const CTA: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-xs text-slate-400 font-medium uppercase tracking-wider">Head Office</p>
-                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{contact.address}</p>
+                    <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">{tripData.address}</p>
                   </div>
                 </div>
               </div>
