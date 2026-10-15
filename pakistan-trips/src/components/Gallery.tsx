@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface CloudinaryImage {
@@ -8,7 +8,6 @@ interface CloudinaryImage {
 
 export const Gallery: React.FC = () => {
   const [images, setImages] = useState<CloudinaryImage[]>([]);
-  const sectionRef = useRef<HTMLElement | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   
@@ -18,49 +17,29 @@ export const Gallery: React.FC = () => {
   const cloudName = 'lvv2vfug';
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    let cancelled = false;
-    let started = false;
-    let observer: IntersectionObserver | undefined;
-
     const fetchGalleryImages = async () => {
-      if (started) return;
-      started = true;
       try {
-        const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json`);
-        if (!response.ok) return;
-        const data = await response.json();
-        const formattedImages = (data.resources || [])
-          .filter((item: any) => item.public_id && item.format && item.version)
-          .map((item: any) => ({
+        setLoading(true);
+        const response = await fetch(
+          `https://res.cloudinary.com/${cloudName}/image/list/gallery.json`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          const formattedImages = data.resources.map((item: any) => ({
             public_id: item.public_id,
-            secure_url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_800/v${item.version}/${item.public_id}.${item.format}`,
+            secure_url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_1000/v${item.version}/${item.public_id}.${item.format}`,
           }));
-        if (!cancelled) setImages(formattedImages);
+          setImages(formattedImages);
+        }
       } catch (error) {
-        console.error('Error fetching Cloudinary gallery:', error);
+        console.error('Error fetching Cloudinary images:', error);
       } finally {
-        if (!cancelled) setLoading(false);
+        setLoading(false);
       }
     };
 
-    if ('IntersectionObserver' in window) {
-      observer = new IntersectionObserver((entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          void fetchGalleryImages();
-          observer?.disconnect();
-        }
-      }, { rootMargin: '300px 0px' });
-      observer.observe(section);
-    } else {
-      void fetchGalleryImages();
-    }
-
-    return () => {
-      cancelled = true;
-      observer?.disconnect();
-    };
+    fetchGalleryImages();
   }, []);
 
   const indexOfLastImage = currentPage * imagesPerPage;
@@ -85,7 +64,7 @@ export const Gallery: React.FC = () => {
   const activeImage = selectedIndex !== null ? images[selectedIndex] : null;
 
   return (
-    <section ref={sectionRef} className="py-20 bg-slate-950 text-white relative" id="gallery">
+    <section className="py-20 bg-slate-950 text-white relative" id="gallery">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">
