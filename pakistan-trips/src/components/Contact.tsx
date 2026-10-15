@@ -194,6 +194,7 @@ export const CTA: React.FC = () => {
                       {pkg.title} ({pkg.duration})
                     </option>
                   ))}
+                  <option value="Other" className="bg-slate-900 text-white">Other / Custom Package</option>
                 </select>
               </div>
 
