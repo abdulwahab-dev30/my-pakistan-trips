@@ -4,8 +4,10 @@ import { Sparkles, Send, Phone, Mail, MapPin, User, Users, Calendar, MessageSqua
 
 // Import central JSON data
 import tripData from '../data/trips-data.json';
+import { useContactInfo } from '../lib/contactInfo';
 
 export const CTA: React.FC = () => {
+  const contact = useContactInfo();
   const packages = tripData.trip_packages || [];
 
   const [formData, setFormData] = useState({
@@ -17,7 +19,7 @@ export const CTA: React.FC = () => {
     notes: ''
   });
 
-  const rawContact = tripData.contact_numbers?.[0] || '03494886076';
+  const rawContact = contact.whatsapp || contact.phone || tripData.contact_numbers?.[0] || '03494886076';
   const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
 
   const handleSubmit = (e: React.FormEvent) => {
