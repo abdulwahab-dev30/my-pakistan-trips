@@ -4,39 +4,39 @@ import { ShieldCheck, Map, HeartHandshake, BadgeCheck, Clock3, Sparkles } from '
 
 const reasons = [
   {
+    icon: Compass,
+    title: 'Professional Tour Guides',
+    description: 'Explore with knowledgeable, professional guides who help make your journey informative, comfortable, and memorable.',
+    number: '01',
+  },
+  {
     icon: ShieldCheck,
     title: 'Safe & Reliable Travel',
     description: 'Travel with a team that puts your comfort, safety, and peace of mind first.',
-    number: '01',
+    number: '02',
   },
   {
     icon: Map,
     title: 'Local Destination Expertise',
     description: 'Explore Pakistan with thoughtful itineraries and guidance from people who know the routes.',
-    number: '02',
+    number: '03',
   },
   {
     icon: HeartHandshake,
     title: 'Personalized Packages',
     description: 'Choose a trip that fits your interests, schedule, and group—not a one-size-fits-all plan.',
-    number: '03',
+    number: '04',
   },
   {
     icon: BadgeCheck,
     title: 'Comfort You Can Count On',
     description: 'We focus on dependable arrangements, comfortable stays, and a smoother travel experience.',
-    number: '04',
+    number: '05',
   },
   {
     icon: Clock3,
     title: 'Clear Trip Planning',
     description: 'Get helpful details about itineraries, inclusions, departure points, and booking before you go.',
-    number: '05',
-  },
-  {
-    icon: Sparkles,
-    title: 'Memories Worth Keeping',
-    description: 'Discover beautiful valleys, mountain views, and meaningful moments across Northern Pakistan.',
     number: '06',
   },
 ];
