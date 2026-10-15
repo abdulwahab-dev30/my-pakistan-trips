@@ -3,12 +3,10 @@ import { MessageCircle } from 'lucide-react';
 
 // Import central JSON data for official contact number
 import tripData from '../data/trips-data.json';
-import { useContactInfo } from '../lib/contactInfo';
 
 export const WhatsAppButton: React.FC = () => {
-  const contact = useContactInfo();
   // Safe WhatsApp number extraction from JSON
-  const rawContact = contact.whatsapp || contact.phone || tripData.contact_numbers?.[0] || '03494886076';
+  const rawContact = tripData.contact_numbers?.[0] || '03494886076';
   const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
 
   // Default pre-filled message text
