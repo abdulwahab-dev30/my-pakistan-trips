@@ -5,26 +5,14 @@ import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronR
 // Import central JSON data
 import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
+import TourImage from './TourImage';
 const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=2400&q=85';
 
-// Each package uses its own Cloudinary tag. Add these exact tags to package photos.
-const CLOUDINARY_CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
-const PLACEHOLDER_IMAGE = "https://placehold.co/800x600/0f172a/94a3b8?text=Image+Coming+Soon";
-const PACKAGE_IMAGE_TAGS: Record<string, string> = {
-  "3 Days Trip to Naran, Shogran and Babusar top": "package-naran-shogran-babusar",
-  "5 Days Trip to Hunza Valley": "package-hunza-valley",
-  "8 Days Trip to Skardu Valley & Hunza": "package-skardu-hunza",
-  "6 Days Trip to Skardu Valley": "package-skardu-valley",
-  "4 Days Kumrat, Jahaz Banda and Katora Lake": "package-kumrat-jahaz-banda-katora-lake",
-  "4 Days Trip to Sharda, Toubat & Aurang Kel (Neelum Valley)": "package-neelum-valley-sharda-taobat-aurang-kel",
-  "6 Days Trip to Astore & Minimerg & Rama Meadows": "package-astore-minimerg-rama-meadows",
-  "3 Days Trip to Swat & Malam Jabba": "package-swat-malam-jabba"
-};
+
 
 export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [packageImages, setPackageImages] = useState<Record<string, string>>({});
   const [isMobile, setIsMobile] = useState(false);
 
   // Keep desktop motion effects, but avoid costly parallax and entrance animations on phones.
@@ -39,55 +27,9 @@ export const Hero: React.FC = () => {
   // Use a wide, high-resolution Hunza Valley landscape for the hero background.
   const rawPackages = tripData.trip_packages || [];
 
-  // Fetch only the active package's tagged image, rather than making eight requests on page load.
-  // Missing tags/photos fall back to a neutral placeholder instead of Unsplash images.
-  useEffect(() => {
-    const pkg = rawPackages[currentIndex];
-    if (!pkg) return;
-
-    const tag = PACKAGE_IMAGE_TAGS[pkg.title];
-    if (!tag) {
-      setPackageImages((previous) => ({ ...previous, [pkg.title]: PLACEHOLDER_IMAGE }));
-      return;
-    }
-    if (packageImages[pkg.title]) return;
-
-    let cancelled = false;
-    const loadPackageImage = async () => {
-      try {
-        const response = await fetch(
-          `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/list/${tag}.json`
-        );
-        if (!response.ok) throw new Error(`No public Cloudinary list for tag: ${tag}`);
-
-        const data = await response.json();
-        const item = (data.resources || []).find(
-          (resource: any) => resource.public_id && resource.format && resource.version
-        );
-        const imageUrl = item
-          ? `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_800/v${item.version}/${item.public_id}.${item.format}`
-          : PLACEHOLDER_IMAGE;
-
-        if (!cancelled) {
-          setPackageImages((previous) => ({ ...previous, [pkg.title]: imageUrl }));
-        }
-      } catch {
-        if (!cancelled) {
-          setPackageImages((previous) => ({ ...previous, [pkg.title]: PLACEHOLDER_IMAGE }));
-        }
-      }
-    };
-
-    loadPackageImage();
-    return () => {
-      cancelled = true;
-    };
-  }, [currentIndex, rawPackages, packageImages]);
-
   // Combine package data with its Cloudinary image and default badges.
   const heroPackages = rawPackages.map((pkg: any, idx: number) => ({
     ...pkg,
-    image: packageImages[pkg.title] || PLACEHOLDER_IMAGE,
     location: pkg.main_attractions?.[0] || "Northern Pakistan",
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
@@ -283,11 +225,13 @@ export const Hero: React.FC = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   <div className="relative h-[17rem] xs:h-[18rem] sm:h-64 rounded-2xl overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
-                    <img height={600} width={800} 
-                      src={currentPkg.image} 
-                      alt={`Scenic landscape for ${currentPkg.title}`}
-                      className="w-full h-full object-cover object-center sm:group-hover:scale-105 transition-transform duration-500" 
-                    loading="lazy" />
+                    <TourImage
+                      src={currentTour?.images?.[0]?.src}
+                      tag={currentTour?.imageTag || currentTour?.images?.[0]?.tag}
+                      alt={currentTour?.images?.[0]?.alt || `Scenic landscape for ${currentPkg.title}`}
+                      className="w-full h-full object-cover object-center sm:group-hover:scale-105 transition-transform duration-500"
+                      loading="eager"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
                     
                     <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
