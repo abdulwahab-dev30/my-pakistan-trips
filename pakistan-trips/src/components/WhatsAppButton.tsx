@@ -2,12 +2,14 @@ import React from 'react';
 import { MessageCircle } from 'lucide-react';
 
 // Import central JSON data for official contact number
-import tripData from '../data/trips-data.json';
+import { useContactInfo } from '../lib/contactInfo';
 
 export const WhatsAppButton: React.FC = () => {
-  // Safe WhatsApp number extraction from JSON
-  const rawContact = tripData.contact_numbers?.[0] || '03494886076';
-  const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
+  const contactInfo = useContactInfo();
+  // Prefer the dedicated WhatsApp contact, then the main phone number.
+  const rawContact = contactInfo.whatsapp || contactInfo.phone || contactInfo.contact_numbers[0] || '';
+  const digits = String(rawContact).replace(/[^0-9]/g, '');
+  const whatsappNumber = digits.startsWith('00') ? digits.slice(2) : digits.startsWith('0') ? '92' + digits.slice(1) : digits;
 
   // Default pre-filled message text
   const defaultMessage = "Assalam-o-Alaikum! I am visiting the My Pakistan Trips website and I would like to get more details about your upcoming tour packages and availability.";
