@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronRight, MapPin, Clock } from 'lucide-react';
 
 // Import central JSON data
@@ -7,7 +7,8 @@ import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
 import TourImage from './TourImage';
-const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=2400&q=85';
+const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=1920&q=75';
+const heroBackgroundMobile = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=900&h=1200&q=70';
 
 
 
@@ -48,9 +49,6 @@ export const Hero: React.FC = () => {
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
 
-  const { scrollY } = useScroll();
-  const yBg = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacityBg = useTransform(scrollY, [0, 300], [1, 0.4]);
 
   // Auto slide timer (5 seconds)
   useEffect(() => {
@@ -97,25 +95,24 @@ export const Hero: React.FC = () => {
   return (
     <div className="relative min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-24 pb-10">
       {/* Background Parallax */}
-      <motion.div 
-        style={isMobile ? undefined : { y: yBg, opacity: opacityBg }}
-        className="absolute inset-0 z-0"
-      >
-        {heroBackgroundImage && (
+      <div className="absolute inset-0 z-0">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={heroBackgroundMobile} />
           <img
             src={heroBackgroundImage}
             alt="Scenic travel photography from Pakistan"
             width={1600}
             height={1000}
             fetchPriority="high"
+            loading="eager"
             decoding="async"
             className="w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105"
           />
-        )}
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
-      </motion.div>
+      </div>
 
       {/* Main Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
