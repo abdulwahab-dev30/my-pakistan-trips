@@ -5,6 +5,7 @@ import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronR
 // Import central JSON data
 import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
+import { getPublishedTours } from '../lib/tourRepository';
 import TourImage from './TourImage';
 const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=2400&q=85';
 
@@ -14,6 +15,19 @@ export const Hero: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [publishedTours, setPublishedTours] = useState<any[]>([]);
+
+  // Load the same published tour records used by the homepage tour cards,
+  // so the hero uses the exact same image URL/tag as the listing.
+  useEffect(() => {
+    let active = true;
+    getPublishedTours().then((data) => {
+      if (active) setPublishedTours(data);
+    }).catch(() => {
+      if (active) setPublishedTours([]);
+    });
+    return () => { active = false; };
+  }, []);
 
   // Keep desktop motion effects, but avoid costly parallax and entrance animations on phones.
   useEffect(() => {
@@ -58,7 +72,10 @@ export const Hero: React.FC = () => {
   };
 
   const currentPkg = heroPackages[currentIndex] || heroPackages[0];
-  const currentTour = tours.find((tour) => tour.title === currentPkg?.title);
+  const normalizeTitle = (value?: string) => (value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+  const currentTour =
+    publishedTours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title)) ||
+    tours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title));
 
   const containerVariants = {
     hidden: { opacity: 0 },
