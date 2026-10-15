@@ -4,10 +4,8 @@ import { Sparkles, ShieldCheck, Award, Users, Compass } from 'lucide-react';
 
 // Import JSON file for official company details
 import tripData from '../data/trips-data.json';
-import { useContactInfo } from '../lib/contactInfo';
 
 export const About: React.FC = () => {
-  const contact = useContactInfo();
   return (
     <section id="about" className="py-24 bg-slate-950 text-white relative overflow-hidden">
       {/* Background Decorative Glow */}
@@ -43,7 +41,7 @@ export const About: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-sm font-bold text-white">Registered & Licensed Agency</h4>
-                      <p className="text-xs text-emerald-400 font-medium">License No: {contact.license_number}</p>
+                      <p className="text-xs text-emerald-400 font-medium">License No: {tripData.license_number}</p>
                     </div>
                   </div>
                 </div>
@@ -72,7 +70,7 @@ export const About: React.FC = () => {
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-              Operating as <strong className="text-white font-semibold">{contact.company_name}</strong>, hamara maqsad har traveler ko safe, comfortable aur memorable adventures provide karna hai. Hum believe karte hain ke safar sirf aik destination par pohochne ka naam nahi, balkay raaste ke har lamhe ko enjoy karne ka tajurba hai.
+              Operating as <strong className="text-white font-semibold">{tripData.company}</strong>, hamara maqsad har traveler ko safe, comfortable aur memorable adventures provide karna hai. Hum believe karte hain ke safar sirf aik destination par pohochne ka naam nahi, balkay raaste ke har lamhe ko enjoy karne ka tajurba hai.
             </p>
 
             {/* Core Pillars Grid */}
@@ -100,7 +98,7 @@ export const About: React.FC = () => {
 
             {/* Official Company Address info */}
             <div className="pt-4 border-t border-slate-800 text-xs text-slate-400">
-              <p>🏢 <strong className="text-slate-300">Head Office:</strong> {contact.address}</p>
+              <p>🏢 <strong className="text-slate-300">Head Office:</strong> {tripData.address}</p>
             </div>
 
           </motion.div>
