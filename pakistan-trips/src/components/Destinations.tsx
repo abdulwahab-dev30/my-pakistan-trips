@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Compass, Search, Star, ArrowUpRight, ChevronLeft, ChevronRight, X, Images } from 'lucide-react';
 
@@ -108,6 +108,7 @@ const CATEGORIES = ["All", "Valleys", "Adventure", "Lakes", "Coastal", "Culture"
 
 export const Destinations: React.FC = () => {
   const [destinationsWithImages, setDestinationsWithImages] = useState(DESTINATIONS);
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
   // Skip card layout/reveal animations on small screens to reduce rendering work.
@@ -120,38 +121,51 @@ export const Destinations: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     let cancelled = false;
+    let started = false;
+    let observer: IntersectionObserver | undefined;
 
     const loadTaggedImages = async () => {
+      if (started) return;
+      started = true;
       const results = await Promise.all(DESTINATIONS.map(async (destination) => {
         try {
           const response = await fetch(
             `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/list/${destination.tag}.json`
           );
           if (!response.ok) return { ...destination, images: [PLACEHOLDER_IMAGE] };
-
           const data = await response.json();
           const images = (data.resources || [])
-            .filter((item: any) => item.public_id && item.format)
+            .filter((item: any) => item.public_id && item.format && item.version)
             .map((item: any) => `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_500/v${item.version}/${item.public_id}.${item.format}`);
-
           return { ...destination, images: images.length ? images : [PLACEHOLDER_IMAGE] };
-        } catch (error) {
-          console.error(`Could not load Cloudinary tag "${destination.tag}":`, error);
+        } catch {
           return { ...destination, images: [PLACEHOLDER_IMAGE] };
         }
       }));
-
       if (!cancelled) setDestinationsWithImages(results);
     };
 
-    loadTaggedImages();
-    return () => { cancelled = true; };
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          void loadTaggedImages();
+          observer?.disconnect();
+        }
+      }, { rootMargin: '300px 0px' });
+      observer.observe(section);
+    } else {
+      void loadTaggedImages();
+    }
+
+    return () => {
+      cancelled = true;
+      observer?.disconnect();
+    };
   }, []);
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeGalleryDestination, setActiveGalleryDestination] = useState<any | null>(null);
-  const [currentImageIdx, setCurrentImageIdx] = useState(0);
 
   const filteredDestinations = destinationsWithImages.filter((item) => {
     const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
@@ -176,7 +190,7 @@ export const Destinations: React.FC = () => {
   };
 
   return (
-    <section id="destinations" className="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <section ref={sectionRef} id="destinations" className="py-24 bg-slate-950 text-white relative overflow-hidden">
       {/* Background Ambient Lighting */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -right-40 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
