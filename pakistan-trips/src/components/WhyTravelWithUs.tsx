@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Map, HeartHandshake, BadgeCheck, Clock3, Sparkles } from 'lucide-react';
+import { Compass, ShieldCheck, Map, HeartHandshake, BadgeCheck, Clock3, Sparkles } from 'lucide-react';
 
 const reasons = [
   {
