@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ShieldCheck, Award, Users, Compass } from 'lucide-react';
 
 // Import JSON file for official company details
 import tripData from '../data/trips-data.json';
+import { getRandomGalleryImage } from '../lib/cloudinaryGallery';
+import heroFallbackImage from '../assets/hero-bg.webp';
 
 export const About: React.FC = () => {
+  const [aboutImage, setAboutImage] = useState(heroFallbackImage);
+  useEffect(() => {
+    let active = true;
+    getRandomGalleryImage(1000).then((url) => {
+      if (active && url) setAboutImage(url);
+    });
+    return () => { active = false; };
+  }, []);
+
   return (
     <section id="about" className="py-24 bg-slate-950 text-white relative overflow-hidden">
       {/* Background Decorative Glow */}
@@ -27,7 +38,7 @@ export const About: React.FC = () => {
             <div className="relative rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/60 backdrop-blur-xl p-4 sm:p-6 shadow-2xl">
               <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden group">
                 <img height={600} width={800} 
-                  src="https://images.unsplash.com/photo-1586375300773-8384e3e4916f?auto=format&fit=crop&q=80&w=1000" 
+                  src={aboutImage} 
                   alt="Northern Pakistan Landscape"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
                 loading="lazy" />
