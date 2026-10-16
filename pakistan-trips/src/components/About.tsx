@@ -81,7 +81,7 @@ export const About: React.FC = () => {
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base font-light leading-relaxed">
-              Operating as <strong className="text-white font-semibold">{tripData.company}</strong>, hamara maqsad har traveler ko safe, comfortable aur memorable adventures provide karna hai. Hum believe karte hain ke safar sirf aik destination par pohochne ka naam nahi, balkay raaste ke har lamhe ko enjoy karne ka tajurba hai.
+              At <strong className="text-white font-semibold">{tripData.company}</strong>, our mission is to create safe, comfortable, and memorable travel experiences for every traveler. We believe a journey is about more than reaching a destination—it is about enjoying every moment along the way.
             </p>
 
             {/* Core Pillars Grid */}
@@ -92,7 +92,7 @@ export const About: React.FC = () => {
                 </div>
                 <h3 className="text-base font-bold text-white mb-1">Expert Guidance</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Experienced tour captains jo har valley aur route ki mukammal maloomat rakhte hain.
+                  Experienced tour leaders with in-depth knowledge of every valley, destination, and route.
                 </p>
               </div>
 
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
                 </div>
                 <h3 className="text-base font-bold text-white mb-1">Quality Stays</h3>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Top-rated hotels aur comfortable transport jo aapke trip ko tension-free banate hain.
+                  Carefully selected hotels and comfortable transport for a smooth, worry-free trip.
                 </p>
               </div>
             </div>
