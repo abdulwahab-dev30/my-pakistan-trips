@@ -15,24 +15,14 @@ export default function BookingOfferPopup() {
   useEffect(() => {
     if (!isOpen) return;
 
-    // Lock background scrolling while the popup is visible, and restore both
-    // document elements on every close/unmount (important for mobile browsers).
-    const body = document.body;
-    const html = document.documentElement;
-    const previousBodyOverflow = body.style.overflow;
-    const previousHtmlOverflow = html.style.overflow;
-
-    body.style.overflow = "hidden";
-    html.style.overflow = "hidden";
-
+    // Keep keyboard dismissal, but do not change document overflow styles.
+    // The overlay is fixed-position, so it does not need to lock page scrolling.
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsOpen(false);
     };
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      body.style.overflow = previousBodyOverflow;
-      html.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
