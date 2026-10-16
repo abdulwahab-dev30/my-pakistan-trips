@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Sparkles, X } from "lucide-react";
-
-const offerImage =
-  "https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=1000&q=80";
+import { getRandomGalleryImage } from "../lib/cloudinaryGallery";
+import heroFallbackImage from "../assets/hero-bg.webp";
 
 export default function BookingOfferPopup() {
   const [isOpen, setIsOpen] = useState(false);
+  const [offerImage, setOfferImage] = useState(heroFallbackImage);
+
+  useEffect(() => {
+    let active = true;
+    getRandomGalleryImage(900).then((url) => {
+      if (active && url) setOfferImage(url);
+    });
+    return () => { active = false; };
+  }, []);
 
   useEffect(() => {
     setIsOpen(true);
