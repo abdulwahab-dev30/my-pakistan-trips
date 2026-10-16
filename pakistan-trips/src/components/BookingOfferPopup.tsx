@@ -101,9 +101,6 @@ export default function BookingOfferPopup() {
               >
                 Maybe later
               </button>
-              <p className="mt-3 text-center text-[11px] leading-4 text-slate-400">
-                *Offer wording reflects the advertised discounts. Confirm applicable booking terms before publishing.
-              </p>
             </div>
           </motion.section>
         </motion.div>
