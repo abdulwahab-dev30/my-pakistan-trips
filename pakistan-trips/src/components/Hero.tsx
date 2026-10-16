@@ -137,23 +137,22 @@ export const Hero: React.FC = () => {
     <div className="relative min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-24 pb-10">
       {/* Background Parallax */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="sync">
+        {heroBackgroundImages.map((image, index) => (
           <motion.img
-            key={heroBackgroundImages[backgroundIndex]}
-            src={heroBackgroundImages[backgroundIndex]}
-            alt="Scenic travel photography from Pakistan"
+            key={image}
+            src={image}
+            alt={index === backgroundIndex ? "Scenic travel photography from Pakistan" : ""}
+            aria-hidden={index !== backgroundIndex}
             width={1600}
             height={1000}
-            fetchPriority={backgroundIndex === 0 ? "high" : "auto"}
+            fetchPriority={index === 0 ? "high" : "auto"}
             loading="eager"
             decoding="async"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105"
+            className="absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105 will-change-[opacity]"
           />
-        </AnimatePresence>
+        ))}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
