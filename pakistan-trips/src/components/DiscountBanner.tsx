@@ -2,7 +2,7 @@ import React from "react";
 
 const DiscountBanner: React.FC = () => (
   <aside
-    aria-label="Special offer: 10% off all tour packages"
+    aria-label="Special offer: 10% off all tour packages plus an extra 5% for website bookings, up to 15% off"
     className="h-11 w-full overflow-hidden bg-emerald-600 text-white"
   >
     <div className="flex h-full items-center">
@@ -15,7 +15,7 @@ const DiscountBanner: React.FC = () => (
           >
             <span>10% OFF ALL TOUR PACKAGES</span>
             <span className="text-emerald-100" aria-hidden="true">✦</span>
-            <span className="font-medium">Plan your Pakistan adventure and save 10%</span>
+            <span className="font-medium">EXTRA 5% OFF WEBSITE BOOKINGS · UP TO 15% OFF</span>
             <span className="text-emerald-100" aria-hidden="true">✦</span>
           </div>
         ))}
