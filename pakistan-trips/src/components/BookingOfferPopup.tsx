@@ -14,14 +14,25 @@ export default function BookingOfferPopup() {
 
   useEffect(() => {
     if (!isOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+
+    // Lock background scrolling while the popup is visible, and restore both
+    // document elements on every close/unmount (important for mobile browsers).
+    const body = document.body;
+    const html = document.documentElement;
+    const previousBodyOverflow = body.style.overflow;
+    const previousHtmlOverflow = html.style.overflow;
+
+    body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsOpen(false);
     };
     window.addEventListener("keydown", handleKeyDown);
+
     return () => {
-      document.body.style.overflow = previousOverflow;
+      body.style.overflow = previousBodyOverflow;
+      html.style.overflow = previousHtmlOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen]);
