@@ -7,7 +7,7 @@ import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
 import TourImage from './TourImage';
-import { getRandomGalleryImage } from '../lib/cloudinaryGallery';
+import { getRandomGalleryImages } from '../lib/cloudinaryGallery';
 import heroFallbackImage from '../assets/hero-bg.webp';
 
 
@@ -17,15 +17,26 @@ export const Hero: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
-  const [heroBackgroundImage, setHeroBackgroundImage] = useState(heroFallbackImage);
+  const [heroBackgroundImages, setHeroBackgroundImages] = useState<string[]>([heroFallbackImage]);
+  const [backgroundIndex, setBackgroundIndex] = useState(0);
 
+  // Rotate the hero background every 5 seconds, with a soft crossfade.
+  // Five seconds is a comfortable, standard pace for a scenic hero slideshow.
   useEffect(() => {
     let active = true;
-    getRandomGalleryImage(1600).then((url) => {
-      if (active && url) setHeroBackgroundImage(url);
+    getRandomGalleryImages(6, 1600).then((images) => {
+      if (active && images.length) setHeroBackgroundImages(images);
     });
     return () => { active = false; };
   }, []);
+
+  useEffect(() => {
+    if (heroBackgroundImages.length < 2) return;
+    const timer = window.setInterval(() => {
+      setBackgroundIndex((index) => (index + 1) % heroBackgroundImages.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [heroBackgroundImages]);
 
   // Load the same published tour records used by the homepage tour cards,
   // so the hero uses the exact same image URL/tag as the listing.
@@ -105,18 +116,23 @@ export const Hero: React.FC = () => {
     <div className="relative min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-24 pb-10">
       {/* Background Parallax */}
       <div className="absolute inset-0 z-0">
-        <picture>
-          <img
-            src={heroBackgroundImage}
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={heroBackgroundImages[backgroundIndex]}
+            src={heroBackgroundImages[backgroundIndex]}
             alt="Scenic travel photography from Pakistan"
             width={1600}
             height={1000}
-            fetchPriority="high"
+            fetchPriority={backgroundIndex === 0 ? "high" : "auto"}
             loading="eager"
             decoding="async"
-            className="w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105"
           />
-        </picture>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
