@@ -24,9 +24,30 @@ export const Hero: React.FC = () => {
   // Five seconds is a comfortable, standard pace for a scenic hero slideshow.
   useEffect(() => {
     let active = true;
-    getRandomGalleryImages(6, 1600).then((images) => {
-      if (active && images.length) setHeroBackgroundImages(images);
-    });
+
+    // Preload the full set before enabling the slideshow. This avoids blank
+    // frames or a visible loading hitch when the next background is selected.
+    const preloadImage = (src: string) =>
+      new Promise<string | null>((resolve) => {
+        const image = new window.Image();
+        image.onload = () => resolve(src);
+        image.onerror = () => resolve(null);
+        image.src = src;
+      });
+
+    getRandomGalleryImages(6, 1600)
+      .then((images) => Promise.all(images.map(preloadImage)))
+      .then((loadedImages) => {
+        const readyImages = loadedImages.filter((src): src is string => Boolean(src));
+        if (active && readyImages.length) {
+          setBackgroundIndex(0);
+          setHeroBackgroundImages(readyImages);
+        }
+      })
+      .catch(() => {
+        // Keep the local fallback image if the gallery or preload fails.
+      });
+
     return () => { active = false; };
   }, []);
 
