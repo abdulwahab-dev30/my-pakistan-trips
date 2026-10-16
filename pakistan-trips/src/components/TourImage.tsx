@@ -7,8 +7,12 @@ export default function TourImage({src,tag,alt,className="",loading="lazy"}:{src
  const [resolved,setResolved]=useState(isPlaceholder(src)?FALLBACK:src!);
  useEffect(()=>{
   let cancelled=false;
+  if(isUnsplash(src)){
+   getRandomGalleryImage(1200).then(url=>{if(!cancelled&&url)setResolved(url)});
+   return()=>{cancelled=true};
+  }
   if(!isPlaceholder(src)){setResolved(src!);return()=>{cancelled=true}};
-  const imageTag=isUnsplash(src)?"gallery":tag;
+  const imageTag=tag;
   if(!imageTag){setResolved(FALLBACK);return()=>{cancelled=true}}
   setResolved(FALLBACK);
   fetch(`https://res.cloudinary.com/${CLOUD}/image/list/${imageTag}.json`)
