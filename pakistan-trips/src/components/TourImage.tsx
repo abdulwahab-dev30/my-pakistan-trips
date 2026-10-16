@@ -1,4 +1,5 @@
 import React,{useEffect,useState}from"react";
+import { getRandomGalleryImage } from "../lib/cloudinaryGallery";
 const CLOUD=import.meta.env.VITE_CLOUDINARY_CLOUD_NAME||"lvv2vfug";
 const FALLBACK="https://placehold.co/800x600/0f172a/94a3b8?text=Image+Coming+Soon";
 const isUnsplash=(value?:string)=>Boolean(value&&/unsplash\.com/i.test(value));
