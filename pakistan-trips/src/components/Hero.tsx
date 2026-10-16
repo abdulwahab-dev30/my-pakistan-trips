@@ -89,6 +89,12 @@ export const Hero: React.FC = () => {
     location: pkg.main_attractions?.[0] || "Northern Pakistan",
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
+  const attractionCount = new Set(
+    rawPackages.flatMap((pkg: any) => pkg.main_attractions || [])
+      .map((name: string) => String(name).trim().toLowerCase())
+      .filter(Boolean)
+  ).size;
+  const departureCityCount = Object.keys(tripData.pickup_points || {}).length;
 
 
   // Auto slide timer (5 seconds)
@@ -141,7 +147,7 @@ export const Hero: React.FC = () => {
           <motion.img
             key={image}
             src={image}
-            alt={index === backgroundIndex ? "Scenic travel photography from Pakistan" : ""}
+            alt=""
             aria-hidden={index !== backgroundIndex}
             width={1600}
             height={1000}
@@ -228,12 +234,12 @@ export const Hero: React.FC = () => {
               <p className="text-xs sm:text-sm text-slate-400 mt-1">Tour Packages</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">North</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Pakistan Destinations</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{attractionCount}+</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Attractions & Highlights</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">Trip</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Planning Support</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{departureCityCount}</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Departure Cities</p>
             </div>
           </motion.div>
         </motion.div>
@@ -251,9 +257,11 @@ export const Hero: React.FC = () => {
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
-                <span className="text-xs font-semibold tracking-wider text-emerald-400 uppercase flex items-center gap-2">
-                  <Compass className="w-4 h-4 animate-spin-slow" />
-                  Package ({currentIndex + 1}/{heroPackages.length})
+                <span
+                  className="text-xs font-semibold tracking-wider text-emerald-400 uppercase flex items-center gap-2"
+                  aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
+                >
+                  <Compass className="w-4 h-4 animate-spin-slow" aria-hidden="true" />
                 </span>
                 
                 {/* Navigation Arrows */}
@@ -313,7 +321,8 @@ export const Hero: React.FC = () => {
 
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-[10px] text-slate-400 uppercase tracking-wider">Per Head Starting</p>
+                      <p className="text-[10px] text-slate-400 uppercase tracking-wider">Starting price per person</p>
+                      <p className="text-[10px] text-slate-500">Listed price before discounts</p>
                       <p className="text-xl font-bold text-emerald-400">
                         {currentPkg.pricing?.standard_4_5_sharing || "Rs. Contact"}
                       </p>
@@ -345,9 +354,10 @@ export const Hero: React.FC = () => {
                     />
                   ))}
                 </div>
-                <span className="text-[10px] text-slate-400">
-                  {isPaused ? 'Paused' : 'Auto-playing'}
-                </span>
+                <span
+                  className="sr-only"
+                  aria-label={isPaused ? "Package carousel paused" : "Package carousel automatically advances every five seconds"}
+                />
               </div>
 
             </div>
