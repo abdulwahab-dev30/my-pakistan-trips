@@ -93,7 +93,7 @@ export default function BookingOfferPopup() {
                     Get <span className="text-amber-300">15% OFF</span>
                   </h2>
                   <p className="mt-2 text-xs leading-5 text-slate-300 sm:text-sm">
-                    Book directly on our website and save more.
+                    Get the standard 10% discount plus an extra 5% for booking online.
                   </p>
                 </div>
                 <div className="shrink-0 rounded-xl border border-amber-300/30 bg-amber-300/10 px-2.5 py-2 text-center">
@@ -104,7 +104,7 @@ export default function BookingOfferPopup() {
 
               <div className="my-4 h-px bg-white/10 sm:my-5" />
               <p id="booking-offer-description" className="mb-4 text-xs leading-5 text-slate-400 sm:mb-5 sm:text-[13px]">
-                Enjoy our existing 10% discount, plus an extra 5% when you book your tour with us online.
+                Save 10% on all tour packages, plus an extra 5% when you book through our website — up to 15% off in total. Listed package prices are before discounts; confirm your final price with our booking team.
               </p>
 
               <a
