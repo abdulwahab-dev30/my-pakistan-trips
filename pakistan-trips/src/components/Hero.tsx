@@ -7,8 +7,8 @@ import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
 import TourImage from './TourImage';
-const heroBackgroundImage = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=1920&q=75';
-const heroBackgroundMobile = 'https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=900&h=1200&q=70';
+import { getRandomGalleryImage } from '../lib/cloudinaryGallery';
+import heroFallbackImage from '../assets/hero-bg.webp';
 
 
 
@@ -17,6 +17,15 @@ export const Hero: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
+  const [heroBackgroundImage, setHeroBackgroundImage] = useState(heroFallbackImage);
+
+  useEffect(() => {
+    let active = true;
+    getRandomGalleryImage(1600).then((url) => {
+      if (active && url) setHeroBackgroundImage(url);
+    });
+    return () => { active = false; };
+  }, []);
 
   // Load the same published tour records used by the homepage tour cards,
   // so the hero uses the exact same image URL/tag as the listing.
@@ -97,7 +106,6 @@ export const Hero: React.FC = () => {
       {/* Background Parallax */}
       <div className="absolute inset-0 z-0">
         <picture>
-          <source media="(max-width: 767px)" srcSet={heroBackgroundMobile} />
           <img
             src={heroBackgroundImage}
             alt="Scenic travel photography from Pakistan"
