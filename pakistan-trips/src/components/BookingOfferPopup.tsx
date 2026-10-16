@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Check, Sparkles, X } from "lucide-react";
+import { ArrowRight, Sparkles, X } from "lucide-react";
+
+const offerImage =
+  "https://images.unsplash.com/photo-1514558427911-8e293bebf18c?auto=format&fit=crop&w=1000&q=80";
 
 export default function BookingOfferPopup() {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Show the offer whenever the homepage loads.
     setIsOpen(true);
   }, []);
 
@@ -28,7 +30,7 @@ export default function BookingOfferPopup() {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-slate-950/70 p-3 backdrop-blur-sm sm:p-5"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-slate-950/75 p-3 backdrop-blur-[3px] sm:p-5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -42,62 +44,72 @@ export default function BookingOfferPopup() {
             aria-modal="true"
             aria-labelledby="booking-offer-title"
             aria-describedby="booking-offer-description"
-            className="relative my-auto w-full max-w-sm overflow-hidden rounded-2xl border border-white/15 bg-white text-slate-900 shadow-2xl sm:max-w-md sm:rounded-3xl"
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            className="relative my-auto w-full max-w-[340px] overflow-hidden rounded-[22px] border border-white/15 bg-[#0c1718] text-white shadow-[0_24px_90px_rgba(0,0,0,0.5)] sm:max-w-sm sm:rounded-[28px]"
+            initial={{ opacity: 0, y: 18, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.28, ease: "easeOut" }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
           >
-            <div className="relative overflow-hidden bg-gradient-to-br from-emerald-700 via-emerald-600 to-teal-600 px-5 pb-5 pt-6 text-center text-white sm:px-9 sm:pb-8 sm:pt-9">
-              <div className="pointer-events-none absolute -right-12 -top-14 h-44 w-44 rounded-full border-[24px] border-white/10" />
-              <div className="pointer-events-none absolute -bottom-20 -left-10 h-40 w-40 rounded-full bg-teal-400/20 blur-2xl" />
+            <div className="relative h-[142px] overflow-hidden sm:h-[168px]">
+              <img
+                src={offerImage}
+                alt="Scenic mountains in northern Pakistan"
+                className="h-full w-full object-cover object-center"
+                loading="eager"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c1718] via-[#0c1718]/15 to-black/20" />
+              <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/25 bg-black/30 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md sm:left-5 sm:top-5">
+                <Sparkles className="h-3 w-3 text-amber-300" />
+                Website exclusive
+              </div>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="absolute right-2 top-2 z-10 rounded-full p-2 text-white/80 transition hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-white sm:right-4 sm:top-4"
+                className="absolute right-3 top-3 rounded-full border border-white/25 bg-black/35 p-2 text-white backdrop-blur-md transition hover:bg-black/60 focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Close booking offer"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4" />
               </button>
-              <div className="relative mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-xl border border-white/25 bg-white/15 shadow-lg backdrop-blur sm:mb-4 sm:h-14 sm:w-14 sm:rounded-2xl">
-                <Sparkles className="h-5 w-5 sm:h-7 sm:w-7" aria-hidden="true" />
+              <div className="absolute bottom-3 left-5 right-5 sm:bottom-4 sm:left-6 sm:right-6">
+                <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-200 sm:text-[11px]">
+                  Your Pakistan escape starts here
+                </p>
               </div>
-              <p className="relative mb-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-50 sm:mb-2 sm:text-xs sm:tracking-[0.22em]">
-                A special offer for you
-              </p>
-              <h2 id="booking-offer-title" className="relative text-2xl font-bold leading-tight sm:text-4xl">
-                Your next adventure,
-                <span className="mt-0.5 block text-amber-200 sm:mt-1">15% OFF</span>
-              </h2>
-              <p className="relative mx-auto mt-2 max-w-xs text-xs leading-5 text-white/90 sm:mt-3 sm:text-sm sm:leading-6">
-                Book your tour directly on our website and get an extra 5% off on top of our existing 10% discount.
-              </p>
             </div>
 
-            <div className="px-5 pb-5 pt-4 sm:px-9 sm:pb-7 sm:pt-6">
-              <div className="mb-4 flex items-start gap-2.5 rounded-xl bg-emerald-50 p-3 sm:mb-5 sm:gap-3 sm:rounded-2xl sm:p-4">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white sm:h-6 sm:w-6">
-                  <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-                </span>
-                <div>
-                  <p className="font-semibold text-slate-900">Book direct. Save more.</p>
-                  <p id="booking-offer-description" className="mt-1 text-xs leading-4 text-slate-600 sm:text-sm sm:leading-5">
-                    Explore our Pakistan tour packages and plan your getaway.
+            <div className="px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
+              <div className="flex items-end justify-between gap-3">
+                <div className="min-w-0">
+                  <h2 id="booking-offer-title" className="text-[27px] font-bold leading-none tracking-tight sm:text-3xl">
+                    Get <span className="text-amber-300">15% OFF</span>
+                  </h2>
+                  <p className="mt-2 text-xs leading-5 text-slate-300 sm:text-sm">
+                    Book directly on our website and save more.
                   </p>
                 </div>
+                <div className="shrink-0 rounded-xl border border-amber-300/30 bg-amber-300/10 px-2.5 py-2 text-center">
+                  <span className="block text-xl font-extrabold leading-none text-amber-300">+5%</span>
+                  <span className="mt-1 block text-[9px] font-semibold uppercase tracking-wide text-amber-100/80">Extra off</span>
+                </div>
               </div>
+
+              <div className="my-4 h-px bg-white/10 sm:my-5" />
+              <p id="booking-offer-description" className="mb-4 text-xs leading-5 text-slate-400 sm:mb-5 sm:text-[13px]">
+                Enjoy our existing 10% discount, plus an extra 5% when you book your tour with us online.
+              </p>
+
               <a
                 href="/tours"
                 onClick={() => setIsOpen(false)}
-                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 text-center text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition duration-200 hover:-translate-y-0.5 hover:bg-emerald-700 hover:shadow-emerald-700/30 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 sm:px-5 sm:py-3.5 sm:text-base"
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-400 px-4 py-3 text-sm font-bold text-[#06251c] transition hover:bg-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-[#0c1718] sm:py-3.5"
               >
                 Explore Tour Packages
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 sm:h-5 sm:w-5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </a>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
-                className="mt-1 w-full rounded-xl px-4 py-2 text-xs font-medium text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 sm:mt-3 sm:py-2.5 sm:text-sm"
+                className="mt-2 w-full py-1.5 text-xs font-medium text-slate-400 transition hover:text-white"
               >
                 Maybe later
               </button>
