@@ -234,7 +234,7 @@ export const Hero: React.FC = () => {
               <p className="text-xs sm:text-sm text-slate-400 mt-1">Tour Packages</p>
             </div>
             <div>
-              <p className="text-2xl sm:text-3xl font-bold text-white">{attractionCount}+</p>
+              <p className="text-2xl sm:text-3xl font-bold text-white">{Math.floor(attractionCount / 10) * 10}+</p>
               <p className="text-xs sm:text-sm text-slate-400 mt-1">Attractions & Highlights</p>
             </div>
             <div>
@@ -246,7 +246,9 @@ export const Hero: React.FC = () => {
 
         {/* Right Side: Auto-Playing Real Packages Carousel */}
         {currentPkg && (
-          <div 
+          <div
+            role="region"
+            aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
             className="lg:col-span-5 relative"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
@@ -257,11 +259,8 @@ export const Hero: React.FC = () => {
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
-                <span
-                  className="text-xs font-semibold tracking-wider text-emerald-400 uppercase flex items-center gap-2"
-                  aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
-                >
-                  <Compass className="w-4 h-4 animate-spin-slow" aria-hidden="true" />
+                <span className="text-emerald-400" aria-hidden="true">
+                  <Compass className="w-4 h-4 animate-spin-slow" />
                 </span>
                 
                 {/* Navigation Arrows */}
@@ -354,10 +353,7 @@ export const Hero: React.FC = () => {
                     />
                   ))}
                 </div>
-                <span
-                  className="sr-only"
-                  aria-label={isPaused ? "Package carousel paused" : "Package carousel automatically advances every five seconds"}
-                />
+
               </div>
 
             </div>
