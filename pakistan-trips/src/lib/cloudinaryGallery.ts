@@ -36,3 +36,20 @@ export async function getRandomGalleryImage(width = 1200): Promise<string | null
   const item = resources[Math.floor(Math.random() * resources.length)];
   return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_${width}/v${item.version}/${item.public_id}.${item.format}`;
 }
+
+
+/** Returns a shuffled set of distinct gallery images for a rotating hero background. */
+export async function getRandomGalleryImages(count = 5, width = 1600): Promise<string[]> {
+  const resources = await getGalleryResources();
+  if (!resources.length) return [];
+
+  const shuffled = [...resources];
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled.slice(0, Math.min(count, shuffled.length)).map((item) =>
+    `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_${width}/v${item.version}/${item.public_id}.${item.format}`
+  );
+}
