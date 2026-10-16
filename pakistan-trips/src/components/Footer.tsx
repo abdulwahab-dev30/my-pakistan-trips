@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 // Import central JSON data for official footer info
 import tripData from '../data/trips-data.json';
@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
             <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Quick Links</h4>
             <ul className="space-y-2 text-xs">
               <li><a href="#tours" className="hover:text-emerald-700 transition-colors">Tour Packages</a></li>
-              <li><a href="#destinations" className="text-slate-700 hover:text-emerald-700 transition-colors">Explore Destinations</a></li>
+              
               <li><a href="#gallery" className="hover:text-emerald-400 transition-colors">Visual Journal</a></li>
               <li><a href="#about" className="hover:text-emerald-400 transition-colors">Our Philosophy</a></li>
               <li><a href="#faq" className="hover:text-emerald-400 transition-colors">FAQs & Policies</a></li>
@@ -58,19 +58,17 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 4: Website Info */}
+          {/* Col 4: Booking help */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Official Portal</h4>
+            <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Plan Your Trip</h4>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Visit our official website for instant bookings and live schedule updates:
+              Need help choosing a package? Contact our team for itinerary details, availability, and the final price after applicable discounts.
             </p>
-            <a 
-              href={`https://${tripData.website}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-4 py-2 rounded-xl bg-white border border-slate-200 text-emerald-700 text-xs font-semibold hover:border-emerald-500/50 transition-colors"
+            <a
+              href="/#contact"
+              className="inline-flex items-center rounded-xl bg-emerald-600 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-emerald-700"
             >
-              {tripData.website}
+              Contact Our Team
             </a>
           </div>
 
@@ -80,7 +78,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-600">
           <p>© {new Date().getFullYear()} {tripData.company}. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            Crafted with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for Pakistan Travelers
+            Crafted with <Heart aria-hidden="true" className="w-3.5 h-3.5 shrink-0 text-rose-500 fill-rose-500" /> for Pakistan Travelers
           </p>
         </div>
       </div>
