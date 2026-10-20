@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Menu, X, Phone, Sparkles } from 'lucide-react';
 import DiscountBanner from './DiscountBanner';
+import { Link } from 'react-router-dom';
 import newLogo from '../assets/logosss (1).png';
 
 export const Navbar: React.FC = () => {
@@ -25,6 +26,7 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Tours', href: '/tours' },
+    { name: 'International', href: '/international-tours' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'About', href: '/#about' },
     { name: 'FAQ', href: '/#faq' },
@@ -58,14 +60,14 @@ export const Navbar: React.FC = () => {
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className="text-sm font-medium text-slate-700 hover:text-emerald-700 transition-colors duration-200 relative group py-1"
             >
               {link.name}
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full rounded-full" />
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -108,15 +110,15 @@ export const Navbar: React.FC = () => {
           >
             <div className="px-6 py-6 space-y-4 flex flex-col">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="text-base font-medium text-slate-700 hover:text-emerald-700 transition-colors py-2 border-b border-slate-200 flex items-center justify-between"
                 >
                   <span>{link.name}</span>
                   <Sparkles className="w-4 h-4 text-emerald-600/50" />
-                </a>
+                </Link>
               ))}
               <div className="pt-2">
                 <a
