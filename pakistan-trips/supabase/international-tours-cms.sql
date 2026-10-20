@@ -31,6 +31,10 @@ create table if not exists public.international_tours (
 
 alter table public.international_tours add column if not exists label text not null default 'International package';
 alter table public.international_tours add column if not exists featured boolean not null default false;
+alter table public.international_tours drop constraint if exists international_tours_duration_days_check;
+alter table public.international_tours drop constraint if exists international_tours_duration_nights_check;
+alter table public.international_tours add constraint international_tours_duration_days_check check (duration_days >= 1 and duration_days <= 90);
+alter table public.international_tours add constraint international_tours_duration_nights_check check (duration_nights >= 0 and duration_nights <= 89);
 alter table public.international_tours enable row level security;
 
 create or replace function public.set_international_tours_updated_at()
