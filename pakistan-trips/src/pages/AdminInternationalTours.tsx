@@ -27,7 +27,41 @@ export default function AdminInternationalTours() {
   const changeList = (key:"highlights"|"included"|"excluded",index:number,value:string) => { if(!editing)return;const list=[...(editing[key]||[])];list[index]=value;change(key,list); };
   const addList = (key:"highlights"|"included"|"excluded") => change(key,[...(editing?.[key]||[]),""]);
   const removeList = (key:"highlights"|"included"|"excluded",index:number) => change(key,(editing?.[key]||[]).filter((_,i)=>i!==index));
-  async function upload(file?:File){ if(!file||!editing)return;const cloud=import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;const preset=import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;if(!cloud||!preset){setError("Cloudinary upload is not configured. Add VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET in Vercel, then redeploy.");return;}if(!file.type.startsWith("image/")){setError("Please choose an image file.");return;}setUploading(true);setError("");try{const body=new FormData();body.append("file",file);body.append("upload_preset",preset);body.append("folder","my-pakistan-trips/international-tours");const response=await fetch("https://api.cloudinary.com/v1_1/"+cloud+"/image/upload",{method:"POST",body});const result=await response.json();if(!response.ok)throw new Error(result.error?.message||"Image upload failed.");setEditing(prev=>prev?({...prev,images:[...(prev.images||[]),{src:result.secure_url,publicId:result.public_id,alt:file.name.replace(/\.[^.]+$/,"").replace(/[-_]+/g," ")}]}):prev);setNotice("Image uploaded. Press Save package to keep it on this package.");}catch(e:any){setError(e?.message||"Image upload failed.");}finally{setUploading(false);}}
+  async function upload(file?: File) {
+    if (!file || !editing) return;
+    const cloud = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const preset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+    if (!cloud || !preset) {
+      setError("Cloudinary upload is not configured. Add VITE_CLOUDINARY_CLOUD_NAME and VITE_CLOUDINARY_UPLOAD_PRESET in Vercel, then redeploy.");
+      return;
+    }
+    if (!file.type.startsWith("image/")) {
+      setError("Please choose an image file.");
+      return;
+    }
+    setUploading(true);
+    setError("");
+    try {
+      const body = new FormData();
+      body.append("file", file);
+      body.append("upload_preset", preset);
+      body.append("folder", "my-pakistan-trips/international-tours");
+      const response = await fetch("https://api.cloudinary.com/v1_1/" + cloud + "/image/upload", { method: "POST", body });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error?.message || "Image upload failed.");
+      const uploadedImage = {
+        src: result.secure_url,
+        publicId: result.public_id,
+        alt: file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
+      };
+      setEditing((previous) => previous ? ({ ...previous, images: [...(previous.images || []), uploadedImage] }) : previous);
+      setNotice("Image uploaded. Press Save package to keep it on this package.");
+    } catch (uploadError: any) {
+      setError(uploadError?.message || "Image upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  }
   async function save(e:React.FormEvent){e.preventDefault();if(!editing)return;setBusy(true);setError("");setNotice("");try{const value={...editing,highlights:editing.highlights.filter(x=>x.trim()),included:editing.included.filter(x=>x.trim()),excluded:editing.excluded.filter(x=>x.trim()),itinerary:editing.itinerary.map((day,index)=>({...day,day:index+1})).slice(0,Number(editing.duration_days)),images:editing.images.filter(x=>x.src.trim())};await saveInternationalTour(value,editing.id);setEditing(null);setNotice("International package saved successfully.");await load();}catch(e:any){setError(e?.message||"Could not save package.");}finally{setBusy(false);}}
   async function remove(tour:InternationalTour){if(!tour.id||!window.confirm('Delete "'+tour.title+'" permanently?'))return;setBusy(true);setError("");try{await deleteInternationalTour(tour.id);setNotice("Package deleted.");await load();}catch(e:any){setError(e?.message||"Could not delete package.");}finally{setBusy(false);}}
   async function logout(){await supabase.auth.signOut();window.location.href="/admin/login";}
