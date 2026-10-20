@@ -1,126 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import { ArrowRight, CheckCircle2, Clock3, Globe2, MapPin, MessageCircle, Plane, ShieldCheck, Sparkles } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Globe2, MapPin, MessageCircle, Plane, ShieldCheck, Sparkles } from "lucide-react";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
-import { internationalTours, internationalTourAudienceNote } from "../data/internationalTours";
+import { getInternationalTourBySlug, getPublishedInternationalTours, type InternationalTour } from "../lib/internationalTourRepository";
 
 const SITE = "https://mypakistantrips.com";
+const audienceNote = "Visa requirements, route accessibility, travel dates, accommodation, inclusions and final pricing should be confirmed individually before booking.";
 
 export default function InternationalTours() {
-  const tour = internationalTours[0];
-  const title = "Pakistan Tours for International Travellers | My Pakistan Trips";
-  const description = "Explore a sample Pakistan tour for international travellers, with cultural heritage, scenic landscapes, and a personalised travel inquiry.";
-
-  return (
-    <>
-      <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="canonical" href={SITE + "/international-tours"} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={tour.image} />
-        <meta property="og:url" content={SITE + "/international-tours"} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "TouristTrip",
-          name: tour.title,
-          description: tour.overview,
-          touristType: "International travellers",
-          itinerary: { "@type": "ItemList", itemListElement: tour.itinerary.map((day, index) => ({
-            "@type": "ListItem", position: index + 1, name: day.title, description: day.description,
-          })) },
-        })}</script>
-      </Helmet>
-      <div className="min-h-screen bg-slate-950 text-white">
-        <Navbar />
-        <main className="pt-36 pb-20">
-          <section className="relative isolate overflow-hidden">
-            <div className="absolute inset-0 -z-10">
-              <img src={tour.image} alt="Mountain scenery in northern Pakistan" className="h-full w-full object-cover opacity-25" fetchPriority="high" />
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/55 via-slate-950/90 to-slate-950" />
-            </div>
-            <div className="mx-auto max-w-7xl px-6 py-14 lg:px-12 lg:py-20">
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-emerald-300"><Globe2 className="h-4 w-4" /> For international travellers</span>
-                <h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">See Pakistan from a <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">new perspective.</span></h1>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">Thoughtfully planned journeys that bring together Pakistan’s living heritage, generous hospitality, and extraordinary mountain scenery.</p>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <a href="#international-demo" className="inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300">Explore sample package <ArrowRight className="h-4 w-4" /></a>
-                  <a href={tour.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10"><MessageCircle className="h-4 w-4" /> Ask us a question</a>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-6 py-12 lg:px-12">
-            <div className="grid gap-4 sm:grid-cols-3">
-              {[
-                { icon: MapPin, title: "Culture & heritage", detail: "Discover cities, historic places and local traditions." },
-                { icon: Plane, title: "Personal trip planning", detail: "Discuss arrival plans, dates and travel preferences with our team." },
-                { icon: ShieldCheck, title: "Details confirmed upfront", detail: "Confirm routes, inclusions and final pricing before booking." },
-              ].map((item) => <article key={item.title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-                <item.icon className="h-6 w-6 text-emerald-400" /><h2 className="mt-4 font-bold text-white">{item.title}</h2><p className="mt-2 text-sm leading-relaxed text-slate-400">{item.detail}</p>
-              </article>)}
-            </div>
-          </section>
-
-          <section id="international-demo" className="mx-auto max-w-7xl scroll-mt-36 px-6 py-10 lg:px-12">
-            <div className="mb-8 max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">Sample itinerary</p>
-              <h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">A first journey through Pakistan</h2>
-              <p className="mt-4 leading-relaxed text-slate-400">We’re starting with one demo package. This is illustrative content to show the kind of journey we can discuss with international guests, not a confirmed departure or live quote.</p>
-            </div>
-            <article className="overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60">
-              <div className="grid lg:grid-cols-2">
-                <div className="relative min-h-72 lg:min-h-full">
-                  <img src={tour.image} alt="Mountain landscape in Pakistan" loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-                  <div className="absolute left-5 top-5 rounded-full border border-emerald-300/30 bg-slate-950/80 px-3 py-1.5 text-xs font-bold text-emerald-300"><Sparkles className="mr-1 inline h-3.5 w-3.5" /> {tour.label}</div>
-                </div>
-                <div className="p-6 sm:p-8 lg:p-10">
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-slate-400"><span className="inline-flex items-center gap-1.5"><Clock3 className="h-4 w-4 text-emerald-400" /> {tour.duration}</span><span>·</span><span>Culture and nature</span></div>
-                  <h3 className="mt-4 text-2xl font-extrabold leading-tight sm:text-3xl">{tour.title}</h3>
-                  <p className="mt-4 text-sm leading-relaxed text-slate-300">{tour.overview}</p>
-                  <div className="mt-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 p-4">
-                    <p className="text-xs uppercase tracking-wider text-slate-400">Illustrative starting estimate</p>
-                    <p className="mt-1 text-3xl font-extrabold text-emerald-300">US$ {tour.priceFromUsd.toLocaleString("en-US")} <span className="text-sm font-medium text-slate-300">/ person</span></p>
-                    <p className="mt-2 text-xs leading-relaxed text-slate-400">{tour.priceNote}</p>
-                  </div>
-                  <div className="mt-6">
-                    <h4 className="font-bold text-white">Highlights</h4>
-                    <ul className="mt-3 space-y-2">{tour.highlights.map((highlight) => <li key={highlight} className="flex gap-2 text-sm text-slate-300"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />{highlight}</li>)}</ul>
-                  </div>
-                  <a href={tour.whatsappLink} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-400 px-5 py-3.5 font-bold text-slate-950 transition hover:bg-emerald-300 sm:w-auto"><MessageCircle className="h-4 w-4" /> Enquire about this trip</a>
-                </div>
-              </div>
-            </article>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-6 py-10 lg:px-12">
-            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-              <div><p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">The journey</p><h2 className="mt-3 text-3xl font-extrabold">Sample 7-day itinerary</h2><p className="mt-4 text-sm leading-relaxed text-slate-400">The final route may change with flight times, road access, weather and guest preferences.</p></div>
-              <ol className="space-y-3">{tour.itinerary.map((day) => <li key={day.day} className="grid gap-3 rounded-2xl border border-slate-800 bg-slate-900/50 p-4 sm:grid-cols-[75px_1fr]"><span className="text-sm font-bold text-emerald-400">{day.day}</span><div><h3 className="font-bold">{day.title}</h3><p className="mt-1 text-sm leading-relaxed text-slate-400">{day.description}</p></div></li>)}</ol>
-            </div>
-          </section>
-
-          <section className="mx-auto max-w-7xl px-6 py-10 lg:px-12">
-            <div className="grid gap-5 md:grid-cols-2">
-              <article className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6"><h2 className="text-xl font-bold">Proposed inclusions</h2><ul className="mt-4 space-y-3">{tour.included.map((item) => <li key={item} className="flex gap-2 text-sm text-slate-300"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" />{item}</li>)}</ul></article>
-              <article className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6"><h2 className="text-xl font-bold">Not included in this estimate</h2><ul className="mt-4 space-y-3">{tour.excluded.map((item) => <li key={item} className="flex gap-2 text-sm text-slate-300"><span className="text-amber-300">•</span>{item}</li>)}</ul></article>
-            </div>
-            <p className="mt-6 rounded-xl border border-amber-300/20 bg-amber-300/5 p-4 text-sm leading-relaxed text-amber-100/80">{internationalTourAudienceNote}</p>
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-800 bg-slate-900/70 p-6"><div><h2 className="text-xl font-bold">Planning a visit to Pakistan?</h2><p className="mt-2 text-sm text-slate-400">Tell us your travel dates, group size and interests. We’ll discuss options and confirm a tailored quotation.</p></div><a href={tour.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 hover:bg-emerald-300"><MessageCircle className="h-4 w-4" /> Contact on WhatsApp</a></div>
-            <p className="mt-8 text-sm text-slate-500"><Link to="/tours" className="text-emerald-400 hover:text-emerald-300">Looking for our existing Pakistan tour packages? View domestic tours →</Link></p>
-          </section>
-        </main>
-        <Footer />
-        <WhatsAppButton />
-      </div>
-    </>
-  );
+  const { slug } = useParams();
+  const [tours,setTours] = useState<InternationalTour[]>([]);
+  const [tour,setTour] = useState<InternationalTour|null>(null);
+  const [loading,setLoading] = useState(true);
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    if (slug) {
+      getInternationalTourBySlug(slug).then(value => { if(active){setTour(value);setLoading(false);} });
+    } else {
+      getPublishedInternationalTours().then(value => { if(active){setTours(value);setLoading(false);} });
+    }
+    return () => { active = false; };
+  },[slug]);
+  const title = tour?.seo_title || (tour ? tour.title+" | International Pakistan Tour | My Pakistan Trips" : "Pakistan Tours for International Travellers | My Pakistan Trips");
+  const description = tour?.meta_description || tour?.overview || "Explore Pakistan tour packages for international travellers, with cultural heritage, scenic landscapes and personalised trip planning.";
+  const image = tour?.images?.[0]?.src || "";
+  return <>
+    <Helmet><title>{title}</title><meta name="description" content={description}/><link rel="canonical" href={SITE+(slug?"/international-tours/"+slug:"/international-tours")}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/>{image&&<meta property="og:image" content={image}/>}<meta property="og:url" content={SITE+(slug?"/international-tours/"+slug:"/international-tours")}/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/></Helmet>
+    <div className="min-h-screen bg-slate-950 text-white"><Navbar/><main className="pt-36 pb-20">
+      <section className="relative isolate overflow-hidden"><div className="absolute inset-0 -z-10 bg-gradient-to-br from-emerald-950/60 via-slate-950 to-slate-950"/><div className="mx-auto max-w-7xl px-6 py-14 lg:px-12 lg:py-20"><div className="max-w-3xl"><span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-emerald-300"><Globe2 className="h-4 w-4"/> For international travellers</span><h1 className="mt-6 text-4xl font-extrabold leading-tight tracking-tight sm:text-6xl">{tour?tour.title:<>See Pakistan from a <span className="bg-gradient-to-r from-emerald-300 to-teal-200 bg-clip-text text-transparent">new perspective.</span></>}</h1><p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">{tour?tour.overview:"Thoughtfully planned journeys that bring together Pakistan’s living heritage, generous hospitality, and extraordinary mountain scenery."}</p>{tour&&<div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-300"><span className="inline-flex items-center gap-2"><Clock3 className="h-4 w-4 text-emerald-400"/>{tour.duration_days} days · {tour.duration_nights} nights</span><span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4 text-emerald-400"/>{tour.destination}</span></div>}<div className="mt-8 flex flex-wrap gap-3">{tour?<a href={tour.whatsapp_link||"https://wa.me/923494886076"} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300"><MessageCircle className="h-4 w-4"/> Enquire about this package</a>:<a href="#packages" className="inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-emerald-300">Explore packages <ArrowRight className="h-4 w-4"/></a>}</div></div></div></section>
+      {!tour&&<section className="mx-auto max-w-7xl px-6 py-12 lg:px-12"><div className="grid gap-4 sm:grid-cols-3">{[{icon:MapPin,title:"Culture & heritage",detail:"Discover historic places, cities and local traditions."},{icon:Plane,title:"Personal trip planning",detail:"Discuss arrival plans, dates and travel preferences."},{icon:ShieldCheck,title:"Details confirmed upfront",detail:"Confirm routes, inclusions and final pricing before booking."}].map(item=><article key={item.title} className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5"><item.icon className="h-6 w-6 text-emerald-400"/><h2 className="mt-4 font-bold">{item.title}</h2><p className="mt-2 text-sm leading-relaxed text-slate-400">{item.detail}</p></article>)}</div></section>}
+      {loading?<div className="mx-auto max-w-7xl px-6 py-16 text-center text-slate-400">Loading international packages…</div>:tour?<><section className="mx-auto max-w-7xl px-6 py-10 lg:px-12"><div className="grid gap-8 lg:grid-cols-2"><div className="relative min-h-72 overflow-hidden rounded-3xl bg-slate-900 lg:min-h-[440px]">{image?<img src={image} alt={tour.images?.[0]?.alt||tour.title} className="absolute inset-0 h-full w-full object-cover"/>:<div className="absolute inset-0 grid place-items-center text-slate-500"><Globe2 size={48}/></div>}</div><div className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 sm:p-8"><span className="text-xs font-semibold uppercase tracking-widest text-emerald-400">{tour.label||"International package"}</span><h2 className="mt-3 text-2xl font-extrabold">From US$ {Number(tour.price_usd||0).toLocaleString("en-US")} <span className="text-sm font-medium text-slate-400">/ person</span></h2>{tour.price_note&&<p className="mt-2 text-sm text-slate-400">{tour.price_note}</p>}{tour.highlights?.length>0&&<><h3 className="mt-7 font-bold">Package highlights</h3><ul className="mt-3 space-y-2">{tour.highlights.map((item,i)=><li key={i} className="flex gap-2 text-sm text-slate-300"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400"/>{item}</li>)}</ul></>}<a href={tour.whatsapp_link||"https://wa.me/923494886076"} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950"><MessageCircle className="h-4 w-4"/> Enquire on WhatsApp</a></div></div></section>
+        <section className="mx-auto max-w-7xl px-6 py-8 lg:px-12"><div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"><div><p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">The journey</p><h2 className="mt-3 text-3xl font-extrabold">Day-by-day itinerary</h2><p className="mt-4 text-sm leading-relaxed text-slate-400">The final route may change with flight times, road access, weather and guest preferences.</p></div><ol className="space-y-3">{(tour.itinerary||[]).map((day,index)=><li key={day.day||index} className="grid gap-3 rounded-2xl border border-slate-800 bg-slate-900/50 p-4 sm:grid-cols-[75px_1fr]"><span className="text-sm font-bold text-emerald-400">Day {day.day||index+1}</span><div><h3 className="font-bold">{day.title||"Details to be confirmed"}</h3>{day.location&&<p className="mt-1 text-xs font-semibold text-emerald-300">{day.location}</p>}<p className="mt-1 text-sm leading-relaxed text-slate-400">{day.description}</p></div></li>)}</ol></div></section>
+        <section className="mx-auto max-w-7xl px-6 py-8 lg:px-12"><div className="grid gap-5 md:grid-cols-2">{[{title:"What's included",items:tour.included||[]},{title:"What's excluded",items:tour.excluded||[]}].map(group=><article key={group.title} className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6"><h2 className="text-xl font-bold">{group.title}</h2><ul className="mt-4 space-y-3">{group.items.map((item,i)=><li key={i} className="flex gap-2 text-sm text-slate-300"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400"/>{item}</li>)}</ul></article>)}</div><p className="mt-6 rounded-xl border border-amber-300/20 bg-amber-300/5 p-4 text-sm leading-relaxed text-amber-100/80">{audienceNote}</p><Link to="/international-tours" className="mt-8 inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300"><ArrowLeft className="h-4 w-4"/> Back to all international packages</Link></section></>:<section id="packages" className="mx-auto max-w-7xl px-6 py-12 lg:px-12"><div className="mb-8"><p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">Curated journeys</p><h2 className="mt-3 text-3xl font-extrabold sm:text-4xl">International tour packages</h2><p className="mt-3 text-slate-400">Explore our published packages or contact us to plan a tailor-made trip.</p></div>{tours.length?<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">{tours.map(t=><article key={t.id||t.slug} className="flex flex-col overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/60"><div className="relative h-52 bg-slate-800">{t.images?.[0]?.src&&<img src={t.images[0].src} alt={t.images[0].alt||t.title} className="h-full w-full object-cover"/>}<span className="absolute left-4 top-4 rounded-full border border-emerald-300/30 bg-slate-950/85 px-3 py-1.5 text-xs font-bold text-emerald-300">{t.label||"International package"}</span></div><div className="flex flex-1 flex-col p-6"><p className="text-xs text-emerald-400">{t.duration_days} days · {t.duration_nights} nights · {t.destination}</p><h3 className="mt-3 text-xl font-bold">{t.title}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-slate-300">{t.overview}</p><p className="mt-4 text-lg font-bold text-emerald-400">From US$ {Number(t.price_usd||0).toLocaleString("en-US")}</p><Link to={"/international-tours/"+t.slug} className="mt-5 inline-flex items-center justify-between rounded-xl bg-slate-800 px-4 py-3 text-sm font-semibold hover:bg-emerald-500 hover:text-slate-950">View package details <ArrowRight className="h-4 w-4"/></Link></div></article>)}</div>:<div className="rounded-2xl border border-dashed border-slate-700 p-10 text-center"><Sparkles className="mx-auto h-8 w-8 text-emerald-400"/><h3 className="mt-4 text-xl font-bold">Packages are being prepared</h3><p className="mt-2 text-sm text-slate-400">Contact our team to discuss a personalised Pakistan itinerary.</p><a href="https://wa.me/923494886076" className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald-400 px-5 py-3 font-bold text-slate-950"><MessageCircle className="h-4 w-4"/> Contact us</a></div>}</section>}
+    </main><Footer/><WhatsAppButton/></div>
+  </>;
 }
