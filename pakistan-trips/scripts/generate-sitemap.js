@@ -51,7 +51,7 @@ const slugs = new Set([
   ...cmsSlugs,
 ].filter((slug) => typeof slug === "string" && slug.trim()));
 
-const routes = ["/", "/tours", ...[...slugs].map((slug) => `/tours/${slug}`)];
+const routes = ["/", "/tours", "/international-tours", ...[...slugs].map((slug) => `/tours/${slug}`)];
 const escapeXml = (value) =>
   value
     .replaceAll("&", "&amp;")
