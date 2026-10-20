@@ -4,6 +4,24 @@ import { tours as localTours } from "../src/data/tours.js";
 const site = "https://mypakistantrips.com";
 const lastmod = new Date().toISOString().slice(0, 10);
 
+async function getPublishedInternationalSlugs() {
+  const url = process.env.VITE_SUPABASE_URL;
+  const key = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !key) return [];
+  try {
+    const endpoint = new URL("/rest/v1/international_tours", url);
+    endpoint.searchParams.set("select", "slug,published");
+    endpoint.searchParams.set("published", "eq.true");
+    const response = await fetch(endpoint, { headers: { apikey: key, Authorization: `Bearer ${key}` } });
+    if (!response.ok) throw new Error(`Supabase returned HTTP ${response.status}`);
+    const rows = await response.json();
+    return rows.map((row) => row.slug).filter((slug) => typeof slug === "string" && slug.trim());
+  } catch (error) {
+    console.warn("Could not load published international tours for sitemap:", error.message);
+    return [];
+  }
+}
+
 async function getPublishedCmsSlugs() {
   const url = process.env.VITE_SUPABASE_URL;
   const key =
@@ -46,12 +64,13 @@ async function getPublishedCmsSlugs() {
 }
 
 const cmsSlugs = await getPublishedCmsSlugs();
+const internationalSlugs = await getPublishedInternationalSlugs();
 const slugs = new Set([
   ...localTours.map((tour) => tour.slug),
   ...cmsSlugs,
 ].filter((slug) => typeof slug === "string" && slug.trim()));
 
-const routes = ["/", "/tours", "/international-tours", ...[...slugs].map((slug) => `/tours/${slug}`)];
+const routes = ["/", "/tours", "/international-tours", ...[...slugs].map((slug) => `/tours/${slug}`), ...internationalSlugs.map((slug) => `/international-tours/${slug}`)];
 const escapeXml = (value) =>
   value
     .replaceAll("&", "&amp;")
