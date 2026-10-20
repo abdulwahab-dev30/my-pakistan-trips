@@ -38,7 +38,7 @@ export async function saveInternationalTour(tour: InternationalTour, id?: string
   if (!tour.title.trim()) throw new Error("Package title is required.");
   const days = Math.max(1, Number(tour.duration_days) || 1);
   const payload = {
-    ...tour, id: undefined, slug, duration_days: days,
+    ...tour, id: undefined, slug, main_image: tour.images?.[0]?.src || "", duration_days: days,
     duration_nights: Math.max(0, Math.min(days - 1, Number(tour.duration_nights) || 0)),
     price_usd: Math.max(0, Number(tour.price_usd) || 0),
     itinerary: Array.from({ length: days }, (_, index) => {
