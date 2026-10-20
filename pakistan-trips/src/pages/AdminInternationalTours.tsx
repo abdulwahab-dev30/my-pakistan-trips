@@ -41,7 +41,17 @@ export default function AdminInternationalTours() {
       const { data, error: invokeError } = await supabase.functions.invoke("generate-international-tour", {
         body: { brief: tourBrief.trim(), title: editing?.title || "" },
       });
-      if (invokeError) throw invokeError;
+      if (invokeError) {
+        let detail = invokeError.message || "AI request failed.";
+        try {
+          const context = (invokeError as any).context;
+          const payload = context && typeof context.json === "function" ? await context.json() : null;
+          if (payload?.error) detail = String(payload.error);
+        } catch {
+          // Keep the original SDK error if the response body is not JSON.
+        }
+        throw new Error(detail);
+      }
       if (data?.error) throw new Error(data.error);
       if (!data?.tour) throw new Error("AI returned no package details. Please try again.");
       setEditing(previous => {
