@@ -140,7 +140,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-24 pb-10">
+    <div className="relative min-h-[auto] sm:min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-28 pb-8 sm:pt-24 sm:pb-10">
       {/* Background Parallax */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
@@ -165,7 +165,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 py-12 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         {/* Left Side: Hero Text */}
         <motion.div 
