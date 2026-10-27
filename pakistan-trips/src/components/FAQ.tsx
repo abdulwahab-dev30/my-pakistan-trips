@@ -1,54 +1,89 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ChevronDown, HelpCircle, PhoneCall } from 'lucide-react';
 import tripData from '../data/trips-data.json';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 
 interface FAQItem {
+  id?: string;
   question: string;
   answer: string;
+  sort_order?: number;
 }
 
-export const FAQ: React.FC = () => {
-  const [openIdx, setOpenIdx] = useState<number | null>(0);
-  const toggleFAQ = (idx: number) => setOpenIdx(openIdx === idx ? null : idx);
-
-  const contactNumbers = (tripData as any).contact_numbers || ["03494886076"];
-  const rawContact = contactNumbers[0] || "03494886076";
-  const whatsappNumber = "92" + String(rawContact).replace(/[^0-9]/g, "").replace(/^0/, "");
-
+const legacyFAQs: FAQItem[] = (() => {
+  const contactNumbers = (tripData as any).contact_numbers || ['03494886076'];
   const pickupPoints = (tripData as any).pickup_points || {};
   const childrenPolicy = (tripData as any).children_policy || {};
   const discountPolicy = (tripData as any).discount_policy || {};
 
-  const faqs: FAQItem[] = [
+  return [
     {
-      question: "Where are the pickup points in Lahore and Islamabad?",
-      answer: `Lahore Pickup: ${pickupPoints.lahore || 'Thokar Niaz Baig'}.\nIslamabad Pickup: ${pickupPoints.islamabad_rawalpindi || 'Daewoo Terminal EME'}.`
+      question: 'Where are the pickup points in Lahore and Islamabad?',
+      answer: `Lahore Pickup: ${pickupPoints.lahore || 'Thokar Niaz Baig'}.
+Islamabad Pickup: ${pickupPoints.islamabad_rawalpindi || 'Daewoo Terminal EME'}.`
     },
     {
-      question: "What is the policy and charges for children?",
-      answer: `• Under 3 Years: ${childrenPolicy.under_3_years || 'Free'}\n• 3 to 8 Years: ${childrenPolicy['3_to_8_years'] || 'Half Charges'}\n• Above 8 Years: ${childrenPolicy.above_8_years || 'Full Charges'}`
+      question: 'What is the policy and charges for children?',
+      answer: `• Under 3 Years: ${childrenPolicy.under_3_years || 'Free'}
+• 3 to 8 Years: ${childrenPolicy['3_to_8_years'] || 'Half Charges'}
+• Above 8 Years: ${childrenPolicy.above_8_years || 'Full Charges'}`
     },
     {
-      question: "Are there any group or traveler discounts available?",
-      answer: `• Group Discount: ${discountPolicy.group_discount || 'Available'}\n• Children Discount: ${discountPolicy.children_discount || '50% off'}\n• Lifetime Card: ${discountPolicy.lifetime_membership_card || '10% off'}\n• Traveler Card: ${discountPolicy.traveller_card || '10% off'}`
+      question: 'Are there any group or traveler discounts available?',
+      answer: `• Group Discount: ${discountPolicy.group_discount || 'Available'}
+• Children Discount: ${discountPolicy.children_discount || '50% off'}
+• Lifetime Card: ${discountPolicy.lifetime_membership_card || '10% off'}
+• Traveler Card: ${discountPolicy.traveller_card || '10% off'}`
     },
     {
-      question: "What is the Meezan Bank account number for payment?",
-      answer: "Meezan Bank Account Number: 6402 0114 9075 75"
+      question: 'What is the Meezan Bank account number for payment?',
+      answer: 'Meezan Bank Account Number: 6402 0114 9075 75'
     },
     {
-      question: "What services are included in standard tour packages?",
-      answer: "All standard tour packages include AC private transportation (Coaster Saloon or Grand Cabin), quality hygienic meals (Breakfasts & Dinners), fuel/road toll expenses, hotel stay, and expert guided tour service."
+      question: 'What services are included in standard tour packages?',
+      answer: 'All standard tour packages include AC private transportation (Coaster Saloon or Grand Cabin), quality hygienic meals (Breakfasts & Dinners), fuel/road toll expenses, hotel stay, and expert guided tour service.'
     },
     {
-      question: "Are jeep charges and fort entry tickets included?",
-      answer: "Boating, fort entry tickets, chairlifts, and 4x4 jeep safari charges are generally self-based, unless you have booked a Deluxe Package where jeep services are included."
+      question: 'Are jeep charges and fort entry tickets included?',
+      answer: 'Boating, fort entry tickets, chairlifts, and 4x4 jeep safari charges are generally self-based, unless you have booked a Deluxe Package where jeep services are included.'
     }
   ];
+})();
+
+export const FAQ: React.FC = () => {
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const [faqs, setFaqs] = useState<FAQItem[]>(legacyFAQs);
+
+  useEffect(() => {
+    if (!supabaseConfigured || !supabase) return;
+    let active = true;
+
+    const loadFAQs = async () => {
+      const { data, error } = await supabase
+        .from('faqs')
+        .select('id, question, answer, sort_order')
+        .eq('published', true)
+        .order('sort_order', { ascending: true });
+
+      if (!active) return;
+      // Keep the existing homepage FAQs visible if the table is not set up yet
+      // or a request fails. Once rows exist, the published database list is used.
+      if (!error && data && data.length > 0) {
+        setFaqs(data as FAQItem[]);
+      }
+    };
+
+    void loadFAQs();
+    return () => { active = false; };
+  }, []);
+
+  const contactNumbers = (tripData as any).contact_numbers || ['03494886076'];
+  const rawContact = contactNumbers[0] || '03494886076';
+  const whatsappNumber = '92' + String(rawContact).replace(/[^0-9]/g, '').replace(/^0/, '');
 
   return (
-    <section id="faq" className="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <section id="faq" className="py-24 bg-slate-950 text-white relative overflow-hidden scroll-mt-32">
       <div className="absolute top-1/4 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="text-center space-y-4 mb-16">
@@ -80,7 +115,7 @@ export const FAQ: React.FC = () => {
             const isOpen = openIdx === idx;
             return (
               <motion.div
-                key={idx}
+                key={faq.id || faq.question}
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -92,7 +127,7 @@ export const FAQ: React.FC = () => {
                   type="button"
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${idx}`}
-                  onClick={() => toggleFAQ(idx)}
+                  onClick={() => setOpenIdx(isOpen ? null : idx)}
                   className="w-full p-6 text-left flex items-center justify-between gap-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400"
                 >
                   <span className="text-base sm:text-lg font-bold text-white flex items-center gap-3">
