@@ -70,7 +70,7 @@ const slugs = new Set([
   ...cmsSlugs,
 ].filter((slug) => typeof slug === "string" && slug.trim()));
 
-const routes = ["/", "/tours", "/international-tours", ...[...slugs].map((slug) => `/tours/${slug}`), ...internationalSlugs.map((slug) => `/international-tours/${slug}`)];
+const routes = ["/", "/tours", "/international-tours", "/terms-and-conditions", "/privacy-policy", ...[...slugs].map((slug) => `/tours/${slug}`), ...internationalSlugs.map((slug) => `/international-tours/${slug}`)];
 const escapeXml = (value) =>
   value
     .replaceAll("&", "&amp;")
