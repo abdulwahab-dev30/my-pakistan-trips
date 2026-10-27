@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ChevronDown, HelpCircle, PhoneCall } from 'lucide-react';
-
-// Import central JSON data
 import tripData from '../data/trips-data.json';
 
 interface FAQItem {
@@ -12,12 +10,8 @@ interface FAQItem {
 
 export const FAQ: React.FC = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
+  const toggleFAQ = (idx: number) => setOpenIdx(openIdx === idx ? null : idx);
 
-  const toggleFAQ = (idx: number) => {
-    setOpenIdx(openIdx === idx ? null : idx);
-  };
-
-  // Safe WhatsApp contact number extraction
   const contactNumbers = (tripData as any).contact_numbers || ["03494886076"];
   const rawContact = contactNumbers[0] || "03494886076";
   const whatsappNumber = "92" + String(rawContact).replace(/[^0-9]/g, "").replace(/^0/, "");
@@ -25,9 +19,7 @@ export const FAQ: React.FC = () => {
   const pickupPoints = (tripData as any).pickup_points || {};
   const childrenPolicy = (tripData as any).children_policy || {};
   const discountPolicy = (tripData as any).discount_policy || {};
-  const paymentMethods = (tripData as any).payment_methods || [];
 
-  // Structured FAQs using JSON policies
   const faqs: FAQItem[] = [
     {
       question: "Where are the pickup points in Lahore and Islamabad?",
@@ -42,8 +34,8 @@ export const FAQ: React.FC = () => {
       answer: `• Group Discount: ${discountPolicy.group_discount || 'Available'}\n• Children Discount: ${discountPolicy.children_discount || '50% off'}\n• Lifetime Card: ${discountPolicy.lifetime_membership_card || '10% off'}\n• Traveler Card: ${discountPolicy.traveller_card || '10% off'}`
     },
     {
-      question: "What payment methods and bank accounts are accepted?",
-      answer: `We accept online bank transfers and mobile wallets:\n• Meezan Bank Title: ${paymentMethods[0]?.account_title || 'N/A'} (${paymentMethods[0]?.account_number || 'N/A'})\n• Easypaisa: ${paymentMethods[3]?.account_title || 'N/A'} (${paymentMethods[3]?.account || 'N/A'})\n• Nayapay: ${paymentMethods[4]?.account_title || 'N/A'} (${paymentMethods[4]?.account || 'N/A'})`
+      question: "What is the Meezan Bank account number for payment?",
+      answer: "Meezan Bank Account Number: 6402 0114 9075 75"
     },
     {
       question: "What services are included in standard tour packages?",
@@ -57,14 +49,10 @@ export const FAQ: React.FC = () => {
 
   return (
     <section id="faq" className="py-24 bg-slate-950 text-white relative overflow-hidden">
-      {/* Background Decorative Lighting */}
       <div className="absolute top-1/4 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-
       <div className="max-w-4xl mx-auto px-6 lg:px-12 relative z-10">
-        
-        {/* Section Header */}
         <div className="text-center space-y-4 mb-16">
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -73,8 +61,7 @@ export const FAQ: React.FC = () => {
             <Sparkles className="w-3.5 h-3.5" />
             Got Questions?
           </motion.span>
-
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -88,7 +75,6 @@ export const FAQ: React.FC = () => {
           </motion.h2>
         </div>
 
-        {/* FAQ Accordion List */}
         <div className="space-y-4">
           {faqs.map((faq, idx) => {
             const isOpen = openIdx === idx;
@@ -117,7 +103,6 @@ export const FAQ: React.FC = () => {
                     <ChevronDown className="w-4 h-4" />
                   </div>
                 </button>
-
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div
@@ -139,7 +124,6 @@ export const FAQ: React.FC = () => {
           })}
         </div>
 
-        {/* Still Have Questions Box */}
         <div className="mt-12 p-6 rounded-3xl bg-slate-900/80 border border-slate-800 text-center space-y-3">
           <p className="text-sm text-slate-300">Have more questions about custom dates or private group booking?</p>
           <a
@@ -151,7 +135,6 @@ export const FAQ: React.FC = () => {
             <PhoneCall className="w-4 h-4" /> Direct WhatsApp Support
           </a>
         </div>
-
       </div>
     </section>
   );
