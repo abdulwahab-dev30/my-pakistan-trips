@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 
 interface CloudinaryImage {
   public_id: string;
@@ -26,10 +27,20 @@ export const Gallery: React.FC = () => {
         );
         if (!response.ok) throw new Error(`Gallery request failed with status ${response.status}`);
         const data = await response.json();
-        setImages((data.resources ?? []).map((item: any) => ({
+        const resources = (data.resources ?? []).map((item: any) => ({
           public_id: item.public_id,
           secure_url: `https://res.cloudinary.com/${cloudName}/image/upload/f_auto,q_auto,w_1800/v${item.version}/${item.public_id}.${item.format}`,
-        })));
+        }));
+        if (supabaseConfigured && supabase) {
+          const { data: setting } = await supabase.from('gallery_settings').select('image_order').eq('id', 1).maybeSingle();
+          const order: string[] = Array.isArray(setting?.image_order) ? setting.image_order : [];
+          const byId = new Map(resources.map((image: any) => [image.public_id, image]));
+          const ordered = order.map((id) => byId.get(id)).filter(Boolean);
+          const orderedIds = new Set(ordered.map((image: any) => image.public_id));
+          setImages([...ordered, ...resources.filter((image: any) => !orderedIds.has(image.public_id))]);
+        } else {
+          setImages(resources);
+        }
       } catch (error) {
         if (!controller.signal.aborted) console.error('Error fetching Cloudinary gallery images:', error);
       } finally {
