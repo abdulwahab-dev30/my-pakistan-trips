@@ -30,6 +30,8 @@ export const Navbar: React.FC = () => {
     { name: 'Gallery', href: '/#gallery' },
     { name: 'About', href: '/#about' },
     { name: 'FAQs', href: '/#faq' },
+    { name: 'Terms & Conditions', href: '/terms-and-conditions' },
+    { name: 'Privacy Policy', href: '/privacy-policy' },
   ];
 
   return (
