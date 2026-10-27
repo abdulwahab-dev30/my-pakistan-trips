@@ -7,8 +7,6 @@ import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
 import TourImage from './TourImage';
-import { getRandomGalleryImages } from '../lib/cloudinaryGallery';
-import heroFallbackImage from '../assets/hero-bg.webp';
 
 
 
@@ -17,47 +15,8 @@ export const Hero: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
-  const [heroBackgroundImages, setHeroBackgroundImages] = useState<string[]>([heroFallbackImage]);
+  const [heroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&w=1920&q=80']);
   const [backgroundIndex, setBackgroundIndex] = useState(0);
-
-  // Rotate the hero background every 5 seconds, with a soft crossfade.
-  // Five seconds is a comfortable, standard pace for a scenic hero slideshow.
-  useEffect(() => {
-    let active = true;
-
-    // Preload the full set before enabling the slideshow. This avoids blank
-    // frames or a visible loading hitch when the next background is selected.
-    const preloadImage = (src: string) =>
-      new Promise<string | null>((resolve) => {
-        const image = new window.Image();
-        image.onload = () => resolve(src);
-        image.onerror = () => resolve(null);
-        image.src = src;
-      });
-
-    getRandomGalleryImages(6, 1600)
-      .then((images) => Promise.all(images.map(preloadImage)))
-      .then((loadedImages) => {
-        const readyImages = loadedImages.filter((src): src is string => Boolean(src));
-        if (active && readyImages.length) {
-          setBackgroundIndex(0);
-          setHeroBackgroundImages(readyImages);
-        }
-      })
-      .catch(() => {
-        // Keep the local fallback image if the gallery or preload fails.
-      });
-
-    return () => { active = false; };
-  }, []);
-
-  useEffect(() => {
-    if (heroBackgroundImages.length < 2) return;
-    const timer = window.setInterval(() => {
-      setBackgroundIndex((index) => (index + 1) % heroBackgroundImages.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
-  }, [heroBackgroundImages]);
 
   // Load the same published tour records used by the homepage tour cards,
   // so the hero uses the exact same image URL/tag as the listing.
