@@ -7,8 +7,6 @@ interface CloudinaryImage {
   secure_url: string;
 }
 
-const AUTO_ADVANCE_MS = 5000;
-
 export const Gallery: React.FC = () => {
   const [images, setImages] = useState<CloudinaryImage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -49,14 +47,6 @@ export const Gallery: React.FC = () => {
   const handleNext = useCallback(() => goTo(currentIndex + 1), [currentIndex, goTo]);
 
   useEffect(() => {
-    if (images.length < 2) return;
-    const interval = window.setInterval(() => {
-      setCurrentIndex((index) => (index + 1) % images.length);
-    }, AUTO_ADVANCE_MS);
-    return () => window.clearInterval(interval);
-  }, [images.length, currentIndex]);
-
-  useEffect(() => {
     if (!images.length) return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowLeft') handlePrev();
@@ -86,8 +76,8 @@ export const Gallery: React.FC = () => {
 
   return (
     <section className="py-12 sm:py-16 bg-slate-950 text-white relative" id="gallery">
-      <div className="w-full px-0 sm:px-5 lg:px-8">
-        <div className="text-center mb-7 sm:mb-10 px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-7 sm:mb-10">
           <h2 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">
             Captured Smiles
           </h2>
@@ -106,7 +96,7 @@ export const Gallery: React.FC = () => {
             onTouchStart={onTouchStart}
             onTouchEnd={onTouchEnd}
           >
-            <div className="relative overflow-hidden sm:rounded-2xl border-y sm:border border-slate-700/70 bg-slate-900 shadow-2xl aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-slate-700/70 bg-slate-900 shadow-2xl aspect-[4/3] sm:aspect-[16/9]">
               <AnimatePresence mode="wait">
                 <motion.img
                   key={activeImage.public_id || currentIndex}
