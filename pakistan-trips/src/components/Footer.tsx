@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
 
 // Import central JSON data for official footer info
@@ -35,7 +36,9 @@ export const Footer: React.FC = () => {
               
               <li><a href="#gallery" className="hover:text-emerald-400 transition-colors">Visual Journal</a></li>
               <li><a href="#about" className="hover:text-emerald-400 transition-colors">Our Philosophy</a></li>
-              <li><a href="#faq" className="hover:text-emerald-400 transition-colors">FAQs & Policies</a></li>
+              <li><a href="/#faq" className="hover:text-emerald-700 transition-colors">FAQs</a></li>
+              <li><Link to="/terms-and-conditions" className="hover:text-emerald-700 transition-colors">Terms & Conditions</Link></li>
+              <li><Link to="/privacy-policy" className="hover:text-emerald-700 transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
 
