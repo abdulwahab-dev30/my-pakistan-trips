@@ -2,7 +2,7 @@ import React from "react";
 
 const DiscountBanner: React.FC = () => (
   <aside
-    aria-label="Special offer: 10% off all tour packages plus an extra 5% for website bookings, up to 15% off"
+    aria-label="Discover Skardu and Hunza by air with our professionally arranged flight tours"
     className="h-11 w-full overflow-hidden bg-emerald-600 text-white"
   >
     <div className="flex h-full items-center">
@@ -13,9 +13,9 @@ const DiscountBanner: React.FC = () => (
             className="discount-marquee-group flex shrink-0 items-center gap-8 pl-4 pr-8"
             aria-hidden={item === 1}
           >
-            <span>10% OFF ALL TOUR PACKAGES</span>
+            <span>DISCOVER SKARDU & HUNZA BY AIR</span>
             <span className="text-emerald-100" aria-hidden="true">✦</span>
-            <span className="font-medium">EXTRA 5% OFF WEBSITE BOOKINGS · UP TO 15% OFF</span>
+            <span className="font-medium">FLY TO THE MOUNTAINS · COMFORTABLE, HASSLE-FREE TOUR PACKAGES</span>
             <span className="text-emerald-100" aria-hidden="true">✦</span>
           </div>
         ))}
