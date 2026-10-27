@@ -75,7 +75,7 @@ We may update this policy when our services or processing practices change. For 
 
 Important: This is initial general policy copy based on the travel-enquiry context. Please update it to reflect your exact forms, analytics, messaging, payment tools, retention practices, and legal obligations.`}
 };
-export default function LegalPage(){const{slug=""}=useParams();const[page,setPage]=useState<LegalPageData|null>(null);const[loading,setLoading]=useState(true);const[unavailable,setUnavailable]=useState(false);
+export default function LegalPage(){const{slug:routeSlug=""}=useParams();const slug=routeSlug || window.location.pathname.split("/").filter(Boolean).pop() || "";const[page,setPage]=useState<LegalPageData|null>(null);const[loading,setLoading]=useState(true);const[unavailable,setUnavailable]=useState(false);
 useEffect(()=>{let active=true;const base=fallback[slug];setPage(base||null);setLoading(true);setUnavailable(false);if(!base){setLoading(false);return;}if(!supabaseConfigured){setLoading(false);return;}supabase.from("legal_pages").select("slug,title,content,updated_at").eq("slug",slug).eq("published",true).maybeSingle().then(({data,error})=>{if(!active)return;if(error){if(error.code==="42P01"||error.code==="PGRST205")setUnavailable(true);}else if(data)setPage(data as LegalPageData);setLoading(false);});return()=>{active=false;}},[slug]);
 if(!page)return <main className="min-h-screen bg-slate-950 px-5 pb-20 pt-40 text-white"><div className="mx-auto max-w-3xl"><h1 className="text-3xl font-bold">Page not found</h1><Link className="mt-5 inline-block text-emerald-300" to="/">Return home</Link></div></main>;
 const paragraphs=page.content.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
