@@ -15,7 +15,7 @@ export const Hero: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
-  const [heroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&w=1920&q=80']);
+  const [heroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=1920&h=1200&q=85']);
   const [backgroundIndex, setBackgroundIndex] = useState(0);
 
   // Load the same published tour records used by the homepage tour cards,
