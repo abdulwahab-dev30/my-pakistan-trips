@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
     { name: 'For Foreign Visitors', href: '/international-tours' },
     { name: 'Gallery', href: '/#gallery' },
     { name: 'About', href: '/#about' },
-    { name: 'FAQ', href: '/#faq' },
+    { name: 'FAQs', href: '/#faq' },
   ];
 
   return (
