@@ -39,26 +39,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Some selected images are not found under the gallery tag. Refresh the gallery and try again.', invalid_ids: invalidIds });
     }
 
-    const timestamp = Math.floor(Date.now() / 1000).toString();
-    const paramsToSign = `public_ids=${publicIds.join(',')}&timestamp=${timestamp}`;
-    const signature = createHash('sha1').update(paramsToSign + apiSecret).digest('hex');
-    const form = new URLSearchParams();
-    form.set('public_ids', publicIds.join(','));
-    form.set('timestamp', timestamp);
-    form.set('api_key', apiKey);
-    form.set('signature', signature);
-
-    const deleteResponse = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: form.toString(),
-    });
-    const deleteData: any = await deleteResponse.json();
-    if (!deleteResponse.ok) {
-      return res.status(502).json({ error: deleteData.error?.message || 'Cloudinary could not delete the selected images.' });
+    const deleted: string[] = [];
+    const failed: { public_id: string; status: string }[] = [];
+    for (const publicId of publicIds) {
+      const timestamp = Math.floor(Date.now() / 1000).toString();
+      const signature = createHash('sha1').update(`public_id=${publicId}&timestamp=${timestamp}` + apiSecret).digest('hex');
+      const form = new URLSearchParams();
+      form.set('public_id', publicId);
+      form.set('timestamp', timestamp);
+      form.set('api_key', apiKey);
+      form.set('signature', signature);
+      const deleteResponse = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/destroy`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: form.toString(),
+      });
+      const deleteData: any = await deleteResponse.json();
+      if (deleteResponse.ok && deleteData.result === 'ok') deleted.push(publicId);
+      else failed.push({ public_id: publicId, status: deleteData.error?.message || deleteData.result || 'failed' });
     }
-    const deleted = Object.entries(deleteData.deleted || {}).filter(([, status]) => status === 'deleted').map(([id]) => id);
-    const failed = Object.entries(deleteData.deleted || {}).filter(([, status]) => status !== 'deleted').map(([id, status]) => ({ public_id: id, status }));
     return res.status(failed.length ? 207 : 200).json({ deleted, failed });
   } catch (error: any) {
     return res.status(500).json({ error: error?.message || 'Unexpected error deleting gallery images.' });
