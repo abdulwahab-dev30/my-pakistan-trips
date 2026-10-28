@@ -31,10 +31,10 @@ export const tours=[
     "h1": "Naran, Shogran & Babusar Top Tour",
     "duration": "3 Days, 2 Nights",
     "departure": "Every Monday & Thursday Night departure",
-    "price": 15999,
-    "priceNote": "Rs. 15,999/- per head",
+    "price": 19500,
+    "priceNote": "Rs. 19,500/- per head",
     "pricingOptions": {
-      "standard_4_5_sharing": "Rs. 15,999/- per head",
+      "standard_4_5_sharing": "Rs. 19,500/- per head",
       "standard_2_sharing": "Rs. 22,500/- per head [Total: 45,000]",
       "deluxe_2_sharing": "Rs. 49,500/- per head [Total: 99,000]"
     },
