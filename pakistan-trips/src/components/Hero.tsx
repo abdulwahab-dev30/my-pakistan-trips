@@ -6,6 +6,7 @@ import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronR
 import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
+import { supabaseConfigured } from '../lib/supabase';
 import TourImage from './TourImage';
 
 
@@ -77,17 +78,20 @@ export const Hero: React.FC = () => {
 
   const currentPkg = heroPackages[currentIndex] || heroPackages[0];
   const normalizeTitle = (value?: string) => (value || "").toLowerCase().replace(/[^a-z0-9]+/g, "");
-  const currentTour =
-    publishedTours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title)) ||
-    tours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title));
-  // Prefer the current Supabase CMS price; static carousel JSON can be outdated.
-  const currentStartingPrice =
-    currentTour?.pricingOptions?.standard_4_5_sharing ||
-    currentTour?.pricing_options?.standard_4_5_sharing ||
-    currentTour?.pricing?.standard_4_5_sharing ||
-    currentTour?.priceNote ||
-    currentPkg.pricing?.standard_4_5_sharing ||
-    "Rs. Contact";
+  const currentCmsTour = publishedTours.find(
+    (tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title)
+  );
+  // Tour-card prices must come only from the Supabase CMS, never from static fallback JSON.
+  const currentTour = currentCmsTour || tours.find(
+    (tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title)
+  );
+  const currentStartingPrice = supabaseConfigured
+    ? currentCmsTour?.pricingOptions?.standard_4_5_sharing ||
+      currentCmsTour?.pricing_options?.standard_4_5_sharing ||
+      currentCmsTour?.pricing?.standard_4_5_sharing ||
+      currentCmsTour?.priceNote ||
+      "Price unavailable"
+    : "Price unavailable";
 
   const containerVariants = {
     hidden: { opacity: 0 },
