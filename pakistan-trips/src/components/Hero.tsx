@@ -80,6 +80,14 @@ export const Hero: React.FC = () => {
   const currentTour =
     publishedTours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title)) ||
     tours.find((tour) => normalizeTitle(tour.title) === normalizeTitle(currentPkg?.title));
+  // Prefer the current Supabase CMS price; static carousel JSON can be outdated.
+  const currentStartingPrice =
+    currentTour?.pricingOptions?.standard_4_5_sharing ||
+    currentTour?.pricing_options?.standard_4_5_sharing ||
+    currentTour?.pricing?.standard_4_5_sharing ||
+    currentTour?.priceNote ||
+    currentPkg.pricing?.standard_4_5_sharing ||
+    "Rs. Contact";
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -282,7 +290,7 @@ export const Hero: React.FC = () => {
                       <p className="text-[10px] text-slate-400 uppercase tracking-wider">Starting price per person</p>
                       <p className="text-[10px] text-slate-500">Listed price before discounts</p>
                       <p className="text-xl font-bold text-emerald-400">
-                        {currentPkg.pricing?.standard_4_5_sharing || "Rs. Contact"}
+                        {currentStartingPrice}
                       </p>
                     </div>
                     <motion.a
