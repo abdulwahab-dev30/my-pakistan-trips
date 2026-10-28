@@ -6,7 +6,7 @@ const clean = (row) => ({ ...(row?.data || {}), id: row?.id, slug: row?.slug || 
 export async function getPublishedTours() {
   if (!supabaseConfigured) return localTours;
   const { data, error } = await supabase.from("tours").select("id,slug,title,published,data,updated_at").eq("published", true).order("title");
-  if (error) { console.error("Unable to load CMS tours:", error.message); return localTours; }
+  if (error) { console.error("Unable to load CMS tours:", error.message); return []; }
   return (data || []).map(clean);
 }
 export async function getTourBySlug(slug) {
