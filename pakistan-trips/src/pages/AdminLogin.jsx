@@ -6,17 +6,17 @@ import{supabase,supabaseConfigured}from"../lib/supabase";
 export default function AdminLogin(){
  const[session,setSession]=useState(undefined);const[email,setEmail]=useState("");const[password,setPassword]=useState("");const[busy,setBusy]=useState(false);const[error,setError]=useState("");const[alertWarning,setAlertWarning]=useState("");const location=useLocation();
  React.useEffect(()=>{if(!supabaseConfigured){setSession(null);return;}supabase.auth.getSession().then(({data})=>setSession(data.session));const{data:{subscription}}=supabase.auth.onAuthStateChange((_event,s)=>setSession(s));return()=>subscription.unsubscribe();},[]);
- async function sendAlert(payload,token){const headers={"Content-Type":"application/json"};if(token)headers.Authorization="Bearer "+token;const response=await fetch("/api/admin-login",{method:"POST",headers,body:JSON.stringify(payload)});let result={};try{result=await response.json();}catch{}if(!response.ok||result.sent!==true)throw new Error(result.error||"Alert endpoint returned HTTP "+response.status);}
+ async function sendAlert(payload,token){const headers={"Content-Type":"application/json"};if(token)headers.Authorization="Bearer "+token;const response=await fetch("/api/admin-login",{method:"POST",headers,body:JSON.stringify(payload)});const raw=await response.text();let result={};try{result=JSON.parse(raw);}catch{}if(!response.ok||result.sent!==true)throw new Error(result.error||("HTTP "+response.status+(raw?" — "+raw.slice(0,180):"")));}
  async function submit(e){e.preventDefault();setError("");setAlertWarning("");setBusy(true);try{
   if(!supabaseConfigured)throw new Error("Supabase is not configured yet. Add the project URL and publishable key to the Vercel environment variables.");
   const attemptedEmail=email.trim();
   const{data,error:loginError}=await supabase.auth.signInWithPassword({email:attemptedEmail,password});
   if(loginError){
-   try{await sendAlert({event:"failed",email:attemptedEmail});}catch(alertError){console.error("Failed-login security alert did not send:",alertError);setAlertWarning("Security alert email was not confirmed. Check the Vercel deployment and /api/admin-login response.");}
+   try{await sendAlert({event:"failed",email:attemptedEmail});}catch(alertError){console.error("Failed-login security alert did not send:",alertError);setAlertWarning("Security alert email failed: "+(alertError.message||"Unknown error"));}
    throw loginError;
   }
   if(data.session){
-   try{await sendAlert({event:"success",email:attemptedEmail},""+data.session.access_token);}catch(alertError){console.error("Successful-login security alert did not send:",alertError);setAlertWarning("Login succeeded, but the security alert email was not confirmed. Check Vercel logs and Gmail SMTP settings.");}
+   try{await sendAlert({event:"success",email:attemptedEmail},""+data.session.access_token);}catch(alertError){console.error("Successful-login security alert did not send:",alertError);setAlertWarning("Login succeeded, but security alert email failed: "+(alertError.message||"Unknown error"));}
   }
  }catch(err){setError(err.message||"Unable to sign in.");}finally{setBusy(false);}}
  if(session)return <Navigate to={location.state?.from||"/admin/tours"} replace/>;
