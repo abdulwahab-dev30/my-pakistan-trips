@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Globe, Eye, Edit3, X } from "lucide-react";
+import { Globe, Eye, Edit3, X, KeyRound } from "lucide-react";
 
-type AdminSection = "tours" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact";
+type AdminSection = "tours" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
@@ -13,6 +13,7 @@ const links: { id: AdminSection; label: string; href: string; meta?: string; ico
   { id:"faqs", label:"FAQs", href:"/admin/faqs", meta:"Manage", icon:Edit3 },
   { id:"legal", label:"Terms & Privacy", href:"/admin/legal-pages", meta:"Manage", icon:Edit3 },
   { id:"contact", label:"Contact information", href:"/admin/contact-info", meta:"Soon", icon:Edit3 },
+  { id:"security", label:"Change password", href:"/admin/password", meta:"Security", icon:KeyRound },
 ];
 
 export default function AdminSidebar({ active, open, onClose }: Props) {
