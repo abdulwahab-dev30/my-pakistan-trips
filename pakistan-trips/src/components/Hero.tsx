@@ -217,11 +217,25 @@ export const Hero: React.FC = () => {
           </motion.div>
         </motion.div>
 
+        <div className="absolute bottom-7 left-4 z-10 grid w-[58%] grid-cols-3 gap-1 border-t border-white/25 pt-3 min-[380px]:left-5 min-[380px]:gap-2 sm:bottom-9 sm:left-10 sm:w-auto sm:max-w-lg sm:gap-7 sm:pt-5 lg:left-12">
+          <div>
+            <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{heroPackages.length}+</p>
+            <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Tour Packages</p>
+          </div>
+          <div>
+            <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{Math.floor(attractionCount / 10) * 10}+</p>
+            <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Places to Explore</p>
+          </div>
+          <div>
+            <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{departureCityCount}</p>
+            <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Pickup Locations</p>
+          </div>
+        </div>
         {currentPkg && (
           <div
             role="region"
             aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
-            className="absolute bottom-[150px] right-3 z-20 w-[148px] min-[380px]:right-5 min-[380px]:w-[164px] sm:relative sm:bottom-auto sm:right-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
+            className="absolute bottom-[112px] right-3 z-20 w-[148px] min-[380px]:right-5 min-[380px]:w-[164px] sm:relative sm:bottom-auto sm:right-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
