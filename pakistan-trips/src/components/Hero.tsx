@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
   // Combine package data with its Cloudinary image and default badges.
   const heroPackages = rawPackages.map((pkg: any, idx: number) => ({
     ...pkg,
-    location: pkg.main_attractions?.[0] || "Northern Pakistan",
+    location: pkg.main_attractions?.[0] || "the Ordinary",
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
   const attractionCount = new Set(
@@ -182,7 +182,7 @@ export const Hero: React.FC = () => {
           <motion.div variants={itemVariants} className="inline-flex">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide shadow-lg shadow-black/10">
               <Sparkles className="w-4 h-4 animate-pulse" />
-              Explore Pakistan · {tripData.company || "My Pakistan Trips"}
+              A MORE PERSONAL WAY TO EXPLORE PAKISTAN
             </span>
           </motion.div>
 
@@ -190,7 +190,7 @@ export const Hero: React.FC = () => {
             variants={itemVariants}
             className="text-[2.65rem] sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-lg"
           >
-            Find Your Escape in <br />
+            Pakistan, Beyond <br />
             <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
               Northern Pakistan
             </span>
@@ -200,7 +200,7 @@ export const Hero: React.FC = () => {
             variants={itemVariants}
             className="text-base sm:text-lg lg:text-xl text-slate-200/95 max-w-xl font-light leading-relaxed"
           >
-            From Hunza’s towering peaks to Skardu’s serene lakes, discover unforgettable journeys with comfortable transport, handpicked stays, and local guidance.
+            Journey through Hunza, Skardu, Naran and the country’s most breathtaking landscapes. Thoughtfully planned tours, handpicked stays and local experiences — all in one place.
           </motion.p>
 
           <motion.div 
@@ -211,9 +211,9 @@ export const Hero: React.FC = () => {
               href="#tours"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-900/30 hover:shadow-emerald-500/30 transition-all duration-300"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-900/30 hover:shadow-emerald-500/30 transition-all duration-300"
             >
-              Browse Packages
+              Explore Our Tours
               <ArrowRight className="w-5 h-5" />
             </motion.a>
 
@@ -222,10 +222,10 @@ export const Hero: React.FC = () => {
               aria-label="Customize your Pakistan tour package"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white/10 border border-white/25 hover:bg-white/15 hover:border-white/40 text-white font-semibold flex items-center gap-3 backdrop-blur-xl transition-all duration-300"
+              className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-white/[0.07] border border-white/25 hover:bg-white/15 hover:border-white/40 text-white font-semibold flex items-center gap-3 backdrop-blur-xl transition-all duration-300"
             >
               <SlidersHorizontal className="w-4 h-4 text-emerald-400" />
-              Customize Your Tour
+              Plan Your Journey
             </motion.a>
           </motion.div>
 
@@ -240,11 +240,11 @@ export const Hero: React.FC = () => {
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-bold text-white">{Math.floor(attractionCount / 10) * 10}+</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Attractions & Highlights</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Places to Explore</p>
             </div>
             <div>
               <p className="text-2xl sm:text-3xl font-bold text-white">{departureCityCount}</p>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">Departure Cities</p>
+              <p className="text-xs sm:text-sm text-slate-400 mt-1">Pickup Locations</p>
             </div>
           </motion.div>
         </motion.div>
@@ -254,17 +254,17 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 relative lg:pl-3"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-400/35 via-teal-500/15 to-cyan-400/25 opacity-80 blur-2xl -z-10" />
 
-            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[1.75rem] bg-slate-950/65 border border-white/15 backdrop-blur-2xl shadow-[0_25px_90px_-25px_rgba(0,0,0,0.75)] overflow-hidden">
+            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[2rem] bg-[#071510]/75 border border-emerald-100/20 backdrop-blur-2xl shadow-[0_30px_100px_-30px_rgba(0,0,0,0.9)] overflow-hidden">
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
-                <span className="text-emerald-400" aria-hidden="true">
+                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-200"><span className="text-emerald-400" aria-hidden="true">
                   <Compass className="w-4 h-4 animate-spin-slow" />
                 </span>
                 
@@ -294,7 +294,7 @@ export const Hero: React.FC = () => {
                   exit={isMobile ? undefined : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <div className="relative h-[17rem] xs:h-[18rem] sm:h-64 rounded-2xl overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
+                  <div className="relative h-[19rem] xs:h-[20rem] sm:h-[21rem] rounded-[1.5rem] overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
                     <TourImage
                       src={currentTour?.images?.[0]?.src}
                       tag={currentTour?.imageTag || currentTour?.images?.[0]?.tag}
