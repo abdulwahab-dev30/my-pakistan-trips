@@ -130,8 +130,8 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[88svh] sm:min-h-[92svh] w-full overflow-hidden bg-[#061510] text-white">
-      {/* Full-width cinematic background — no framed container or tour card */}
+    <section className="relative min-h-[88svh] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
+      {/* Full-bleed scenic artwork */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
           <React.Fragment key={image}>
@@ -163,28 +163,28 @@ export const Hero: React.FC = () => {
             />
           </React.Fragment>
         ))}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#061510]/85 via-[#061510]/45 to-[#061510]/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/25" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_12%_78%,rgba(16,185,129,0.22),transparent_48%)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061510]/80 via-[#061510]/35 to-[#061510]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-slate-950/35" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_80%,rgba(16,185,129,0.20),transparent_48%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl items-center px-6 py-16 sm:min-h-[92svh] sm:px-10 lg:px-16">
+      {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
+      <div className="relative z-10 mx-auto grid min-h-[88svh] max-w-[1440px] grid-cols-1 items-center gap-7 px-6 py-16 sm:min-h-[92svh] sm:px-10 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
-          className="w-full max-w-2xl"
+          className="lg:col-span-4"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="mb-6 inline-flex">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] font-semibold tracking-wide text-emerald-100 shadow-lg backdrop-blur-xl sm:text-xs">
-              <Sparkles className="h-4 w-4 text-emerald-300" />
+          <motion.div variants={itemVariants} className="mb-5 inline-flex">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-2 text-[10px] font-semibold tracking-wide text-emerald-100 shadow-lg backdrop-blur-xl sm:text-xs">
+              <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
               A MORE PERSONAL WAY TO EXPLORE PAKISTAN
             </span>
           </motion.div>
-
           <motion.h1
             variants={itemVariants}
-            className="max-w-2xl text-[3.1rem] font-extrabold leading-[0.99] tracking-[-0.05em] drop-shadow-xl sm:text-6xl lg:text-[5.25rem]"
+            className="max-w-xl text-[2.8rem] font-extrabold leading-[1.01] tracking-[-0.05em] drop-shadow-xl sm:text-6xl lg:text-[4.15rem]"
           >
             Travel <br />
             Beyond the <br />
@@ -192,50 +192,105 @@ export const Hero: React.FC = () => {
               Expected.
             </span>
           </motion.h1>
-
           <motion.p
             variants={itemVariants}
-            className="mt-6 max-w-lg text-sm font-light leading-relaxed text-slate-100/90 sm:text-base lg:text-lg"
+            className="mt-5 max-w-md text-sm font-light leading-relaxed text-slate-100/90 sm:text-base"
           >
             Journey through Hunza, Skardu, Naran and Pakistan’s most breathtaking landscapes with thoughtfully planned tours and unforgettable local experiences.
           </motion.p>
-
-          <motion.div variants={itemVariants} className="mt-7 flex flex-wrap items-center gap-3">
+          <motion.div variants={itemVariants} className="mt-6 flex flex-wrap items-center gap-3">
             <motion.a
               href="#tours"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30"
+              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-5 py-3 text-xs font-bold text-slate-950 shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30 sm:text-sm"
             >
               Explore Journeys
               <ArrowRight className="h-4 w-4" />
             </motion.a>
             <a
               href="#contact-form"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-xl transition hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-3 text-xs font-semibold text-white backdrop-blur-xl transition hover:bg-white/20 sm:text-sm"
             >
               Plan Your Trip
             </a>
           </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="mt-9 grid max-w-lg grid-cols-3 gap-4 border-t border-white/25 pt-5 sm:mt-12 sm:gap-7"
-          >
-            <div>
-              <p className="text-2xl font-bold text-white sm:text-3xl">{heroPackages.length}+</p>
-              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Tour Packages</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-white sm:text-3xl">{Math.floor(attractionCount / 10) * 10}+</p>
-              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Places to Explore</p>
-            </div>
-            <div>
-              <p className="text-2xl font-bold text-white sm:text-3xl">{departureCityCount}</p>
-              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Pickup Locations</p>
-            </div>
-          </motion.div>
         </motion.div>
+
+        {currentPkg && (
+          <div
+            role="region"
+            aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
+            className="mx-auto w-[218px] sm:w-[245px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            <div className="relative rounded-[1.25rem] border-[3px] border-white/90 bg-white p-1.5 text-slate-900 shadow-[0_25px_75px_-20px_rgba(0,0,0,0.8)]">
+              <div className="relative h-[145px] overflow-hidden rounded-[0.9rem] bg-slate-200 sm:h-[165px]">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentPkg.title}
+                    initial={isMobile ? false : { opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className="absolute inset-0"
+                  >
+                    <TourImage
+                      src={currentTour?.images?.[0]?.src}
+                      tag={currentTour?.imageTag || currentTour?.images?.[0]?.tag}
+                      alt={currentTour?.images?.[0]?.alt || `Scenic landscape for ${currentPkg.title}`}
+                      className="h-full w-full object-cover"
+                      loading="eager"
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-5 text-[9px] font-semibold text-white">
+                  <span className="flex items-center gap-1"><Sparkles className="h-3 w-3 text-emerald-300" /> Featured tour</span>
+                  <span>{currentPkg.tag}</span>
+                </div>
+              </div>
+              <div className="flex items-center justify-between gap-2 px-2 pb-2 pt-2.5">
+                <div className="min-w-0">
+                  <p className="line-clamp-1 text-[11px] font-bold leading-tight">{currentPkg.title}</p>
+                  <p className="mt-0.5 line-clamp-1 text-[9px] text-slate-500">{currentPkg.location} · {currentPkg.duration}</p>
+                </div>
+                <a
+                  href={currentTour ? `/tours/${currentTour.slug}` : "/tours"}
+                  aria-label={`View ${currentPkg.title}`}
+                  className="shrink-0 rounded-full bg-emerald-500 p-2 text-slate-950 transition hover:bg-emerald-400"
+                >
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </a>
+              </div>
+            </div>
+            <div className="mt-2 flex items-center justify-center gap-3 text-white">
+              <button onClick={handlePrev} aria-label="Previous featured tour" className="rounded-full border border-white/50 bg-black/25 p-1.5 backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950">
+                <ChevronLeft className="h-3.5 w-3.5" />
+              </button>
+              <div className="flex items-center gap-1">
+                {heroPackages.map((_, idx) => (
+                  <button key={idx} onClick={() => setCurrentIndex(idx)} aria-label={`Show tour ${idx + 1}`} className={`h-1.5 rounded-full transition-all ${idx === currentIndex ? "w-5 bg-emerald-300" : "w-1.5 bg-white/60"}`} />
+                ))}
+              </div>
+              <button onClick={handleNext} aria-label="Next featured tour" className="rounded-full border border-white/50 bg-black/25 p-1.5 backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        <div className="mx-auto hidden w-full max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
+          <div className="rounded-2xl border border-white/20 bg-black/35 p-3.5 text-white shadow-xl backdrop-blur-xl">
+            <div className="flex items-center gap-1.5">
+              <div className="flex -space-x-2">
+                {[0,1,2].map((n) => <span key={n} className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#173c30] bg-emerald-200 text-[9px] font-bold text-[#062d24]">{["M","A","T"][n]}</span>)}
+              </div>
+              <span className="text-lg font-semibold">Trusted</span>
+            </div>
+            <p className="mt-2 text-[10px] leading-relaxed text-white/80">Thoughtfully planned journeys across Pakistan’s most beautiful places.</p>
+          </div>
+        </div>
       </div>
     </section>
   );
