@@ -130,196 +130,112 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative bg-[#061510] px-3 py-4 sm:px-6 sm:py-7 lg:px-8">
-      <div className="relative isolate mx-auto min-h-[780px] max-w-[1500px] overflow-hidden rounded-[1.6rem] border border-white/10 bg-slate-950 text-white shadow-2xl sm:min-h-[650px] sm:rounded-[2rem] lg:min-h-[680px]">
-        {/* Full-bleed scenic background inside the framed hero */}
-        <div className="absolute inset-0 -z-20">
-          {heroBackgroundImages.map((image, index) => (
-            <React.Fragment key={image}>
-              <motion.img
-                src={mobileHeroBackground}
-                alt=""
-                aria-hidden="true"
-                width={900}
-                height={1600}
-                fetchPriority="high"
-                loading="eager"
-                decoding="async"
-                animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className="absolute inset-0 block h-full w-full object-cover object-center sm:hidden"
-              />
-              <motion.img
-                src={image}
-                alt=""
-                aria-hidden="true"
-                width={1920}
-                height={1200}
-                fetchPriority="auto"
-                loading="eager"
-                decoding="async"
-                animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
-                transition={{ duration: 1.2, ease: "easeInOut" }}
-                className="absolute inset-0 hidden h-full w-full object-cover object-center sm:block"
-              />
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#061510]/90 via-[#061510]/55 to-[#061510]/15" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/20" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_15%_75%,rgba(16,185,129,0.22),transparent_45%)]" />
+    <section className="relative min-h-[88svh] sm:min-h-[92svh] w-full overflow-hidden bg-[#061510] text-white">
+      {/* Full-width cinematic background — no framed container or tour card */}
+      <div className="absolute inset-0 z-0">
+        {heroBackgroundImages.map((image, index) => (
+          <React.Fragment key={image}>
+            <motion.img
+              src={mobileHeroBackground}
+              alt=""
+              aria-hidden="true"
+              width={900}
+              height={1600}
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0 block h-full w-full object-cover object-center sm:hidden"
+            />
+            <motion.img
+              src={image}
+              alt=""
+              aria-hidden="true"
+              width={1920}
+              height={1200}
+              fetchPriority="auto"
+              loading="eager"
+              decoding="async"
+              animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0 hidden h-full w-full object-cover object-center sm:block"
+            />
+          </React.Fragment>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#061510]/85 via-[#061510]/45 to-[#061510]/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/25" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_12%_78%,rgba(16,185,129,0.22),transparent_48%)]" />
+      </div>
 
-        {/* Layout follows the supplied reference: copy left, compact featured tour center, trust panel right */}
-        <div className="relative grid min-h-[780px] grid-cols-1 content-start gap-8 px-6 pb-7 pt-14 sm:min-h-[650px] sm:px-10 sm:py-12 lg:min-h-[680px] lg:grid-cols-12 lg:items-center lg:gap-5 lg:px-12 lg:py-14">
-          <motion.div
-            className="lg:col-span-5 lg:pr-5"
-            variants={containerVariants}
-            initial={isMobile ? false : "hidden"}
-            animate="visible"
-          >
-            <motion.div variants={itemVariants} className="mb-5 inline-flex">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-2 text-[10px] font-semibold tracking-wide text-emerald-100 shadow-lg backdrop-blur-xl sm:text-xs">
-                <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
-                A MORE PERSONAL WAY TO EXPLORE PAKISTAN
-              </span>
-            </motion.div>
-
-            <motion.h1
-              variants={itemVariants}
-              className="max-w-[620px] text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.045em] drop-shadow-lg sm:text-6xl lg:text-[4.1rem]"
-            >
-              Travel <br />
-              Beyond the <br />
-              <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
-                Expected.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              variants={itemVariants}
-              className="mt-5 max-w-md text-sm font-light leading-relaxed text-slate-100/90 sm:text-base"
-            >
-              Journey through Hunza, Skardu, Naran and Pakistan’s most breathtaking landscapes with thoughtfully planned tours and memorable local experiences.
-            </motion.p>
-
-            <motion.div variants={itemVariants} className="mt-6 flex flex-wrap items-center gap-3">
-              <motion.a
-                href="#tours"
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30"
-              >
-                Explore Journeys
-                <ArrowRight className="h-4 w-4" />
-              </motion.a>
-              <a
-                href="#contact-form"
-                className="hidden items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-xl transition hover:bg-white/20 sm:inline-flex"
-              >
-                Plan Your Trip
-              </a>
-            </motion.div>
-
-            <motion.div
-              variants={itemVariants}
-              className="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/25 pt-5 sm:mt-9"
-            >
-              <div>
-                <p className="text-2xl font-bold text-white">{heroPackages.length}+</p>
-                <p className="mt-1 text-[10px] text-slate-200/75 sm:text-xs">Tour Packages</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white">{Math.floor(attractionCount / 10) * 10}+</p>
-                <p className="mt-1 text-[10px] text-slate-200/75 sm:text-xs">Places to Explore</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-white">{departureCityCount}</p>
-                <p className="mt-1 text-[10px] text-slate-200/75 sm:text-xs">Pickup Locations</p>
-              </div>
-            </motion.div>
+      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl items-center px-6 py-16 sm:min-h-[92svh] sm:px-10 lg:px-16">
+        <motion.div
+          className="w-full max-w-2xl"
+          variants={containerVariants}
+          initial={isMobile ? false : "hidden"}
+          animate="visible"
+        >
+          <motion.div variants={itemVariants} className="mb-6 inline-flex">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-[10px] font-semibold tracking-wide text-emerald-100 shadow-lg backdrop-blur-xl sm:text-xs">
+              <Sparkles className="h-4 w-4 text-emerald-300" />
+              A MORE PERSONAL WAY TO EXPLORE PAKISTAN
+            </span>
           </motion.div>
 
-          {currentPkg && (
-            <div
-              role="region"
-              aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
-              className="mx-auto w-full max-w-[250px] lg:col-span-3 lg:col-start-7 lg:mx-0 lg:mt-8 lg:max-w-[230px]"
-              onMouseEnter={() => setIsPaused(true)}
-              onMouseLeave={() => setIsPaused(false)}
-            >
-              <div className="rounded-[1.35rem] border border-white/70 bg-white p-2.5 text-slate-900 shadow-[0_25px_70px_-20px_rgba(0,0,0,0.75)]">
-                <div className="relative h-[170px] overflow-hidden rounded-[1rem] bg-slate-200 sm:h-[190px]">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentPkg.title}
-                      initial={isMobile ? false : { opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute inset-0"
-                    >
-                      <TourImage
-                        src={currentTour?.images?.[0]?.src}
-                        tag={currentTour?.imageTag || currentTour?.images?.[0]?.tag}
-                        alt={currentTour?.images?.[0]?.alt || `Scenic landscape for ${currentPkg.title}`}
-                        className="h-full w-full object-cover"
-                        loading="eager"
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                  <span className="absolute bottom-2 left-2 rounded-full bg-black/60 px-2 py-1 text-[9px] font-semibold text-white backdrop-blur">
-                    {currentPkg.tag}
-                  </span>
-                </div>
-                <div className="px-2 pb-1 pt-3">
-                  <p className="line-clamp-1 text-xs font-bold">{currentPkg.title}</p>
-                  <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-500">{currentPkg.location} · {currentPkg.duration}</p>
-                  <div className="mt-3 flex items-center justify-between gap-2">
-                    <div className="min-w-0">
-                      <p className="text-[9px] uppercase tracking-wide text-slate-400">Starting from</p>
-                      <p className="truncate text-xs font-extrabold text-emerald-700">{currentStartingPrice}</p>
-                    </div>
-                    <a
-                      href={currentTour ? `/tours/${currentTour.slug}` : "/tours"}
-                      className="shrink-0 rounded-full bg-emerald-500 p-2 text-slate-950 transition hover:bg-emerald-400"
-                      aria-label={`View ${currentPkg.title}`}
-                    >
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-3 flex items-center justify-center gap-3">
-                <button onClick={handlePrev} className="rounded-full border border-white/30 bg-black/25 p-2 text-white backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950" aria-label="Previous tour">
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <div className="flex items-center gap-1.5">
-                  {heroPackages.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setCurrentIndex(idx)}
-                      aria-label={`Show tour ${idx + 1}`}
-                      className={`h-1.5 rounded-full transition-all ${idx === currentIndex ? "w-6 bg-emerald-300" : "w-1.5 bg-white/60"}`}
-                    />
-                  ))}
-                </div>
-                <button onClick={handleNext} className="rounded-full border border-white/30 bg-black/25 p-2 text-white backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950" aria-label="Next tour">
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-          )}
+          <motion.h1
+            variants={itemVariants}
+            className="max-w-2xl text-[3.1rem] font-extrabold leading-[0.99] tracking-[-0.05em] drop-shadow-xl sm:text-6xl lg:text-[5.25rem]"
+          >
+            Travel <br />
+            Beyond the <br />
+            <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
+              Expected.
+            </span>
+          </motion.h1>
 
-          <div className="hidden lg:col-span-3 lg:col-start-10 lg:flex lg:items-end lg:justify-end lg:self-end">
-            <div className="max-w-[210px] rounded-2xl border border-white/20 bg-black/30 p-4 text-white shadow-xl backdrop-blur-xl">
-              <p className="text-xs font-semibold text-emerald-200">Made for memorable journeys</p>
-              <p className="mt-2 text-sm leading-relaxed text-white/90">Explore curated trips, beautiful destinations and experiences across Pakistan.</p>
-              <a href="#tours" className="mt-3 inline-flex items-center gap-2 text-xs font-bold text-emerald-300 hover:text-white">
-                Discover packages <ArrowRight className="h-3.5 w-3.5" />
-              </a>
+          <motion.p
+            variants={itemVariants}
+            className="mt-6 max-w-lg text-sm font-light leading-relaxed text-slate-100/90 sm:text-base lg:text-lg"
+          >
+            Journey through Hunza, Skardu, Naran and Pakistan’s most breathtaking landscapes with thoughtfully planned tours and unforgettable local experiences.
+          </motion.p>
+
+          <motion.div variants={itemVariants} className="mt-7 flex flex-wrap items-center gap-3">
+            <motion.a
+              href="#tours"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-6 py-3.5 text-sm font-bold text-slate-950 shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30"
+            >
+              Explore Journeys
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+            <a
+              href="#contact-form"
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3.5 text-sm font-semibold text-white backdrop-blur-xl transition hover:bg-white/20"
+            >
+              Plan Your Trip
+            </a>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="mt-9 grid max-w-lg grid-cols-3 gap-4 border-t border-white/25 pt-5 sm:mt-12 sm:gap-7"
+          >
+            <div>
+              <p className="text-2xl font-bold text-white sm:text-3xl">{heroPackages.length}+</p>
+              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Tour Packages</p>
             </div>
-          </div>
-        </div>
+            <div>
+              <p className="text-2xl font-bold text-white sm:text-3xl">{Math.floor(attractionCount / 10) * 10}+</p>
+              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Places to Explore</p>
+            </div>
+            <div>
+              <p className="text-2xl font-bold text-white sm:text-3xl">{departureCityCount}</p>
+              <p className="mt-1 text-[10px] text-slate-200/80 sm:text-xs">Pickup Locations</p>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
