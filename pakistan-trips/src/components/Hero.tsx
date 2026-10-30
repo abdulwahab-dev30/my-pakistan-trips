@@ -171,7 +171,7 @@ export const Hero: React.FC = () => {
       {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
       <div className="relative z-10 mx-auto grid min-h-[860px] max-w-[1440px] grid-cols-1 content-start gap-5 px-3 pb-40 pt-28 min-[380px]:px-4 sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
-          className="relative z-20 max-w-[225px] min-[380px]:max-w-[245px] lg:col-span-4 lg:max-w-none"
+          className="relative z-20 max-w-[310px] min-[380px]:max-w-[340px] lg:col-span-5 lg:max-w-none"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
@@ -184,19 +184,18 @@ export const Hero: React.FC = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="max-w-[290px] text-[2.55rem] font-extrabold leading-[0.99] tracking-[-0.05em] drop-shadow-xl min-[380px]:text-[2.8rem] sm:max-w-xl sm:text-6xl lg:text-[4.15rem]"
+            className="max-w-[310px] text-[2.35rem] font-extrabold leading-[1.02] tracking-[-0.05em] drop-shadow-xl min-[380px]:text-[2.65rem] sm:max-w-xl sm:text-6xl lg:text-[4.15rem] lg:leading-[1.02]"
           >
-            Travel <br />
-            Beyond the <br />
-            <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
-              Expected.
+            <span className="block whitespace-nowrap">Travel Beyond</span>
+            <span className="block whitespace-nowrap bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
+              the Expected.
             </span>
           </motion.h1>
           <motion.p
             variants={itemVariants}
             className="mt-4 max-w-[290px] text-[12px] font-light leading-relaxed text-slate-100/90 min-[380px]:text-sm sm:mt-5 sm:max-w-md sm:text-base"
           >
-            Journey through Hunza, Skardu, Naran and Pakistan’s most breathtaking landscapes with thoughtfully planned tours and unforgettable local experiences.
+            Explore Pakistan’s most beautiful destinations with thoughtfully planned tours and unforgettable local experiences.
           </motion.p>
           <motion.div variants={itemVariants} className="mt-5 flex flex-wrap items-center gap-2 min-[380px]:gap-3 sm:mt-6">
             <motion.a
@@ -235,7 +234,7 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
-            className="absolute right-2 top-[47%] z-20 w-[132px] min-[380px]:right-4 min-[380px]:w-[148px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
+            className="absolute right-2 top-[47%] z-20 w-[132px] min-[380px]:right-4 min-[380px]:w-[148px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-7 lg:mx-0 lg:mt-16"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
