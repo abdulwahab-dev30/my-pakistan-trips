@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[88svh] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
+    <section className="relative min-h-[820px] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
       {/* Full-bleed scenic artwork */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
@@ -169,22 +169,22 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
-      <div className="relative z-10 mx-auto grid min-h-[88svh] max-w-[1440px] grid-cols-1 items-center gap-7 px-6 py-16 sm:min-h-[92svh] sm:px-10 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
+      <div className="relative z-10 mx-auto grid min-h-[820px] max-w-[1440px] grid-cols-1 content-start gap-5 px-4 pb-44 pt-24 min-[380px]:px-5 sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
-          className="lg:col-span-4"
+          className="relative z-20 lg:col-span-4"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="mb-5 inline-flex">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-2 text-[10px] font-semibold tracking-wide text-emerald-100 shadow-lg backdrop-blur-xl sm:text-xs">
+          <motion.div variants={itemVariants} className="mb-4 inline-flex max-w-full">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[9px] font-semibold tracking-wide text-emerald-100 min-[380px]:text-[10px] shadow-lg backdrop-blur-xl sm:text-xs">
               <Sparkles className="h-3.5 w-3.5 text-emerald-300" />
               A MORE PERSONAL WAY TO EXPLORE PAKISTAN
             </span>
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="max-w-xl text-[2.8rem] font-extrabold leading-[1.01] tracking-[-0.05em] drop-shadow-xl sm:text-6xl lg:text-[4.15rem]"
+            className="max-w-[290px] text-[2.55rem] font-extrabold leading-[0.99] tracking-[-0.05em] drop-shadow-xl min-[380px]:text-[2.8rem] sm:max-w-xl sm:text-6xl lg:text-[4.15rem]"
           >
             Travel <br />
             Beyond the <br />
@@ -194,23 +194,23 @@ export const Hero: React.FC = () => {
           </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="mt-5 max-w-md text-sm font-light leading-relaxed text-slate-100/90 sm:text-base"
+            className="mt-4 max-w-[290px] text-[12px] font-light leading-relaxed text-slate-100/90 min-[380px]:text-sm sm:mt-5 sm:max-w-md sm:text-base"
           >
             Journey through Hunza, Skardu, Naran and Pakistan’s most breathtaking landscapes with thoughtfully planned tours and unforgettable local experiences.
           </motion.p>
-          <motion.div variants={itemVariants} className="mt-6 flex flex-wrap items-center gap-3">
+          <motion.div variants={itemVariants} className="mt-5 flex flex-wrap items-center gap-2 min-[380px]:gap-3 sm:mt-6">
             <motion.a
               href="#tours"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-5 py-3 text-xs font-bold text-slate-950 shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30 sm:text-sm"
+              className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 px-4 py-3 text-[11px] font-bold text-slate-950 min-[380px]:px-5 min-[380px]:text-xs shadow-xl shadow-emerald-950/40 transition-all hover:shadow-emerald-500/30 sm:text-sm"
             >
               Explore Journeys
               <ArrowRight className="h-4 w-4" />
             </motion.a>
             <a
               href="#contact-form"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-3 text-xs font-semibold text-white backdrop-blur-xl transition hover:bg-white/20 sm:text-sm"
+              className="hidden items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-3 text-xs font-semibold text-white backdrop-blur-xl transition hover:bg-white/20 min-[420px]:inline-flex sm:text-sm"
             >
               Plan Your Trip
             </a>
@@ -221,12 +221,12 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
-            className="mx-auto w-[218px] sm:w-[245px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
+            className="absolute bottom-[150px] right-3 z-20 w-[148px] min-[380px]:right-5 min-[380px]:w-[164px] sm:relative sm:bottom-auto sm:right-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative rounded-[1.25rem] border-[3px] border-white/90 bg-white p-1.5 text-slate-900 shadow-[0_25px_75px_-20px_rgba(0,0,0,0.8)]">
-              <div className="relative h-[145px] overflow-hidden rounded-[0.9rem] bg-slate-200 sm:h-[165px]">
+            <div className="relative rounded-[1rem] border-2 border-white/90 bg-white p-1 text-slate-900 min-[380px]:rounded-[1.25rem] min-[380px]:p-1.5 shadow-[0_25px_75px_-20px_rgba(0,0,0,0.8)]">
+              <div className="relative h-[100px] overflow-hidden rounded-[0.75rem] bg-slate-200 min-[380px]:h-[112px] sm:h-[165px] sm:rounded-[0.9rem]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentPkg.title}
@@ -245,15 +245,15 @@ export const Hero: React.FC = () => {
                     />
                   </motion.div>
                 </AnimatePresence>
-                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-2 pb-2 pt-5 text-[9px] font-semibold text-white">
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/70 to-transparent px-1.5 pb-1.5 pt-4 text-[8px] font-semibold text-white min-[380px]:text-[9px]">
                   <span className="flex items-center gap-1"><Sparkles className="h-3 w-3 text-emerald-300" /> Featured tour</span>
                   <span>{currentPkg.tag}</span>
                 </div>
               </div>
-              <div className="flex items-center justify-between gap-2 px-2 pb-2 pt-2.5">
+              <div className="flex items-center justify-between gap-1 px-1 pb-1.5 pt-2 min-[380px]:gap-2 min-[380px]:px-2 min-[380px]:pb-2">
                 <div className="min-w-0">
-                  <p className="line-clamp-1 text-[11px] font-bold leading-tight">{currentPkg.title}</p>
-                  <p className="mt-0.5 line-clamp-1 text-[9px] text-slate-500">{currentPkg.location} · {currentPkg.duration}</p>
+                  <p className="line-clamp-1 text-[9px] font-bold leading-tight min-[380px]:text-[10px]">{currentPkg.title}</p>
+                  <p className="mt-0.5 line-clamp-1 text-[8px] text-slate-500 min-[380px]:text-[9px]">{currentPkg.location} · {currentPkg.duration}</p>
                 </div>
                 <a
                   href={currentTour ? `/tours/${currentTour.slug}` : "/tours"}
@@ -264,7 +264,7 @@ export const Hero: React.FC = () => {
                 </a>
               </div>
             </div>
-            <div className="mt-2 flex items-center justify-center gap-3 text-white">
+            <div className="mt-1.5 flex items-center justify-center gap-2 text-white sm:mt-2 sm:gap-3">
               <button onClick={handlePrev} aria-label="Previous featured tour" className="rounded-full border border-white/50 bg-black/25 p-1.5 backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950">
                 <ChevronLeft className="h-3.5 w-3.5" />
               </button>
@@ -280,7 +280,7 @@ export const Hero: React.FC = () => {
           </div>
         )}
 
-        <div className="mx-auto hidden w-full max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
+        <div className="hidden w-full max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
           <div className="rounded-2xl border border-white/20 bg-black/35 p-3.5 text-white shadow-xl backdrop-blur-xl">
             <div className="flex items-center gap-1.5">
               <div className="flex -space-x-2">
