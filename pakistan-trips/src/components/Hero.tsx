@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
   // Combine package data with its Cloudinary image and default badges.
   const heroPackages = rawPackages.map((pkg: any, idx: number) => ({
     ...pkg,
-    location: pkg.main_attractions?.[0] || "the Ordinary",
+    location: pkg.main_attractions?.[0] || "Northern Pakistan",
     tag: idx % 2 === 0 ? "Best Seller" : "Trending"
   }));
   const attractionCount = new Set(
