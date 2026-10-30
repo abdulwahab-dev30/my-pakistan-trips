@@ -211,7 +211,7 @@ export const Hero: React.FC = () => {
               href="#tours"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-950/40 hover:shadow-emerald-500/30 transition-all duration-300"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-700 to-emerald-500 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-950/40 hover:shadow-emerald-500/30 transition-all duration-300"
             >
               Explore Our Tours
               <ArrowRight className="w-5 h-5" />
@@ -278,7 +278,7 @@ export const Hero: React.FC = () => {
                   </button>
                   <button 
                     onClick={handleNext}
-                    className="p-2 rounded-full bg-slate-800/80 hover:bg-emerald-500 text-slate-300 hover:text-slate-950 transition-colors"
+                    className="p-2 rounded-full bg-slate-800/80 hover:bg-[#FACC15] text-slate-300 hover:text-slate-950 transition-colors"
                   >
                     <ChevronRight className="w-4 h-4" />
                   </button>
@@ -327,7 +327,7 @@ export const Hero: React.FC = () => {
                     <div>
                       <p className="text-[10px] text-slate-400 uppercase tracking-wider">Starting price per person</p>
                       <p className="text-[10px] text-slate-500">Listed price before discounts</p>
-                      <p className="text-xl font-bold text-emerald-400">
+                      <p className="text-xl font-bold text-[#FACC15]">
                         {currentStartingPrice}
                       </p>
                     </div>
