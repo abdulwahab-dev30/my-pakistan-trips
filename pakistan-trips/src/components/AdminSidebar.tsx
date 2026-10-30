@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Globe, Eye, Edit3, X, KeyRound } from "lucide-react";
+import { Globe, Eye, Edit3, X, KeyRound, Image } from "lucide-react";
 
-type AdminSection = "tours" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security";
+type AdminSection = "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
   { id:"tours", label:"Tours", href:"/admin/tours", icon:Globe },
+  { id:"hero", label:"Hero background", href:"/admin/hero-background", meta:"Manage", icon:Image },
   { id:"international", label:"International tours", href:"/admin/international-tours", meta:"CMS", icon:Globe },
   { id:"gallery", label:"Gallery", href:"/admin/gallery", meta:"Manage", icon:Eye },
   { id:"founder", label:"Founder & CEO Note", href:"/admin/founder-profile", meta:"Edit", icon:Edit3 },
