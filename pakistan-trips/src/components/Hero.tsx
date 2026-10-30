@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[860px] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
+    <section className="relative h-[calc(100svh-210px)] min-h-[680px] w-full overflow-hidden bg-[#061510] text-white sm:h-auto sm:min-h-[92svh]">
       {/* Full-bleed scenic artwork */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
@@ -169,7 +169,7 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
-      <div className="relative z-10 mx-auto grid min-h-[860px] max-w-[1440px] grid-cols-1 content-start gap-5 px-3 pb-40 pt-28 min-[380px]:px-4 sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
+      <div className="relative z-10 mx-auto grid h-full min-h-0 max-w-[1440px] grid-cols-1 content-start gap-4 px-3 pb-28 pt-7 min-[380px]:px-4 sm:h-auto sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
           className="relative z-20 max-w-[310px] min-[380px]:max-w-[340px] lg:col-span-5 lg:max-w-none"
           variants={containerVariants}
@@ -278,7 +278,7 @@ export const Hero: React.FC = () => {
               </div>
             </div>
             <div className="mt-1.5 flex items-center justify-center gap-2 text-white sm:mt-2 sm:gap-3">
-              <button onClick={handlePrev} aria-label="Previous featured tour" className="rounded-full border border-white/50 bg-black/25 p-1.5 backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950">
+              <button onClick={handlePrev} aria-label="Previous featured tour" className="hidden sm:inline-flex rounded-full border border-white/50 bg-black/25 p-1.5 backdrop-blur transition hover:bg-emerald-500 hover:text-slate-950">
                 <ChevronLeft className="h-3.5 w-3.5" />
               </button>
               <div className="flex items-center gap-1">
