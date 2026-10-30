@@ -6,7 +6,7 @@ import { Compass, Sparkles, ArrowRight, SlidersHorizontal, ChevronLeft, ChevronR
 import tripData from '../data/trips-data.json';
 import { tours } from '../data/tours.js';
 import { getPublishedTours } from '../lib/tourRepository';
-import { supabaseConfigured } from '../lib/supabase';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 import TourImage from './TourImage';
 
 
@@ -16,9 +16,8 @@ export const Hero: React.FC = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
-  const [heroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=1920&h=1200&q=85']);
-  // Serve a portrait crop on phones so the landscape is composed for a narrow screen.
-  const mobileHeroBackground = 'https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=900&h=1600&q=85';
+  const [heroBackgroundImages, setHeroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=1920&h=1200&q=85']);
+  const [mobileHeroBackground, setMobileHeroBackground] = useState('https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=900&h=1600&q=85');
   const [backgroundIndex, setBackgroundIndex] = useState(0);
 
   // Load the same published tour records used by the homepage tour cards,
@@ -30,6 +29,24 @@ export const Hero: React.FC = () => {
     }).catch(() => {
       if (active) setPublishedTours([]);
     });
+    return () => { active = false; };
+  }, []);
+
+  // Load the active hero artwork from Supabase. Static image URLs remain as a fast fallback.
+  useEffect(() => {
+    let active = true;
+    if (!supabaseConfigured || !supabase) return;
+    supabase.from('hero_content')
+      .select('background_image_url,mobile_background_image_url')
+      .eq('is_active', true)
+      .order('updated_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (!active || error || !data?.background_image_url) return;
+        setHeroBackgroundImages([data.background_image_url]);
+        setMobileHeroBackground(data.mobile_background_image_url || data.background_image_url);
+      });
     return () => { active = false; };
   }, []);
 
@@ -125,7 +142,7 @@ export const Hero: React.FC = () => {
               aria-hidden={index !== backgroundIndex}
               width={900}
               height={1600}
-              fetchPriority={index === 0 ? "high" : "auto"}
+              fetchPriority="high"
               loading="eager"
               decoding="async"
               animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
