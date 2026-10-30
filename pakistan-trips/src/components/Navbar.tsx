@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import newLogo from '../assets/logosss (1).png';
 
 export const Navbar: React.FC = () => {
+  const isHomePage = window.location.pathname === '/';
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
