@@ -55,9 +55,11 @@ export default function AdminSecurity() {
           await supabase.auth.signOut();
           throw new Error("This account is not an authorized My Pakistan Trips admin.");
         }
-        if (active) {
-          setAuthorized(true);
+        if (active) setAuthorized(true);
+        try {
           await loadPasskeys();
+        } catch (listError: any) {
+          if (active) setError(listError?.message || "Passkey management is not available yet. Enable Passkey Authentication in Supabase settings.");
         }
       } catch (err: any) {
         if (active) {
