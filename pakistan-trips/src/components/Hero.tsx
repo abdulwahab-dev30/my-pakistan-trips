@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-[820px] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
+    <section className="relative min-h-[860px] w-full overflow-hidden bg-[#061510] text-white sm:min-h-[92svh]">
       {/* Full-bleed scenic artwork */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
@@ -169,9 +169,9 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
-      <div className="relative z-10 mx-auto grid min-h-[820px] max-w-[1440px] grid-cols-1 content-start gap-5 px-4 pb-44 pt-24 min-[380px]:px-5 sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
+      <div className="relative z-10 mx-auto grid min-h-[860px] max-w-[1440px] grid-cols-1 content-start gap-5 px-3 pb-40 pt-28 min-[380px]:px-4 sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
-          className="relative z-20 lg:col-span-4"
+          className="relative z-20 max-w-[225px] min-[380px]:max-w-[245px] lg:col-span-4 lg:max-w-none"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
@@ -217,7 +217,7 @@ export const Hero: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        <div className="absolute bottom-7 left-4 z-10 grid w-[58%] grid-cols-3 gap-1 border-t border-white/25 pt-3 min-[380px]:left-5 min-[380px]:gap-2 sm:bottom-9 sm:left-10 sm:w-auto sm:max-w-lg sm:gap-7 sm:pt-5 lg:left-12">
+        <div className="absolute bottom-6 left-3 z-10 grid w-[54%] grid-cols-3 gap-1 border-t border-white/25 pt-3 min-[380px]:left-4 min-[380px]:w-[56%] min-[380px]:gap-2 sm:bottom-9 sm:left-10 sm:w-auto sm:max-w-lg sm:gap-7 sm:pt-5 lg:left-12">
           <div>
             <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{heroPackages.length}+</p>
             <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Tour Packages</p>
@@ -235,7 +235,7 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
-            className="absolute bottom-[112px] right-3 z-20 w-[148px] min-[380px]:right-5 min-[380px]:w-[164px] sm:relative sm:bottom-auto sm:right-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
+            className="absolute right-2 top-[47%] z-20 w-[132px] min-[380px]:right-4 min-[380px]:w-[148px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-6 lg:mx-0 lg:mt-16"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -294,15 +294,15 @@ export const Hero: React.FC = () => {
           </div>
         )}
 
-        <div className="hidden w-full max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
-          <div className="rounded-2xl border border-white/20 bg-black/35 p-3.5 text-white shadow-xl backdrop-blur-xl">
-            <div className="flex items-center gap-1.5">
+        <div className="absolute right-2 top-[66%] z-20 w-[142px] min-[380px]:right-4 min-[380px]:w-[158px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:w-full sm:max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
+          <div className="rounded-2xl border border-white/20 bg-black/40 p-2.5 text-white shadow-xl backdrop-blur-xl sm:p-3.5">
+            <div className="flex items-center gap-1 sm:gap-1.5">
               <div className="flex -space-x-2">
                 {[0,1,2].map((n) => <span key={n} className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[#173c30] bg-emerald-200 text-[9px] font-bold text-[#062d24]">{["M","A","T"][n]}</span>)}
               </div>
-              <span className="text-lg font-semibold">Trusted</span>
+              <span className="text-sm font-semibold min-[380px]:text-base sm:text-lg">4.8/5</span>
             </div>
-            <p className="mt-2 text-[10px] leading-relaxed text-white/80">Thoughtfully planned journeys across Pakistan’s most beautiful places.</p>
+            <p className="mt-1.5 text-[9px] leading-snug text-white/85 min-[380px]:text-[10px] sm:mt-2 sm:leading-relaxed">Thoughtfully planned journeys across Pakistan’s most beautiful places.</p>
           </div>
         </div>
       </div>
