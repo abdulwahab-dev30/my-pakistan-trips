@@ -192,7 +192,7 @@ export const Hero: React.FC = () => {
           >
             Pakistan, Beyond <br />
             <span className="bg-gradient-to-r from-emerald-300 via-[#FACC15] to-white bg-clip-text text-transparent">
-              Northern Pakistan
+              the Ordinary
             </span>
           </motion.h1>
 
@@ -264,9 +264,9 @@ export const Hero: React.FC = () => {
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
-                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-200"><span className="text-emerald-400" aria-hidden="true">
-                  <Compass className="w-4 h-4 animate-spin-slow" />
-                </span>
+                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#D1FAE5]"><span className="text-[#FACC15]" aria-hidden="true">
+                  <Compass className="w-4 h-4" />
+                </span> Featured escape</span>
                 
                 {/* Navigation Arrows */}
                 <div className="flex items-center gap-2">
