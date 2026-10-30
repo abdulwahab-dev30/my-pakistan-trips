@@ -5,6 +5,7 @@ import { supabase } from "./supabase";
  * This is intentionally separate from user-editable auth metadata.
  */
 export async function isCmsAdmin(userId) {
+  if (!supabase) throw new Error("Supabase is not configured.");
   if (!userId) return false;
 
   const { data, error } = await supabase
