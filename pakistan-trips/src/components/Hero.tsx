@@ -130,9 +130,9 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[100svh] sm:min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-8 pb-10 sm:pt-24 sm:pb-10">
+    <div className="relative min-h-[88svh] sm:min-h-[92svh] flex items-center justify-center overflow-hidden bg-[#061510] text-white px-3 sm:px-6 py-5 sm:py-8">
       {/* Background Parallax */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-3 sm:inset-6 lg:inset-8 z-0 overflow-hidden rounded-[1.75rem] sm:rounded-[2.25rem] border border-white/10 shadow-2xl">
         {heroBackgroundImages.map((image, index) => (
           <React.Fragment key={image}>
             {/* Dedicated portrait crop prevents the desktop landscape from being awkwardly cropped on phones. */}
@@ -170,11 +170,11 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 py-0 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-10 lg:px-14 py-10 sm:py-16 w-full grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-8 items-center">
         
         {/* Left Side: Hero Text */}
         <motion.div 
-          className="lg:col-span-7 space-y-6 sm:space-y-8"
+          className="lg:col-span-6 space-y-5 sm:space-y-7"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
@@ -188,10 +188,10 @@ export const Hero: React.FC = () => {
 
           <motion.h1 
             variants={itemVariants}
-            className="text-[2.65rem] sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-lg"
+            className="text-[2.55rem] sm:text-6xl lg:text-[4.15rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-lg"
           >
             Pakistan, Beyond <br />
-            <span className="bg-gradient-to-r from-emerald-300 via-[#FACC15] to-white bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
               the Ordinary
             </span>
           </motion.h1>
@@ -211,7 +211,7 @@ export const Hero: React.FC = () => {
               href="#tours"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-700 to-emerald-500 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-950/40 hover:shadow-emerald-500/30 transition-all duration-300"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-900/30 hover:shadow-emerald-500/30 transition-all duration-300"
             >
               Explore Our Tours
               <ArrowRight className="w-5 h-5" />
@@ -254,17 +254,17 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour package ${currentIndex + 1} of ${heroPackages.length}`}
-            className="lg:col-span-5 relative lg:pl-3"
+            className="lg:col-span-5 relative lg:pl-1 lg:pr-2"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-500/35 via-[#FACC15]/15 to-emerald-300/20 opacity-80 blur-2xl -z-10" />
+            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-400/35 via-teal-500/15 to-cyan-400/25 opacity-80 blur-2xl -z-10" />
 
-            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[2rem] bg-[#071510]/75 border border-emerald-300/20 backdrop-blur-2xl shadow-[0_30px_100px_-30px_rgba(0,0,0,0.9)] overflow-hidden">
+            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[2rem] bg-[#071510]/75 border border-emerald-100/20 backdrop-blur-2xl shadow-[0_30px_100px_-30px_rgba(0,0,0,0.9)] overflow-hidden">
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
-                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#D1FAE5]"><span className="text-[#FACC15]" aria-hidden="true">
+                <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.22em] text-emerald-200"><span className="text-emerald-400" aria-hidden="true">
                   <Compass className="w-4 h-4" />
                 </span> Featured escape</span>
                 
@@ -272,7 +272,7 @@ export const Hero: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={handlePrev}
-                    className="p-2 rounded-full bg-slate-800/80 hover:bg-[#FACC15] text-slate-300 hover:text-slate-950 transition-colors"
+                    className="p-2 rounded-full bg-slate-800/80 hover:bg-emerald-500 text-slate-300 hover:text-slate-950 transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -294,7 +294,7 @@ export const Hero: React.FC = () => {
                   exit={isMobile ? undefined : { opacity: 0, x: -20 }}
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
-                  <div className="relative h-[19rem] xs:h-[20rem] sm:h-[21rem] rounded-[1.5rem] overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
+                  <div className="relative h-[16rem] xs:h-[18rem] sm:h-[19rem] rounded-[1.5rem] overflow-hidden mb-5 group ring-1 ring-white/15 bg-slate-800">
                     <TourImage
                       src={currentTour?.images?.[0]?.src}
                       tag={currentTour?.imageTag || currentTour?.images?.[0]?.tag}
@@ -304,7 +304,7 @@ export const Hero: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
                     
-                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-[#FACC15] text-[#062D24] shadow-md">
+                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
                       {currentPkg.tag}
                     </span>
 
@@ -327,7 +327,7 @@ export const Hero: React.FC = () => {
                     <div>
                       <p className="text-[10px] text-slate-400 uppercase tracking-wider">Starting price per person</p>
                       <p className="text-[10px] text-slate-500">Listed price before discounts</p>
-                      <p className="text-xl font-bold text-[#FACC15]">
+                      <p className="text-xl font-bold text-emerald-400">
                         {currentStartingPrice}
                       </p>
                     </div>
@@ -335,7 +335,7 @@ export const Hero: React.FC = () => {
                       href={currentTour ? `/tours/${currentTour.slug}` : "/tours"}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-colors shadow-md shadow-emerald-950/30"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-colors shadow-md shadow-emerald-950/30"
                     >
                       View Trip
                     </motion.a>
@@ -352,7 +352,7 @@ export const Hero: React.FC = () => {
                       onClick={() => setCurrentIndex(idx)}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         idx === currentIndex 
-                          ? 'w-6 bg-[#FACC15]' 
+                          ? 'w-6 bg-emerald-400' 
                           : 'w-1.5 bg-slate-700 hover:bg-slate-500'
                       }`}
                     />
