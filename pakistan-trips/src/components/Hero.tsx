@@ -166,7 +166,7 @@ export const Hero: React.FC = () => {
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.18),transparent_42%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_18%_45%,rgba(16,185,129,0.22),transparent_42%)]" />
       </div>
 
       {/* Main Container */}
@@ -180,7 +180,7 @@ export const Hero: React.FC = () => {
           animate="visible"
         >
           <motion.div variants={itemVariants} className="inline-flex">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-emerald-200 text-xs sm:text-sm font-semibold tracking-wide shadow-lg shadow-black/10">
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-[#D1FAE5] text-xs sm:text-sm font-semibold tracking-wide shadow-lg shadow-black/10">
               <Sparkles className="w-4 h-4 animate-pulse" />
               A MORE PERSONAL WAY TO EXPLORE PAKISTAN
             </span>
@@ -191,7 +191,7 @@ export const Hero: React.FC = () => {
             className="text-[2.65rem] sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-lg"
           >
             Pakistan, Beyond <br />
-            <span className="bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-300 via-[#FACC15] to-white bg-clip-text text-transparent">
               Northern Pakistan
             </span>
           </motion.h1>
@@ -211,7 +211,7 @@ export const Hero: React.FC = () => {
               href="#tours"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-900/30 hover:shadow-emerald-500/30 transition-all duration-300"
+              className="px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-emerald-300 to-teal-400 text-slate-950 font-bold flex items-center gap-3 shadow-xl shadow-emerald-950/40 hover:shadow-emerald-500/30 transition-all duration-300"
             >
               Explore Our Tours
               <ArrowRight className="w-5 h-5" />
@@ -224,7 +224,7 @@ export const Hero: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="px-6 sm:px-7 py-3.5 sm:py-4 rounded-full bg-white/[0.07] border border-white/25 hover:bg-white/15 hover:border-white/40 text-white font-semibold flex items-center gap-3 backdrop-blur-xl transition-all duration-300"
             >
-              <SlidersHorizontal className="w-4 h-4 text-emerald-400" />
+              <SlidersHorizontal className="w-4 h-4 text-emerald-300" />
               Plan Your Journey
             </motion.a>
           </motion.div>
@@ -258,9 +258,9 @@ export const Hero: React.FC = () => {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-400/35 via-teal-500/15 to-cyan-400/25 opacity-80 blur-2xl -z-10" />
+            <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-emerald-500/35 via-[#FACC15]/15 to-emerald-300/20 opacity-80 blur-2xl -z-10" />
 
-            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[2rem] bg-[#071510]/75 border border-emerald-100/20 backdrop-blur-2xl shadow-[0_30px_100px_-30px_rgba(0,0,0,0.9)] overflow-hidden">
+            <div className="relative p-4 sm:p-6 lg:p-7 rounded-[2rem] bg-[#071510]/75 border border-emerald-300/20 backdrop-blur-2xl shadow-[0_30px_100px_-30px_rgba(0,0,0,0.9)] overflow-hidden">
               
               {/* Header */}
               <div className="flex items-center justify-between mb-4 gap-3">
@@ -272,7 +272,7 @@ export const Hero: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <button 
                     onClick={handlePrev}
-                    className="p-2 rounded-full bg-slate-800/80 hover:bg-emerald-500 text-slate-300 hover:text-slate-950 transition-colors"
+                    className="p-2 rounded-full bg-slate-800/80 hover:bg-[#FACC15] text-slate-300 hover:text-slate-950 transition-colors"
                   >
                     <ChevronLeft className="w-4 h-4" />
                   </button>
@@ -304,7 +304,7 @@ export const Hero: React.FC = () => {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/10 to-transparent" />
                     
-                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-slate-950 shadow-md">
+                    <span className="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-[#FACC15] text-[#062D24] shadow-md">
                       {currentPkg.tag}
                     </span>
 
@@ -335,7 +335,7 @@ export const Hero: React.FC = () => {
                       href={currentTour ? `/tours/${currentTour.slug}` : "/tours"}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-colors shadow-md shadow-emerald-500/20"
+                      className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm transition-colors shadow-md shadow-emerald-950/30"
                     >
                       View Trip
                     </motion.a>
@@ -352,7 +352,7 @@ export const Hero: React.FC = () => {
                       onClick={() => setCurrentIndex(idx)}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         idx === currentIndex 
-                          ? 'w-6 bg-emerald-400' 
+                          ? 'w-6 bg-[#FACC15]' 
                           : 'w-1.5 bg-slate-700 hover:bg-slate-500'
                       }`}
                     />
