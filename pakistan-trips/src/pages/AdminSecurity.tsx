@@ -31,7 +31,7 @@ export default function AdminSecurity() {
       return;
     }
 
-    async function verifyAdmin(nextSession) {
+    async function verifyAdmin(nextSession: any) {
       if (!nextSession?.user?.id) {
         if (active) {
           setSession(null);
@@ -85,19 +85,21 @@ export default function AdminSecurity() {
     setError("");
     setNotice("");
     try {
+      if (!supabase) throw new Error("Supabase is not configured.");
       const { data, error: registerError } = await supabase.auth.registerPasskey();
       if (registerError) throw registerError;
       await loadPasskeys();
       setNotice("Passkey registered successfully. You can now use it on the admin login page.");
-    } catch (err) {
+    } catch (err: any) {
       setError(err?.message || "Passkey registration failed. Check that this browser and device support passkeys.");
     } finally {
       setBusy(false);
     }
   }
 
-  async function removePasskey(passkey) {
+  async function removePasskey(passkey: any) {
     const label = passkey.friendly_name || "this passkey";
+    if (!supabase) return;
     if (!window.confirm(`Remove ${label}? This device will no longer be able to sign in with this passkey.`)) return;
     setBusy(true);
     setError("");
@@ -114,9 +116,9 @@ export default function AdminSecurity() {
     }
   }
 
-  async function renamePasskey(passkey) {
+  async function renamePasskey(passkey: any) {
     const nextName = window.prompt("Enter a name for this device:", passkey.friendly_name || "My device");
-    if (!nextName || !nextName.trim()) return;
+    if (!nextName || !nextName.trim() || !supabase) return;
     setBusy(true);
     setError("");
     setNotice("");
