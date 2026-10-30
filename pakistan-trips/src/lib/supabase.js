@@ -4,4 +4,11 @@ const url = import.meta.env.VITE_SUPABASE_URL;
 const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const supabaseConfigured = Boolean(url && key);
-export const supabase = supabaseConfigured ? createClient(url, key) : null;
+export const supabase = supabaseConfigured
+  ? createClient(url, key, {
+      auth: {
+        // Supabase Passkey support is currently experimental and must be opted into.
+        experimental: { passkey: true },
+      },
+    })
+  : null;
