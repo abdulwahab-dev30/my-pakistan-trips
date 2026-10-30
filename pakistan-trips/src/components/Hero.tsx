@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative h-[calc(100svh-210px)] min-h-[680px] w-full overflow-hidden bg-[#061510] text-white sm:h-auto sm:min-h-[92svh]">
+    <section className="relative h-[calc(100svh-118px)] min-h-[560px] w-full overflow-hidden bg-[#061510] text-white sm:h-auto sm:min-h-[92svh]">
       {/* Full-bleed scenic artwork */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
@@ -169,9 +169,9 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Reference composition: left headline, small centered tour tile, right-side trust badge */}
-      <div className="relative z-10 mx-auto grid h-full min-h-0 max-w-[1440px] grid-cols-1 content-start gap-4 px-3 pb-28 pt-7 min-[380px]:px-4 sm:h-auto sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
+      <div className="relative z-10 mx-auto grid h-full min-h-0 max-w-[1440px] grid-cols-1 content-start gap-3 px-4 pb-24 pt-24 min-[380px]:px-5 sm:h-auto sm:min-h-[92svh] sm:content-center sm:items-center sm:gap-7 sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-5 lg:px-12 lg:py-20">
         <motion.div
-          className="relative z-20 max-w-[310px] min-[380px]:max-w-[340px] lg:col-span-5 lg:max-w-none"
+          className="relative z-20 max-w-[340px] min-[380px]:max-w-[360px] lg:col-span-5 lg:max-w-none"
           variants={containerVariants}
           initial={isMobile ? false : "hidden"}
           animate="visible"
@@ -184,7 +184,7 @@ export const Hero: React.FC = () => {
           </motion.div>
           <motion.h1
             variants={itemVariants}
-            className="max-w-[310px] text-[2.35rem] font-extrabold leading-[1.02] tracking-[-0.05em] drop-shadow-xl min-[380px]:text-[2.65rem] sm:max-w-xl sm:text-6xl lg:text-[4.15rem] lg:leading-[1.02]"
+            className="max-w-[340px] text-[2.25rem] font-extrabold leading-[1.02] tracking-[-0.05em] drop-shadow-xl min-[380px]:text-[2.5rem] sm:max-w-xl sm:text-6xl lg:text-[4.15rem] lg:leading-[1.02]"
           >
             <span className="block whitespace-nowrap">Travel Beyond</span>
             <span className="block whitespace-nowrap bg-gradient-to-r from-emerald-300 via-teal-200 to-white bg-clip-text text-transparent">
@@ -216,7 +216,7 @@ export const Hero: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        <div className="absolute bottom-6 left-3 z-10 grid w-[54%] grid-cols-3 gap-1 border-t border-white/25 pt-3 min-[380px]:left-4 min-[380px]:w-[56%] min-[380px]:gap-2 sm:bottom-9 sm:left-10 sm:w-auto sm:max-w-lg sm:gap-7 sm:pt-5 lg:left-12">
+        <div className="absolute bottom-5 left-4 z-10 grid w-[calc(100%-2rem)] grid-cols-3 gap-2 border-t border-white/30 pt-3 min-[380px]:left-5 min-[380px]:w-[calc(100%-2.5rem)] sm:bottom-9 sm:left-10 sm:w-auto sm:max-w-lg sm:gap-7 sm:pt-5 lg:left-12">
           <div>
             <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{heroPackages.length}+</p>
             <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Tour Packages</p>
@@ -234,7 +234,7 @@ export const Hero: React.FC = () => {
           <div
             role="region"
             aria-label={`Featured tour ${currentIndex + 1} of ${heroPackages.length}`}
-            className="absolute right-2 top-[47%] z-20 w-[132px] min-[380px]:right-4 min-[380px]:w-[148px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-7 lg:mx-0 lg:mt-16"
+            className="hidden sm:block absolute right-2 top-[47%] z-20 w-[132px] min-[380px]:right-4 min-[380px]:w-[148px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:mt-0 sm:w-[218px] lg:col-span-3 lg:col-start-7 lg:mx-0 lg:mt-16"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -293,7 +293,7 @@ export const Hero: React.FC = () => {
           </div>
         )}
 
-        <div className="absolute right-2 top-[66%] z-20 w-[142px] min-[380px]:right-4 min-[380px]:w-[158px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:w-full sm:max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
+        <div className="hidden sm:block absolute right-2 top-[66%] z-20 w-[142px] min-[380px]:right-4 min-[380px]:w-[158px] sm:relative sm:right-auto sm:top-auto sm:mx-auto sm:w-full sm:max-w-[205px] lg:col-span-2 lg:col-start-11 lg:mb-1 lg:block">
           <div className="rounded-2xl border border-white/20 bg-black/40 p-2.5 text-white shadow-xl backdrop-blur-xl sm:p-3.5">
             <div className="flex items-center gap-1 sm:gap-1.5">
               <div className="flex -space-x-2">
