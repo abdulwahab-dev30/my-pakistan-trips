@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck } from "lucide-react";
 
-type AdminSection = "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security";
+type AdminSection = "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
