@@ -7,16 +7,17 @@ import { supabase, supabaseConfigured } from "../lib/supabase";
 import { isCmsAdmin } from "../lib/adminAuth";
 
 export default function AdminSecurity() {
-  const [session, setSession] = useState(undefined);
+  const [session, setSession] = useState<any>(undefined);
   const [checking, setChecking] = useState(true);
   const [authorized, setAuthorized] = useState(false);
-  const [passkeys, setPasskeys] = useState([]);
+  const [passkeys, setPasskeys] = useState<any[]>([]);
   const [busy, setBusy] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
   const loadPasskeys = useCallback(async () => {
+    if (!supabase) throw new Error("Supabase is not configured.");
     const { data, error: listError } = await supabase.auth.passkey.list();
     if (listError) throw listError;
     setPasskeys(Array.isArray(data) ? data : []);
@@ -24,7 +25,7 @@ export default function AdminSecurity() {
 
   useEffect(() => {
     let active = true;
-    if (!supabaseConfigured) {
+    if (!supabaseConfigured || !supabase) {
       setSession(null);
       setChecking(false);
       return;
@@ -58,7 +59,7 @@ export default function AdminSecurity() {
           setAuthorized(true);
           await loadPasskeys();
         }
-      } catch (err) {
+      } catch (err: any) {
         if (active) {
           setAuthorized(false);
           setError(err?.message || "Could not verify admin access.");
