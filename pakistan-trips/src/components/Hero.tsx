@@ -17,6 +17,8 @@ export const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [publishedTours, setPublishedTours] = useState<any[]>([]);
   const [heroBackgroundImages] = useState<string[]>(['https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=1920&h=1200&q=85']);
+  // Serve a portrait crop on phones so the landscape is composed for a narrow screen.
+  const mobileHeroBackground = 'https://images.unsplash.com/photo-1611821824288-95e977eab064?auto=format&fit=crop&crop=entropy&w=900&h=1600&q=85';
   const [backgroundIndex, setBackgroundIndex] = useState(0);
 
   // Load the same published tour records used by the homepage tour cards,
@@ -111,24 +113,39 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-[auto] sm:min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-8 pb-8 sm:pt-24 sm:pb-10">
+    <div className="relative min-h-[100svh] sm:min-h-[92svh] flex items-center justify-center overflow-hidden bg-slate-950 text-white pt-8 pb-10 sm:pt-24 sm:pb-10">
       {/* Background Parallax */}
       <div className="absolute inset-0 z-0">
         {heroBackgroundImages.map((image, index) => (
-          <motion.img
-            key={image}
-            src={image}
-            alt=""
-            aria-hidden={index !== backgroundIndex}
-            width={1600}
-            height={1000}
-            fetchPriority={index === 0 ? "high" : "auto"}
-            loading="eager"
-            decoding="async"
-            animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover object-[center_42%] sm:object-center scale-100 sm:scale-105 will-change-[opacity]"
-          />
+          <React.Fragment key={image}>
+            {/* Dedicated portrait crop prevents the desktop landscape from being awkwardly cropped on phones. */}
+            <motion.img
+              src={mobileHeroBackground}
+              alt=""
+              aria-hidden={index !== backgroundIndex}
+              width={900}
+              height={1600}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              loading="eager"
+              decoding="async"
+              animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0 block sm:hidden w-full h-full object-cover object-center scale-100 will-change-[opacity]"
+            />
+            <motion.img
+              src={image}
+              alt=""
+              aria-hidden={index !== backgroundIndex}
+              width={1920}
+              height={1200}
+              fetchPriority="auto"
+              loading="eager"
+              decoding="async"
+              animate={{ opacity: index === backgroundIndex ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: "easeInOut" }}
+              className="absolute inset-0 hidden sm:block w-full h-full object-cover object-center scale-100 sm:scale-105 will-change-[opacity]"
+            />
+          </React.Fragment>
         ))}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/35 via-[#061510]/55 to-slate-950/95 sm:bg-gradient-to-r sm:from-[#061510]/90 sm:via-slate-950/65 sm:to-slate-950/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/15 sm:from-slate-950/90 sm:to-slate-950/35" />
