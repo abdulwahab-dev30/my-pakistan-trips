@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3, Sparkles } from "lucide-react";
+import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3, Sparkles, Users } from "lucide-react";
 
-type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password" | "growth" | "activity" | "homepage";
+type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password" | "growth" | "activity" | "homepage" | "team";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
@@ -10,6 +10,7 @@ const links: { id: AdminSection; label: string; href: string; meta?: string; ico
   { id:"analytics", label:"Website Analytics", href:"/admin/analytics", meta:"GA4", icon:BarChart3 },
   { id:"growth", label:"Growth & SEO Center", href:"/admin/growth", meta:"Tools", icon:Sparkles },
   { id:"activity", label:"Activity Logs", href:"/admin/activity", meta:"Audit", icon:ShieldCheck },
+  { id:"team", label:"Team Management", href:"/admin/team", meta:"Owner", icon:Users },
   { id:"homepage", label:"Homepage Builder", href:"/admin/homepage", meta:"Layout", icon:LayoutDashboard },
   { id:"inbox", label:"WhatsApp Inbox", href:"/admin/whatsapp-inbox", meta:"Chat", icon:MessageCircle },
   { id:"leads", label:"WhatsApp Leads", href:"/admin/whatsapp-leads", meta:"Clicks", icon:MessageCircle },
