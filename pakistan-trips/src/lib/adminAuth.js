@@ -15,5 +15,16 @@ export async function isCmsAdmin(userId) {
     .maybeSingle();
 
   if (error) throw error;
-  return Boolean(data?.user_id);
+  if (data?.user_id) return true;
+
+  // Active team members may sign in; their table access remains constrained by RLS permissions.
+  const { data: member, error: memberError } = await supabase
+    .from("team_members")
+    .select("user_id")
+    .eq("user_id", userId)
+    .eq("role", "team_member")
+    .eq("status", "active")
+    .maybeSingle();
+  if (memberError) throw memberError;
+  return Boolean(member?.user_id);
 }

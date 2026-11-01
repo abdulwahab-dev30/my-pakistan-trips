@@ -1,4 +1,5 @@
 import type { VercelRequest,VercelResponse } from "@vercel/node";
+import { randomBytes } from "node:crypto";
 import { verifyCmsAdmin } from "./_lib/search-console.js";
 const root=()=> (process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"").replace(/\/$/,"");
 const service=()=>process.env.SUPABASE_SERVICE_ROLE_KEY||"";
@@ -20,12 +21,13 @@ export default async function handler(req:VercelRequest,res:VercelResponse){
   if(req.method==="POST"){
    const email=String(body.email||"").trim().toLowerCase(),name=String(body.full_name||"").trim();
    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!name)return res.status(400).json({error:"Enter a valid email and full name."});
-   const invite=await fetch(url+"/auth/v1/invite",{method:"POST",headers,body:JSON.stringify({email,data:{full_name:name}})});
-   const user:any=await invite.json();if(!invite.ok) return res.status(invite.status).json({error:user.msg||user.message||user.error_description||user.message||"Invitation failed. The email may already have an account."});
+   const temporaryPassword="MPT-"+randomBytes(18).toString("base64url")+"!9a";
+   const created=await fetch(url+"/auth/v1/admin/users",{method:"POST",headers,body:JSON.stringify({email,password:temporaryPassword,email_confirm:true,user_metadata:{full_name:name}})});
+   const user:any=await created.json();if(!created.ok)return res.status(created.status).json({error:user.msg||user.message||user.error_description||"Could not create account. This email may already be registered."});
    const permissions=cleanPermissions(body.permissions);
-   const saved=await fetch(url+"/rest/v1/team_members",{method:"POST",headers:{...headers,Prefer:"return=representation"},body:JSON.stringify({user_id:user.id,email,full_name:name,role:"team_member",status:"invited",permissions,invited_by:admin.userId})});
-   const result:any=await saved.json();if(!saved.ok)return res.status(saved.status).json({error:result.message||"User invited, but the team record could not be saved. Contact support before retrying."});
-   return res.status(201).json({member:result[0]});
+   const saved=await fetch(url+"/rest/v1/team_members",{method:"POST",headers:{...headers,Prefer:"return=representation"},body:JSON.stringify({user_id:user.id,email,full_name:name,role:"team_member",status:"active",permissions,invited_by:admin.userId})});
+   const result:any=await saved.json();if(!saved.ok){await fetch(url+"/auth/v1/admin/users/"+encodeURIComponent(user.id),{method:"DELETE",headers});return res.status(saved.status).json({error:result.message||"Account creation was rolled back because the team record could not be saved."});}
+   return res.status(201).json({member:result[0],temporary_password:temporaryPassword});
   }
   const userId=String(body.user_id||"");if(!userId||userId===admin.userId)return res.status(400).json({error:"Invalid team member."});
   const existing=await fetch(url+"/rest/v1/team_members?select=user_id,role&user_id=eq."+encodeURIComponent(userId),{headers});
