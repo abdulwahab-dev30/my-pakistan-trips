@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle } from "lucide-react";
+import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3 } from "lucide-react";
 
-type AdminSection = "dashboard" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password";
+type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
   { id:"dashboard", label:"Dashboard", href:"/admin/dashboard", icon:LayoutDashboard },
+  { id:"analytics", label:"Website Analytics", href:"/admin/analytics", meta:"GA4", icon:BarChart3 },
   { id:"inbox", label:"WhatsApp Inbox", href:"/admin/whatsapp-inbox", meta:"Chat", icon:MessageCircle },
   { id:"leads", label:"WhatsApp Leads", href:"/admin/whatsapp-leads", meta:"Clicks", icon:MessageCircle },
   { id:"tours", label:"Tours", href:"/admin/tours", icon:Globe },
