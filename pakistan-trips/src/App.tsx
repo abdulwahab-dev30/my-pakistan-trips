@@ -1,5 +1,5 @@
 import React,{lazy,Suspense,useEffect,useState}from"react";
-import{BrowserRouter,Routes,Route,useParams,useLocation,Navigate}from"react-router-dom";
+import{BrowserRouter,Routes,Route,useParams,useLocation,useNavigate,Navigate}from"react-router-dom";
 import HomePage from "./HomePage";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 const ToursListing=lazy(()=>import("./pages/ToursListing"));
