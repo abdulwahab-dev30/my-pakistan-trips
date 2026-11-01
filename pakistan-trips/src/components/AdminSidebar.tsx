@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3 } from "lucide-react";
+import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3, Sparkles } from "lucide-react";
 
-type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password";
+type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password" | "growth";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
   { id:"dashboard", label:"Dashboard", href:"/admin/dashboard", icon:LayoutDashboard },
   { id:"analytics", label:"Website Analytics", href:"/admin/analytics", meta:"GA4", icon:BarChart3 },
+  { id:"growth", label:"Growth & SEO Center", href:"/admin/growth", meta:"Tools", icon:Sparkles },
   { id:"inbox", label:"WhatsApp Inbox", href:"/admin/whatsapp-inbox", meta:"Chat", icon:MessageCircle },
   { id:"leads", label:"WhatsApp Leads", href:"/admin/whatsapp-leads", meta:"Clicks", icon:MessageCircle },
   { id:"tours", label:"Tours", href:"/admin/tours", icon:Globe },
@@ -33,7 +34,7 @@ export default function AdminSidebar({ active, open, onClose }: Props) {
       <nav aria-label="Admin navigation" className="space-y-1">
         {links.map(item => { const Icon=item.icon; const selected=item.id===active; return <Link key={item.id} to={item.href} onClick={onClose} aria-current={selected?"page":undefined} className={"flex items-center gap-3 rounded-xl px-3 py-3 text-sm transition " + (selected ? "bg-emerald-400/10 font-semibold text-emerald-300 ring-1 ring-inset ring-emerald-400/20" : "font-medium text-slate-300 hover:bg-slate-800 hover:text-white")}><Icon size={17}/><span>{item.label}</span>{(selected||item.meta)&&<span className={"ml-auto text-xs "+(selected?"":"text-slate-500")}>{selected?"Active":item.meta}</span>}</Link>; })}
       </nav>
-      <p className="mt-5 border-t border-slate-800 px-3 pt-4 text-xs leading-5 text-slate-500">More admin features can be added here later.</p>
+      <p className="mt-5 border-t border-slate-800 px-3 pt-4 text-xs leading-5 text-slate-500">Growth tools, SEO checks and campaign utilities.</p>
     </aside>
   </>;
 }
