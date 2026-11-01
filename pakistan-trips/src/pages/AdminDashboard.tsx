@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 import {
   Activity, BarChart3, CalendarDays, CheckCircle2, CircleAlert, ExternalLink,
   FileText, Image as ImageIcon, LayoutDashboard, Menu, MessageSquare,
-  RefreshCw, Star, TrendingUp, Wallet, Globe, Search, Unplug, MousePointerClick,
+  RefreshCw, TrendingUp, Wallet, Globe, Search, Unplug, MousePointerClick,
   Eye, Smartphone, ChevronDown, SearchCheck
 } from "lucide-react";
 import AdminSidebar from "../components/AdminSidebar";
@@ -14,8 +14,7 @@ import { isCmsAdmin } from "../lib/adminAuth";
 type CountResult = { count: number | null; error: string | null };
 type Stats = {
   tours: number | null; publishedTours: number | null; draftTours: number | null;
-  internationalTours: number | null; faqs: number | null; reviews: number | null;
-  galleryImages: number | null; tourImages: number | null;
+  internationalTours: number | null; galleryImages: number | null;
 };
 type RecentTour = { id: string; title: string; slug: string | null; published: boolean; updated_at: string | null };
 type SearchMetric = { clicks: number; impressions: number; ctr: number; position: number };
@@ -33,7 +32,7 @@ type SearchConsoleData = {
 
 const emptyStats: Stats = {
   tours: null, publishedTours: null, draftTours: null, internationalTours: null,
-  faqs: null, reviews: null, galleryImages: null, tourImages: null,
+  galleryImages: null,
 };
 
 async function countRows(table: string, filters?: (query: any) => any): Promise<CountResult> {
@@ -288,22 +287,18 @@ export default function AdminDashboard() {
     if (!supabase) return;
     setLoading(true);
     setError("");
-    const [tours, published, drafts, international, faqs, reviews, gallery, tourImages] = await Promise.all([
+    const [tours, published, drafts, international, gallery] = await Promise.all([
       countRows("tours"),
       countRows("tours", q => q.eq("published", true)),
       countRows("tours", q => q.eq("published", false)),
       countRows("international_tours"),
-      countRows("faqs"),
-      countRows("testimonials"),
       countCloudinaryGalleryImages(),
-      countRows("tour_images"),
     ]);
     setStats({
       tours: tours.count, publishedTours: published.count, draftTours: drafts.count,
-      internationalTours: international.count, faqs: faqs.count, reviews: reviews.count,
-      galleryImages: gallery.count, tourImages: tourImages.count,
+      internationalTours: international.count, galleryImages: gallery.count,
     });
-    const failures = [tours, published, drafts, international, faqs, reviews, gallery, tourImages].filter(item => item.error);
+    const failures = [tours, published, drafts, international, gallery].filter(item => item.error);
     if (failures.length) setError("Some statistics could not be loaded. Check the admin read policies for the affected tables.");
     const { data, error: recentError } = await supabase.from("tours")
       .select("id,title,slug,published,updated_at").order("updated_at", { ascending: false }).limit(5);
@@ -377,10 +372,7 @@ export default function AdminDashboard() {
             <StatCard label="Published tours" value={stats.publishedTours} note="Visible tour records" icon={CheckCircle2}/>
             <StatCard label="Draft tours" value={stats.draftTours} note="Unpublished tour records" icon={FileText} accent="amber"/>
             <StatCard label="International tours" value={stats.internationalTours} note="International package records" icon={TrendingUp} accent="sky"/>
-            <StatCard label="FAQs" value={stats.faqs} note="FAQ records in CMS" icon={MessageSquare}/>
-            <StatCard label="Customer reviews" value={stats.reviews} note="Testimonial records" icon={Star} accent="amber"/>
             <StatCard label="Gallery images" value={stats.galleryImages} note="Cloudinary gallery images" icon={ImageIcon} accent="rose"/>
-            <StatCard label="Tour images" value={stats.tourImages} note="Images linked to tour records" icon={ImageIcon} accent="sky"/>
           </div>
 
           <SearchConsolePanel accessToken={session.access_token}/>
