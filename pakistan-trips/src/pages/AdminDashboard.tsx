@@ -47,6 +47,21 @@ async function countRows(table: string, filters?: (query: any) => any): Promise<
   }
 }
 
+async function countCloudinaryGalleryImages(): Promise<CountResult> {
+  try {
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
+    const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json?t=${Date.now()}`);
+    if (!response.ok) throw new Error("Cloudinary gallery list is not available.");
+    const result = await response.json();
+    const count = Array.isArray(result.resources)
+      ? result.resources.filter((image: any) => image.public_id && image.version && image.format).length
+      : 0;
+    return { count, error: null };
+  } catch (error: any) {
+    return { count: null, error: error?.message || "Unable to load Cloudinary gallery count." };
+  }
+}
+
 function StatCard({ label, value, note, icon: Icon, accent = "emerald" }: {
   label: string; value: number | null; note: string; icon: React.ElementType; accent?: string;
 }) {
@@ -280,7 +295,7 @@ export default function AdminDashboard() {
       countRows("international_tours"),
       countRows("faqs"),
       countRows("testimonials"),
-      countRows("gallery_images"),
+      countCloudinaryGalleryImages(),
       countRows("tour_images"),
     ]);
     setStats({
@@ -364,7 +379,7 @@ export default function AdminDashboard() {
             <StatCard label="International tours" value={stats.internationalTours} note="International package records" icon={TrendingUp} accent="sky"/>
             <StatCard label="FAQs" value={stats.faqs} note="FAQ records in CMS" icon={MessageSquare}/>
             <StatCard label="Customer reviews" value={stats.reviews} note="Testimonial records" icon={Star} accent="amber"/>
-            <StatCard label="Gallery images" value={stats.galleryImages} note="Supabase gallery records" icon={ImageIcon} accent="rose"/>
+            <StatCard label="Gallery images" value={stats.galleryImages} note="Cloudinary gallery images" icon={ImageIcon} accent="rose"/>
             <StatCard label="Tour images" value={stats.tourImages} note="Images linked to tour records" icon={ImageIcon} accent="sky"/>
           </div>
 
