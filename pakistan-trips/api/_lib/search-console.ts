@@ -11,14 +11,20 @@ export function getCookie(req: VercelRequest, name: string): string {
   return match ? decodeURIComponent(match.slice(name.length + 1)) : "";
 }
 
+function appendCookie(res: VercelResponse, cookie: string) {
+  const current = res.getHeader("Set-Cookie");
+  const values = Array.isArray(current) ? current.map(String) : current ? [String(current)] : [];
+  res.setHeader("Set-Cookie", [...values, cookie]);
+}
+
 export function setCookie(res: VercelResponse, name: string, value: string, maxAge: number) {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  res.setHeader("Set-Cookie", name + "=" + encodeURIComponent(value) + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=" + maxAge + secure);
+  appendCookie(res, name + "=" + encodeURIComponent(value) + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=" + maxAge + secure);
 }
 
 export function clearCookie(res: VercelResponse, name: string) {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  res.setHeader("Set-Cookie", name + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + secure);
+  appendCookie(res, name + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + secure);
 }
 
 export function getRedirectUri() {
