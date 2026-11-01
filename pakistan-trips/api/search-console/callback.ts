@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { clearCookie, getCookie, getRedirectUri, REFRESH_COOKIE, STATE_COOKIE, setCookie } from "./_lib/search-console";
+import { clearCookie, getCookie, getRedirectUri, REFRESH_COOKIE, STATE_COOKIE, setCookie } from "../_lib/search-console";
 
 function back(res: VercelResponse, status: string) {
   return res.redirect(302, "/admin/dashboard?searchConsole=" + encodeURIComponent(status));
