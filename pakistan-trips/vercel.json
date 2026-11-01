@@ -1,8 +1,24 @@
 {
   "rewrites": [
-    { "source": "/admin/:path*", "destination": "/index.html" },
-    { "source": "/tours/:path*", "destination": "/index.html" },
-    { "source": "/international-tours/:path*", "destination": "/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/api/admin-login",
+      "destination": "/api/admin-activity?action=login"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tours/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/international-tours/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

@@ -1,10 +1,12 @@
 import type { ApiRequest, ApiResponse } from "./_lib/search-console.js";
 import { verifyCmsAdmin } from "./_lib/search-console.js";
+import loginAlertHandler from "./_lib/admin-login.js";
 
 const base = () => (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "").replace(/\/$/, "");
 const key = () => process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "";
 function token(req: ApiRequest) { const h=req.headers.authorization; const value=Array.isArray(h)?h[0]||"":h||""; return value.startsWith("Bearer ")?value.slice(7):""; }
 export default async function handler(req: ApiRequest,res: ApiResponse) {
+ if (req.query?.action === "login") return loginAlertHandler(req, res);
  res.setHeader("Cache-Control","no-store");
  if(req.method!=="GET"&&req.method!=="POST"){res.setHeader("Allow","GET, POST");return res.status(405).json({error:"Method not allowed."});}
  const admin=await verifyCmsAdmin(req); if(!admin.ok)return res.status(admin.status).json({error:admin.error});
