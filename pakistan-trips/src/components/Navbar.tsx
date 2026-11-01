@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import newLogo from '../assets/logosss (1).png';
 
 export const Navbar: React.FC = () => {
-  const isHomePage = window.location.pathname === '/';
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -56,7 +55,7 @@ export const Navbar: React.FC = () => {
             width={99}
             src={newLogo}
             alt=""
-            className={`h-10 min-[380px]:h-11 sm:h-14 w-auto object-contain ${isHomePage ? "rounded-md drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)]" : ""}`}
+            className="block h-10 min-[380px]:h-11 sm:h-14 w-auto object-contain rounded-none shadow-none drop-shadow-none filter-none"
           />
         </a>
 
