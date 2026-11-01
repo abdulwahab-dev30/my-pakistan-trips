@@ -28,6 +28,7 @@ export default function AdminWhatsAppLeads() {
   const [leads, setLeads] = useState<WhatsAppLead[]>([]);
   const [monthlyUsage, setMonthlyUsage] = useState(0);
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "click_recorded">("all");
 
   const loadLeads = useCallback(async () => {
     if (!supabase) return;
@@ -91,10 +92,10 @@ export default function AdminWhatsAppLeads() {
 
   const filtered = useMemo(() => {
     const term = search.trim().toLowerCase();
-    if (!term) return leads;
-    return leads.filter(lead => [lead.page_title, lead.page_url, lead.tour_title, lead.tour_slug, lead.message]
-      .some(value => String(value || "").toLowerCase().includes(term)));
-  }, [leads, search]);
+    const matchesSearch = (lead: WhatsAppLead) => !term || [lead.page_title, lead.page_url, lead.tour_title, lead.tour_slug, lead.message]
+      .some(value => String(value || "").toLowerCase().includes(term));
+    return leads.filter(lead => (statusFilter === "all" || statusFilter === "click_recorded") && matchesSearch(lead));
+  }, [leads, search, statusFilter]);
 
   if (checking || session === undefined) {
     return <div className="grid min-h-screen place-items-center bg-slate-950 px-4 text-center text-white">Verifying admin access…</div>;
@@ -132,7 +133,7 @@ export default function AdminWhatsAppLeads() {
           </div>
           <div className="flex min-w-0 flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-3 sm:flex-row sm:items-center sm:p-4">
             <div className="relative min-w-0 flex-1"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"/><input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search page, package or message…" className="min-h-11 w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pl-9 pr-3 text-sm text-white outline-none focus:border-emerald-400"/></div>
-            <span className="text-xs text-slate-500">{filtered.length} of {leads.length} records</span>
+            <div className="flex flex-wrap items-center gap-2"><select aria-label="Filter lead status" value={statusFilter} onChange={event => setStatusFilter(event.target.value as "all" | "click_recorded")} className="min-h-11 rounded-xl border border-slate-700 bg-slate-950 px-3 text-sm text-slate-200 outline-none focus:border-emerald-400"><option value="all">All statuses</option><option value="click_recorded">Click recorded</option></select><span className="text-xs text-slate-500">{filtered.length} of {leads.length} records</span></div>
           </div>
           {error && <p role="alert" className="break-words rounded-xl border border-rose-900 bg-rose-950/40 p-3 text-sm text-rose-200">{error}</p>}
           <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70">
@@ -146,11 +147,11 @@ export default function AdminWhatsAppLeads() {
                   <p className="break-all text-xs leading-5 text-slate-400">{lead.page_url}</p>
                   <a href={lead.page_url} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-300 hover:text-emerald-200">Open source page <ExternalLink size={12}/></a>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 xl:justify-end"><Clock3 size={14}/><span>{new Date(lead.clicked_at || lead.created_at).toLocaleString("en-PK", { dateStyle: "medium", timeStyle: "short" })}</span><span className="rounded-full bg-amber-400/10 px-2.5 py-1 font-semibold text-amber-300">WhatsApp opened</span></div>
+                <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400 xl:justify-end"><Clock3 size={14}/><span>{new Date(lead.clicked_at || lead.created_at).toLocaleString("en-PK", { dateStyle: "medium", timeStyle: "short" })}</span><span className="rounded-full bg-amber-400/10 px-2.5 py-1 font-semibold text-amber-300">Click recorded</span></div>
               </article>)}
             </div> : <div className="px-5 py-14 text-center"><span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-slate-800 text-slate-400"><MousePointerClick size={22}/></span><h3 className="mt-4 font-semibold text-white">{loading ? "Loading WhatsApp activity…" : search ? "No matching inquiries" : "No WhatsApp clicks yet"}</h3><p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">When a visitor clicks the website WhatsApp button, the click and its page/message details will appear here.</p></div>}
           </div>
-          <p className="px-1 text-xs leading-5 text-slate-500">These records show WhatsApp link clicks only. They do not confirm that a visitor sent the message or reveal their WhatsApp phone number or replies.</p>
+          <p className="px-1 text-xs leading-5 text-slate-500">Status filter is based on website click tracking only. These records show WhatsApp link clicks only. They do not confirm that a visitor sent the message or reveal their WhatsApp phone number or replies.</p>
         </section>
       </div>
     </main>
