@@ -3,7 +3,7 @@ import { MessageCircle } from 'lucide-react';
 
 // Import central JSON data for official contact number
 import tripData from '../data/trips-data.json';
-import { supabase } from '../lib/supabase';
+import { trackWhatsAppLead } from '../lib/whatsappLeads';
 
 export const WhatsAppButton: React.FC = () => {
   // Safe WhatsApp number extraction from JSON
@@ -17,15 +17,7 @@ export const WhatsAppButton: React.FC = () => {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const trackInquiryClick = () => {
-    if (!supabase) return;
-    void supabase.from('whatsapp_leads').insert({
-      source: 'floating_whatsapp_button',
-      page_url: window.location.href.slice(0, 2048),
-      page_title: document.title.slice(0, 300),
-      message: defaultMessage,
-    }).then(({ error }) => {
-      if (error) console.warn('WhatsApp inquiry click was not recorded:', error.message);
-    });
+    void trackWhatsAppLead({ source: 'floating_whatsapp_button', message: defaultMessage });
   };
 
   return (
