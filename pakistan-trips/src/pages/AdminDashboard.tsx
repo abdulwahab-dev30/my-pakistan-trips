@@ -394,7 +394,7 @@ export default function AdminDashboard() {
             <div className="mt-4 grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3">
               <NotConnected title="Bookings" description="No bookings table was found in the current database schema." icon={CalendarDays}/>
               <NotConnected title="Revenue & payments" description="No payment or invoice records were found in the current database schema." icon={Wallet}/>
-              <NotConnected title="Customer inquiries" description="No inquiry or lead records were found in the current database schema." icon={MessageSquare}/>
+              <div className="min-w-0 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-3 sm:p-4"><div className="flex items-center gap-2 text-emerald-300"><MessageSquare size={18}/><p className="font-semibold text-slate-200">WhatsApp Leads</p></div><p className="mt-2 text-sm leading-6 text-slate-400">View website visitors who clicked to enquire on WhatsApp.</p><a href="/admin/whatsapp-leads" className="mt-3 inline-flex min-h-10 items-center gap-2 rounded-lg bg-emerald-400 px-3 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-300">Open leads <ExternalLink size={13}/></a></div>
             </div>
           </section>
           <p className="px-1 text-xs leading-5 text-slate-500">Dashboard statistics are read-only. Existing tour, FAQ, gallery, review and authentication workflows are not modified by this page.</p>
