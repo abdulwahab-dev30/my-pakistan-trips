@@ -226,7 +226,7 @@ export const Hero: React.FC = () => {
             <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Places to Explore</p>
           </div>
           <div>
-            <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">{departureCityCount}</p>
+            <p className="text-xl font-bold text-white min-[380px]:text-2xl sm:text-3xl">5+</p>
             <p className="mt-1 text-[8px] leading-tight text-slate-200/80 min-[380px]:text-[9px] sm:text-xs">Pickup Locations</p>
           </div>
         </div>
