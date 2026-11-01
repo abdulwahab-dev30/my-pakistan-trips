@@ -87,11 +87,11 @@ export default function AdminAnalytics() {
 
   return <main className="min-h-screen w-full overflow-x-clip bg-slate-950 text-white">
     <Helmet><title>Website Analytics | My Pakistan Trips Admin</title><meta name="robots" content="noindex,nofollow"/></Helmet>
-    <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-900/95 backdrop-blur"><div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-3 py-3 sm:px-6">
+    <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-900/95 backdrop-blur"><div className="mx-auto flex max-w-[1920px] items-center justify-between gap-3 px-3 py-3 sm:px-6">
       <div className="flex items-center gap-3"><button type="button" onClick={()=>setMenuOpen(true)} aria-label="Open admin menu" className="grid h-10 w-10 place-items-center rounded-xl border border-slate-700 lg:hidden">☰</button><div><p className="text-[10px] font-bold uppercase tracking-widest text-emerald-300">My Pakistan Trips</p><h1 className="text-xl font-bold sm:text-2xl">Website Analytics</h1></div></div>
       <button type="button" onClick={()=>load(days,session.access_token)} disabled={loading} className="inline-flex items-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-sm hover:border-emerald-400 disabled:opacity-50"><RefreshCw size={15} className={loading?"animate-spin":""}/> Refresh</button>
     </div></header>
-    <div className="mx-auto flex max-w-7xl flex-col gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:flex-row">
+    <div className="mx-auto flex max-w-[1920px] flex-col gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:flex-row">
       <AdminSidebar active="analytics" open={menuOpen} onClose={()=>setMenuOpen(false)}/>
       <section className="min-w-0 flex-1 space-y-5">
         <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm text-slate-400">Visitors, devices, traffic sources and conversions · All-time reporting available</p><h2 className="mt-1 text-2xl font-bold">GA4 performance</h2><p className="mt-1 text-xs text-slate-500">Measurement ID: G-S2S70VQ1BF · Data is delayed by Google, usually up to 24–48 hours.</p></div>

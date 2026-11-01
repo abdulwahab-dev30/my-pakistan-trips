@@ -106,7 +106,7 @@ export default function AdminWhatsAppLeads() {
     <main className="min-h-screen w-full overflow-x-clip bg-slate-950 text-white">
       <Helmet><title>WhatsApp Leads | My Pakistan Trips Admin</title><meta name="robots" content="noindex,nofollow" /></Helmet>
       <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-900/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between gap-3 px-3 py-3 sm:px-6 sm:py-4">
+        <div className="mx-auto flex w-full max-w-[1920px] flex-wrap items-center justify-between gap-3 px-3 py-3 sm:px-6 sm:py-4">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button type="button" onClick={() => setMenuOpen(true)} aria-label="Open admin menu" className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-700 lg:hidden">☰</button>
             <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-widest text-emerald-300 sm:text-xs">My Pakistan Trips</p><h1 className="mt-1 truncate text-lg font-bold sm:text-2xl">WhatsApp Leads</h1></div>
@@ -114,7 +114,7 @@ export default function AdminWhatsAppLeads() {
           <button type="button" onClick={loadLeads} disabled={loading} className="inline-flex min-h-10 items-center gap-2 rounded-xl border border-slate-700 px-3 py-2 text-xs font-semibold text-slate-200 hover:border-emerald-400 disabled:opacity-50 sm:text-sm"><RefreshCw size={15} className={loading ? "animate-spin" : ""}/> Refresh leads</button>
         </div>
       </header>
-      <div className="mx-auto flex w-full max-w-7xl min-w-0 flex-col gap-4 px-3 py-4 sm:gap-6 sm:px-6 sm:py-6 lg:flex-row">
+      <div className="mx-auto flex w-full max-w-[1920px] min-w-0 flex-col gap-4 px-3 py-4 sm:gap-6 sm:px-6 sm:py-6 lg:flex-row">
         <AdminSidebar active="leads" open={menuOpen} onClose={() => setMenuOpen(false)} />
         <section className="min-w-0 flex-1 space-y-4 sm:space-y-6">
           <div className="flex flex-wrap items-end justify-between gap-3">
