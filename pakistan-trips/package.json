@@ -31,6 +31,8 @@
     "vite": "^6.0.0",
     "@prerenderer/rollup-plugin": "^0.3.12",
     "@prerenderer/renderer-puppeteer": "^1.2.4",
-    "@sparticuz/chromium": "153.0.0"
+    "@sparticuz/chromium": "153.0.0",
+    "@vercel/node": "^5.10.2",
+    "@types/nodemailer": "^6.4.24"
   }
 }

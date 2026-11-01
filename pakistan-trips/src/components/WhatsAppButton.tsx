@@ -4,6 +4,7 @@ import { MessageCircle } from 'lucide-react';
 // Import central JSON data for official contact number
 import tripData from '../data/trips-data.json';
 import { trackWhatsAppLead } from '../lib/whatsappLeads';
+import { trackGAEvent } from '../lib/analytics';
 
 export const WhatsAppButton: React.FC = () => {
   // Safe WhatsApp number extraction from JSON
@@ -17,6 +18,7 @@ export const WhatsAppButton: React.FC = () => {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(defaultMessage)}`;
 
   const trackInquiryClick = () => {
+    trackGAEvent('whatsapp_click', { link_location: 'floating_button' });
     void trackWhatsAppLead({ source: 'floating_whatsapp_button', message: defaultMessage });
   };
 
