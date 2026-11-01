@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../_lib/search-console";
-import { clearCookie, REFRESH_COOKIE, verifyCmsAdmin } from "../_lib/search-console";
+import type { ApiRequest, ApiResponse } from "../_lib/search-console.js";
+import { clearCookie, REFRESH_COOKIE, verifyCmsAdmin } from "../_lib/search-console.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   res.setHeader("Cache-Control", "no-store");
