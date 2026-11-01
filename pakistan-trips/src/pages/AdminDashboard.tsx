@@ -46,18 +46,18 @@ async function countRows(table: string, filters?: (query: any) => any): Promise<
   }
 }
 
-async function countCloudinaryGalleryImages(): Promise<CountResult> {
+async function countCloudinaryGalleryImages(accessToken: string): Promise<CountResult> {
   try {
-    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "lvv2vfug";
-    const response = await fetch(`https://res.cloudinary.com/${cloudName}/image/list/gallery.json?t=${Date.now()}`);
-    if (!response.ok) throw new Error("Cloudinary gallery list is not available.");
+    const response = await fetch("/api/gallery-count", {
+      headers: { Authorization: "Bearer " + accessToken },
+      credentials: "same-origin",
+      cache: "no-store",
+    });
     const result = await response.json();
-    const count = Array.isArray(result.resources)
-      ? result.resources.filter((image: any) => image.public_id && image.version && image.format).length
-      : 0;
-    return { count, error: null };
+    if (!response.ok) throw new Error(result.error || "Unable to load live Cloudinary gallery count.");
+    return { count: Number(result.count) || 0, error: null };
   } catch (error: any) {
-    return { count: null, error: error?.message || "Unable to load Cloudinary gallery count." };
+    return { count: null, error: error?.message || "Unable to load live Cloudinary gallery count." };
   }
 }
 
@@ -283,7 +283,7 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState<Stats>(emptyStats);
   const [recentTours, setRecentTours] = useState<RecentTour[]>([]);
 
-  const loadDashboard = useCallback(async () => {
+  const loadDashboard = useCallback(async (accessToken?: string) => {
     if (!supabase) return;
     setLoading(true);
     setError("");
@@ -292,7 +292,7 @@ export default function AdminDashboard() {
       countRows("tours", q => q.eq("published", true)),
       countRows("tours", q => q.eq("published", false)),
       countRows("international_tours"),
-      countCloudinaryGalleryImages(),
+      accessToken ? countCloudinaryGalleryImages(accessToken) : Promise.resolve({ count: null, error: "Admin session is not ready." }),
     ]);
     setStats({
       tours: tours.count, publishedTours: published.count, draftTours: drafts.count,
@@ -328,7 +328,7 @@ export default function AdminDashboard() {
           await supabase.auth.signOut();
           throw new Error("This account is not an authorized My Pakistan Trips admin.");
         }
-        if (active) { setAuthorized(true); await loadDashboard(); }
+        if (active) { setAuthorized(true); await loadDashboard(nextSession.access_token); }
       } catch {
         if (active) { setAuthorized(false); setSession(null); }
       } finally {
