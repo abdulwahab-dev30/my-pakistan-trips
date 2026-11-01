@@ -307,6 +307,25 @@ export default function AdminDashboard() {
     setLoading(false);
   }, []);
 
+  const refreshGalleryCount = useCallback(async () => {
+    if (!session?.access_token) return;
+    const result = await countCloudinaryGalleryImages(session.access_token);
+    if (!result.error) setStats(current => ({ ...current, galleryImages: result.count }));
+  }, [session?.access_token]);
+
+  useEffect(() => {
+    if (!session?.access_token || !authorized) return;
+    const refresh = () => { void refreshGalleryCount(); };
+    const interval = window.setInterval(refresh, 15000);
+    window.addEventListener("focus", refresh);
+    window.addEventListener("gallery-images-updated", refresh);
+    return () => {
+      window.clearInterval(interval);
+      window.removeEventListener("focus", refresh);
+      window.removeEventListener("gallery-images-updated", refresh);
+    };
+  }, [session?.access_token, authorized, refreshGalleryCount]);
+
   useEffect(() => {
     let active = true;
     if (!supabaseConfigured || !supabase) {
