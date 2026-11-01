@@ -1,11 +1,11 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+import type { ApiRequest, ApiResponse } from "../_lib/search-console";
 import { clearCookie, getCookie, getRedirectUri, REFRESH_COOKIE, STATE_COOKIE, setCookie } from "../_lib/search-console";
 
-function back(res: VercelResponse, status: string) {
+function back(res: ApiResponse, status: string) {
   return res.redirect(302, "/admin/dashboard?searchConsole=" + encodeURIComponent(status));
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   res.setHeader("Cache-Control", "no-store");
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
