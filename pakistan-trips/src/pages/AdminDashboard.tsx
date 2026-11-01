@@ -319,10 +319,12 @@ export default function AdminDashboard() {
     const interval = window.setInterval(refresh, 15000);
     window.addEventListener("focus", refresh);
     window.addEventListener("gallery-images-updated", refresh);
+    window.addEventListener("storage", refresh);
     return () => {
       window.clearInterval(interval);
       window.removeEventListener("focus", refresh);
       window.removeEventListener("gallery-images-updated", refresh);
+      window.removeEventListener("storage", refresh);
     };
   }, [session?.access_token, authorized, refreshGalleryCount]);
 
