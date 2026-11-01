@@ -73,7 +73,6 @@ export const Hero: React.FC = () => {
       .map((name: string) => String(name).trim().toLowerCase())
       .filter(Boolean)
   ).size;
-  const departureCityCount = Object.keys(tripData.pickup_points || {}).length;
 
 
   // Auto slide timer (5 seconds)
