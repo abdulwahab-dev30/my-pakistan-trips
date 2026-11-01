@@ -35,7 +35,7 @@ export default function AdminAnalytics() {
   const [connecting,setConnecting]=useState(false);
   const [error,setError]=useState("");
 
-  const load=useCallback(async(nextDays=days, token=session?.access_token)=>{
+  const load=useCallback(async(nextDays:number, token:string)=>{
     if(!token)return;
     setLoading(true);setError("");
     try{
@@ -45,7 +45,7 @@ export default function AdminAnalytics() {
       setData(result as Report);
     }catch(err:any){setError(err?.message||"GA4 report could not be loaded.");}
     finally{setLoading(false);}
-  },[days,session?.access_token]);
+  },[]);
 
   useEffect(()=>{
     let active=true;
@@ -95,7 +95,7 @@ export default function AdminAnalytics() {
       <AdminSidebar active="analytics" open={menuOpen} onClose={()=>setMenuOpen(false)}/>
       <section className="min-w-0 flex-1 space-y-5">
         <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm text-slate-400">Visitors, devices, traffic sources and conversions</p><h2 className="mt-1 text-2xl font-bold">GA4 performance</h2><p className="mt-1 text-xs text-slate-500">Measurement ID: G-S2S70VQ1BF · Data is delayed by Google, usually up to 24–48 hours.</p></div>
-          <div className="flex rounded-xl border border-slate-700 bg-slate-900 p-1">{[7,28,90].map(value=><button key={value} type="button" onClick={()=>{setDays(value);void load(value);}} className={"rounded-lg px-3 py-2 text-xs font-semibold "+(days===value?"bg-emerald-400 text-slate-950":"text-slate-300 hover:bg-slate-800")}>{value} days</button>)}</div>
+          <div className="flex rounded-xl border border-slate-700 bg-slate-900 p-1">{[7,28,90].map(value=><button key={value} type="button" onClick={()=>{setDays(value);void load(value,session.access_token);}} className={"rounded-lg px-3 py-2 text-xs font-semibold "+(days===value?"bg-emerald-400 text-slate-950":"text-slate-300 hover:bg-slate-800")}>{value} days</button>)}</div>
         </div>
         {error&&<div role="alert" className="rounded-xl border border-amber-800 bg-amber-950/30 p-4 text-sm leading-6 text-amber-200">{error}<div className="mt-3"><button type="button" onClick={connectGoogle} disabled={connecting} className="rounded-lg bg-emerald-400 px-3 py-2 text-xs font-bold text-slate-950 disabled:opacity-50">{connecting?"Connecting…":"Connect / Reconnect Google account"}</button></div><p className="mt-3 text-xs text-amber-200/70">Approve Google Analytics read-only access. Ensure Google Analytics Data API and Admin API are enabled in the linked Google Cloud project.</p></div>}
         {!data&&!error&&<p className="rounded-xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-400">{loading?"Loading GA4 reports…":"No report data loaded yet."}</p>}
