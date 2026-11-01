@@ -100,19 +100,19 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
         limit: 10,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "sessionDefaultChannelGroup" }],
         metrics: [{ name: "sessions" }, { name: "activeUsers" }],
         limit: 10,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "eventName" }],
         metrics: [{ name: "eventCount" }, { name: "keyEvents" }],
         limit: 20,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "pagePath" }],
         metrics: [{ name: "screenPageViews" }, { name: "activeUsers" }],
         orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
