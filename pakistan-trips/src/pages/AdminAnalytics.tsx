@@ -7,9 +7,9 @@ import { supabase, supabaseConfigured } from "../lib/supabase";
 import { isCmsAdmin } from "../lib/adminAuth";
 
 type Report = {
-  connected: boolean; propertyId?: string; measurementId?: string; days: number;
+  connected: boolean; propertyId?: string; measurementId?: string; days: number | "all";
   summary: { activeUsers: number; newUsers: number; sessions: number; pageViews: number; keyEvents: number };
-  previous: { activeUsers: number; newUsers: number; sessions: number; pageViews: number; keyEvents: number };
+  previous?: { activeUsers: number; newUsers: number; sessions: number; pageViews: number; keyEvents: number };
   devices: { device: string; activeUsers: number; sessions: number }[];
   channels: { channel: string; sessions: number; activeUsers: number }[];
   events: { event: string; count: number; keyEvents: number }[];
@@ -29,13 +29,13 @@ export default function AdminAnalytics() {
   const [authorized,setAuthorized]=useState(false);
   const [checking,setChecking]=useState(true);
   const [menuOpen,setMenuOpen]=useState(false);
-  const [days,setDays]=useState(28);
+  const [days,setDays]=useState<number | "all">(28);
   const [data,setData]=useState<Report|null>(null);
   const [loading,setLoading]=useState(false);
   const [connecting,setConnecting]=useState(false);
   const [error,setError]=useState("");
 
-  const load=useCallback(async(nextDays:number, token:string)=>{
+  const load=useCallback(async(nextDays:number | "all", token:string)=>{
     if(!token)return;
     setLoading(true);setError("");
     try{
@@ -94,18 +94,18 @@ export default function AdminAnalytics() {
     <div className="mx-auto flex max-w-7xl flex-col gap-4 px-3 py-4 sm:px-6 sm:py-6 lg:flex-row">
       <AdminSidebar active="analytics" open={menuOpen} onClose={()=>setMenuOpen(false)}/>
       <section className="min-w-0 flex-1 space-y-5">
-        <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm text-slate-400">Visitors, devices, traffic sources and conversions</p><h2 className="mt-1 text-2xl font-bold">GA4 performance</h2><p className="mt-1 text-xs text-slate-500">Measurement ID: G-S2S70VQ1BF · Data is delayed by Google, usually up to 24–48 hours.</p></div>
-          <div className="flex rounded-xl border border-slate-700 bg-slate-900 p-1">{[7,28,90].map(value=><button key={value} type="button" onClick={()=>{setDays(value);void load(value,session.access_token);}} className={"rounded-lg px-3 py-2 text-xs font-semibold "+(days===value?"bg-emerald-400 text-slate-950":"text-slate-300 hover:bg-slate-800")}>{value} days</button>)}</div>
+        <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-sm text-slate-400">Visitors, devices, traffic sources and conversions · All-time reporting available</p><h2 className="mt-1 text-2xl font-bold">GA4 performance</h2><p className="mt-1 text-xs text-slate-500">Measurement ID: G-S2S70VQ1BF · Data is delayed by Google, usually up to 24–48 hours.</p></div>
+          <div className="flex rounded-xl border border-slate-700 bg-slate-900 p-1">{([{value:7,label:"7 days"},{value:28,label:"28 days"},{value:90,label:"90 days"},{value:"all" as const,label:"All time"}]).map(option=><button key={option.value} type="button" onClick={()=>{setDays(option.value);void load(option.value,session.access_token);}} className={"rounded-lg px-3 py-2 text-xs font-semibold "+(days===option.value?"bg-emerald-400 text-slate-950":"text-slate-300 hover:bg-slate-800")}>{option.label}</button>)}</div>
         </div>
         {error&&<div role="alert" className="rounded-xl border border-amber-800 bg-amber-950/30 p-4 text-sm leading-6 text-amber-200">{error}<div className="mt-3"><button type="button" onClick={connectGoogle} disabled={connecting} className="rounded-lg bg-emerald-400 px-3 py-2 text-xs font-bold text-slate-950 disabled:opacity-50">{connecting?"Connecting…":"Connect / Reconnect Google account"}</button></div><p className="mt-3 text-xs text-amber-200/70">Approve Google Analytics read-only access. Ensure Google Analytics Data API and Admin API are enabled in the linked Google Cloud project.</p></div>}
         {!data&&!error&&<p className="rounded-xl border border-slate-800 bg-slate-900 p-4 text-sm text-slate-400">{loading?"Loading GA4 reports…":"No report data loaded yet."}</p>}
         {summary&&<>
           <div className="grid grid-cols-1 gap-3 min-[440px]:grid-cols-2 xl:grid-cols-5">
-            <Metric label="Active users" value={summary.activeUsers} change={pct(summary.activeUsers,data!.previous.activeUsers)} icon={Users}/>
-            <Metric label="New users" value={summary.newUsers} change={pct(summary.newUsers,data!.previous.newUsers)} icon={Activity}/>
-            <Metric label="Sessions" value={summary.sessions} change={pct(summary.sessions,data!.previous.sessions)} icon={Globe}/>
-            <Metric label="Page views" value={summary.pageViews} change={pct(summary.pageViews,data!.previous.pageViews)} icon={Eye}/>
-            <Metric label="Key events" value={summary.keyEvents} change={pct(summary.keyEvents,data!.previous.keyEvents)} icon={MousePointerClick}/>
+            <Metric label="Active users" value={summary.activeUsers} change={data!.previous ? pct(summary.activeUsers,data!.previous.activeUsers) : undefined} icon={Users}/>
+            <Metric label="New users" value={summary.newUsers} change={data!.previous ? pct(summary.newUsers,data!.previous.newUsers) : undefined} icon={Activity}/>
+            <Metric label="Sessions" value={summary.sessions} change={data!.previous ? pct(summary.sessions,data!.previous.sessions) : undefined} icon={Globe}/>
+            <Metric label="Page views" value={summary.pageViews} change={data!.previous ? pct(summary.pageViews,data!.previous.pageViews) : undefined} icon={Eye}/>
+            <Metric label="Key events" value={summary.keyEvents} change={data!.previous ? pct(summary.keyEvents,data!.previous.keyEvents) : undefined} icon={MousePointerClick}/>
           </div>
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
             <Panel title="Visitors by device"><div className="mt-3 space-y-3">{data!.devices.map(item=>{const Icon=deviceIcon(item.device);return <div key={item.device} className="flex items-center gap-3"><Icon size={17} className="text-emerald-300"/><span className="flex-1 text-sm text-slate-300">{item.device}</span><span className="text-sm font-semibold">{number(item.activeUsers)}</span><span className="w-24 text-right text-xs text-slate-500">{number(item.sessions)} sessions</span></div>;})}{!data!.devices.length&&<p className="text-sm text-slate-500">No device data in this period.</p>}</div></Panel>
