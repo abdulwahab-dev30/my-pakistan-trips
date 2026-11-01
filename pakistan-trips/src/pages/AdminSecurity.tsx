@@ -149,12 +149,12 @@ export default function AdminSecurity() {
     <main className="min-h-screen bg-slate-950 text-white">
       <Helmet><title>Security & Passkeys | My Pakistan Trips Admin</title><meta name="robots" content="noindex,nofollow" /></Helmet>
       <header className="sticky top-0 z-30 border-b border-slate-800 bg-slate-900/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-[1920px] items-center gap-3 px-4 py-4 sm:px-6">
           <button type="button" onClick={() => setMenuOpen(true)} aria-label="Open admin menu" className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-700 lg:hidden"><Menu size={20} /></button>
           <div><p className="text-xs font-bold uppercase tracking-widest text-emerald-300">My Pakistan Trips</p><h1 className="mt-1 text-xl font-bold sm:text-2xl">Security & Passkeys</h1></div>
         </div>
       </header>
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-6 sm:px-6 lg:flex-row">
+      <div className="mx-auto flex max-w-[1920px] flex-col gap-6 px-4 py-6 sm:px-6 lg:flex-row">
         <AdminSidebar active="security" open={menuOpen} onClose={() => setMenuOpen(false)} />
         <section className="min-w-0 flex-1">
           <div className="max-w-3xl rounded-3xl border border-slate-800 bg-slate-900/70 p-5 sm:p-8">
