@@ -5,6 +5,7 @@ import { Sparkles, Send, Phone, Mail, MapPin, User, Users, Calendar, MessageSqua
 // Import central JSON data
 import tripData from '../data/trips-data.json';
 import { trackWhatsAppLead } from '../lib/whatsappLeads';
+import { trackGAEvent } from '../lib/analytics';
 
 export const CTA: React.FC = () => {
   const packages = tripData.trip_packages || [];
@@ -33,6 +34,8 @@ export const CTA: React.FC = () => {
       (formData.notes ? `💬 *Notes:* ${formData.notes}\n` : '');
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    trackGAEvent('generate_lead', { method: 'contact_form_whatsapp' });
+    trackGAEvent('whatsapp_click', { link_location: 'contact_form' });
     void trackWhatsAppLead({ source: 'contact_form_whatsapp', tourTitle: formData.selectedTrip, message });
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
