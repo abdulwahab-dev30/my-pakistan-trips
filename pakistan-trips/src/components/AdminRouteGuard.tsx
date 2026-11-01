@@ -17,6 +17,6 @@ export default function AdminRouteGuard({permission,ownerOnly=false,children}:{p
   if(live)setState("allowed");
  }catch{if(live)setState("denied");}})();return()=>{live=false;}},[permission,ownerOnly]);
  if(state==="checking")return <div className="grid min-h-screen place-items-center bg-slate-950 text-white">Checking module permissions…</div>;
- if(state==="denied")return <Navigate to="/admin/dashboard" replace/>;
+ if(state==="denied")return <div className="grid min-h-screen place-items-center bg-slate-950 px-5 text-white"><div className="max-w-md rounded-2xl border border-slate-800 bg-slate-900 p-6 text-center"><h1 className="text-xl font-bold">Access restricted</h1><p className="mt-2 text-sm leading-6 text-slate-400">Your account does not have permission to open this module. Use a module assigned by the Owner.</p><a href="/admin/gallery" className="mt-4 inline-flex rounded-xl bg-emerald-400 px-4 py-2.5 text-sm font-bold text-slate-950">Open Gallery</a></div></div>;
  return <>{children}</>;
 }
