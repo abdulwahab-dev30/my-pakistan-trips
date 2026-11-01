@@ -75,36 +75,44 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
   }
 
   const allowedDays = [7, 28, 90];
-  const requestedDays = Number(req.query.days || 28);
-  const days = allowedDays.includes(requestedDays) ? requestedDays : 28;
+  const requestedRange = String(req.query.days || "28");
+  const allTime = requestedRange === "all";
+  const requestedDays = Number(requestedRange);
+  const days = allTime ? "all" : (allowedDays.includes(requestedDays) ? requestedDays : 28);
+  const dateRange = allTime
+    ? [{ startDate: "2020-01-01", endDate: "yesterday" }]
+    : [{ startDate: days + "daysAgo", endDate: "yesterday" }];
+  const summaryDateRanges = allTime
+    ? dateRange
+    : [...dateRange, { startDate: (Number(days) * 2) + "daysAgo", endDate: (Number(days) + 1) + "daysAgo" }];
 
   try {
     const propertyId = await findPropertyId(token.accessToken);
     const [summary, devices, channels, events, pages] = await Promise.all([
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }, { startDate: (days * 2) + "daysAgo", endDate: (days + 1) + "daysAgo" }],
+        dateRanges: summaryDateRanges,
         metrics: [{ name: "activeUsers" }, { name: "newUsers" }, { name: "sessions" }, { name: "screenPageViews" }, { name: "keyEvents" }],
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "deviceCategory" }],
         metrics: [{ name: "activeUsers" }, { name: "sessions" }],
         limit: 10,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "sessionDefaultChannelGroup" }],
         metrics: [{ name: "sessions" }, { name: "activeUsers" }],
         limit: 10,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "eventName" }],
         metrics: [{ name: "eventCount" }, { name: "keyEvents" }],
         limit: 20,
       }),
       runReport(token.accessToken, propertyId, {
-        dateRanges: [{ startDate: days + "daysAgo", endDate: "yesterday" }],
+        dateRanges: dateRange,
         dimensions: [{ name: "pagePath" }],
         metrics: [{ name: "screenPageViews" }, { name: "activeUsers" }],
         orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
@@ -112,8 +120,8 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       }),
     ]);
 
-    const current = summary.rows?.find((row: any) => row.dimensionValues?.[0]?.value === "0") || summary.rows?.[0];
-    const previous = summary.rows?.find((row: any) => row.dimensionValues?.[0]?.value === "1") || summary.rows?.[1];
+    const current = allTime ? summary.rows?.[0] : (summary.rows?.find((row: any) => row.dimensionValues?.[0]?.value === "0") || summary.rows?.[0]);
+    const previous = allTime ? undefined : (summary.rows?.find((row: any) => row.dimensionValues?.[0]?.value === "1") || summary.rows?.[1]);
     const metricSet = (row: any) => ({
       activeUsers: value(row, 0), newUsers: value(row, 1), sessions: value(row, 2),
       pageViews: value(row, 3), keyEvents: value(row, 4),
@@ -125,7 +133,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       measurementId: MEASUREMENT_ID,
       days,
       summary: metricSet(current),
-      previous: metricSet(previous),
+      ...(previous ? { previous: metricSet(previous) } : {}),
       devices: (devices.rows || []).map((row: any) => ({
         device: row.dimensionValues?.[0]?.value || "Other",
         activeUsers: value(row, 0), sessions: value(row, 1),
