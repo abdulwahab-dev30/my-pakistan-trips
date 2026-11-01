@@ -72,7 +72,7 @@ export default function AdminGallery(){
    if(!response.ok&&response.status!==207)throw new Error(result.error||"Could not delete selected images.");
    const deleted:string[]=result.deleted||[];
    const remaining=images.filter(image=>!deleted.includes(image.public_id));
-   setImages(remaining);setSelected(current=>current.filter(id=>!deleted.includes(id)));setConfirmDelete(false);window.dispatchEvent(new Event("gallery-images-updated"));
+   setImages(remaining);setSelected(current=>current.filter(id=>!deleted.includes(id)));setConfirmDelete(false);window.dispatchEvent(new Event("gallery-images-updated"));localStorage.setItem("gallery-images-updated",String(Date.now()));
    if(deleted.length){const{error:orderError}=await supabase!.from("gallery_settings").upsert({id:1,image_order:remaining.map(image=>image.public_id),updated_at:new Date().toISOString()},{onConflict:"id"});if(orderError)throw orderError;}
    setNotice("Deleted "+deleted.length+" image(s)."+((result.failed||[]).length?" Some images could not be deleted.":""));
   }catch(e:any){setError(e?.message||"Could not delete selected images.");}
