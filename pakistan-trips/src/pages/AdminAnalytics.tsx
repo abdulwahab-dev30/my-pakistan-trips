@@ -65,7 +65,7 @@ export default function AdminAnalytics() {
     supabase.auth.getSession().then(({data})=>verify(data.session));
     const {data:{subscription}}=supabase.auth.onAuthStateChange((_event,next)=>Promise.resolve().then(()=>verify(next)));
     return()=>{active=false;subscription.unsubscribe();};
-  },[load,days]);
+  },[load]);
 
   async function connectGoogle(){
     if(!session?.access_token)return;
