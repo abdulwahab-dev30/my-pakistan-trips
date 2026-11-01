@@ -26,19 +26,31 @@ export default function AdminWhatsAppLeads() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [leads, setLeads] = useState<WhatsAppLead[]>([]);
+  const [monthlyUsage, setMonthlyUsage] = useState(0);
   const [search, setSearch] = useState("");
 
   const loadLeads = useCallback(async () => {
     if (!supabase) return;
     setLoading(true);
     setError("");
-    const { data, error: queryError } = await supabase
-      .from("whatsapp_leads")
-      .select("id,source,page_url,page_title,tour_title,tour_slug,message,clicked_at,created_at")
-      .order("clicked_at", { ascending: false })
-      .limit(500);
+    const monthStart = new Date();
+    monthStart.setUTCDate(1);
+    monthStart.setUTCHours(0, 0, 0, 0);
+    const monthKey = monthStart.toISOString().slice(0, 10);
+    const [{ data, error: queryError }, { data: usageData, error: usageError }] = await Promise.all([
+      supabase.from("whatsapp_leads")
+        .select("id,source,page_url,page_title,tour_title,tour_slug,message,clicked_at,created_at")
+        .order("clicked_at", { ascending: false })
+        .limit(500),
+      supabase.from("whatsapp_message_usage")
+        .select("sent_count")
+        .eq("month_start", monthKey)
+        .maybeSingle()
+    ]);
     if (queryError) setError(queryError.message || "WhatsApp leads could not be loaded.");
     else setLeads((data || []) as WhatsAppLead[]);
+    if (usageError) setError(current => current || "Monthly WhatsApp usage could not be loaded: " + usageError.message);
+    else setMonthlyUsage(Number(usageData?.sent_count || 0));
     setLoading(false);
   }, []);
 
@@ -107,6 +119,16 @@ export default function AdminWhatsAppLeads() {
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div><p className="text-sm text-slate-400">People who clicked a WhatsApp inquiry link on your website</p><h2 className="mt-1 text-xl font-bold sm:text-2xl">Inquiry activity</h2></div>
             <div className="rounded-xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3"><p className="text-xs text-emerald-200">Total clicks recorded</p><p className="mt-1 text-2xl font-bold text-white">{leads.length.toLocaleString("en-PK")}</p></div>
+          </div>
+          <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div><p className="text-sm font-semibold text-white">Monthly WhatsApp sending limit</p><p className="mt-1 text-xs text-slate-400">Outgoing messages reserved through the website this month</p></div>
+              <span className={"rounded-full px-3 py-1 text-xs font-bold " + (monthlyUsage >= 1000 ? "bg-rose-400/10 text-rose-300" : monthlyUsage >= 900 ? "bg-amber-400/10 text-amber-300" : "bg-emerald-400/10 text-emerald-300")}>{monthlyUsage >= 1000 ? "Limit reached" : monthlyUsage >= 900 ? "Approaching limit" : "Within limit"}</span>
+            </div>
+            <div className="mt-4 flex items-end justify-between gap-3"><p className="text-3xl font-bold tabular-nums text-white">{monthlyUsage.toLocaleString("en-PK")} <span className="text-base font-medium text-slate-500">/ 1,000</span></p><p className="text-xs text-slate-400">{Math.max(1000 - monthlyUsage, 0).toLocaleString("en-PK")} remaining</p></div>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-slate-800"><div className={"h-full rounded-full " + (monthlyUsage >= 1000 ? "bg-rose-400" : monthlyUsage >= 900 ? "bg-amber-400" : "bg-emerald-400")} style={{ width: Math.min(monthlyUsage / 1000 * 100, 100) + "%" }} /></div>
+            {monthlyUsage >= 900 && <p className="mt-3 text-xs text-amber-300">{monthlyUsage >= 1000 ? "The monthly website sending allowance has been reached. New sends must be blocked until the monthly reset." : "Warning: fewer than 100 messages remain this month."}</p>}
+            <p className="mt-3 text-xs leading-5 text-slate-500">Counter resets automatically on the first day of each month (UTC). This is a website-side safety cap; Meta billing/free-tier rules are separate.</p>
           </div>
           <div className="flex min-w-0 flex-col gap-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-3 sm:flex-row sm:items-center sm:p-4">
             <div className="relative min-w-0 flex-1"><Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500"/><input value={search} onChange={event => setSearch(event.target.value)} placeholder="Search page, package or message…" className="min-h-11 w-full rounded-xl border border-slate-700 bg-slate-950 py-2 pl-9 pr-3 text-sm text-white outline-none focus:border-emerald-400"/></div>
