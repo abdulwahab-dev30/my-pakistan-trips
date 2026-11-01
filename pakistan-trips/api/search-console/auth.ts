@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { makeOAuthState, requireGoogleConfig, SCOPES, setCookie, STATE_COOKIE, getRedirectUri, verifyCmsAdmin } from "./_lib/search-console";
+import { makeOAuthState, requireGoogleConfig, SCOPES, setCookie, STATE_COOKIE, getRedirectUri, verifyCmsAdmin } from "../_lib/search-console";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader("Cache-Control", "no-store");
