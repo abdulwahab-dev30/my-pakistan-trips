@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Globe, Eye, Edit3, X, KeyRound, Image, ShieldCheck, LayoutDashboard, MessageCircle, BarChart3, Sparkles } from "lucide-react";
 
-type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password" | "growth";
+type AdminSection = "dashboard" | "analytics" | "inbox" | "leads" | "tours" | "hero" | "international" | "gallery" | "founder" | "faqs" | "legal" | "contact" | "security" | "password" | "growth" | "activity";
 type Props = { active: AdminSection; open: boolean; onClose: () => void };
 
 const links: { id: AdminSection; label: string; href: string; meta?: string; icon: typeof Globe }[] = [
   { id:"dashboard", label:"Dashboard", href:"/admin/dashboard", icon:LayoutDashboard },
   { id:"analytics", label:"Website Analytics", href:"/admin/analytics", meta:"GA4", icon:BarChart3 },
   { id:"growth", label:"Growth & SEO Center", href:"/admin/growth", meta:"Tools", icon:Sparkles },
+  { id:"activity", label:"Activity Logs", href:"/admin/activity", meta:"Audit", icon:ShieldCheck },
   { id:"inbox", label:"WhatsApp Inbox", href:"/admin/whatsapp-inbox", meta:"Chat", icon:MessageCircle },
   { id:"leads", label:"WhatsApp Leads", href:"/admin/whatsapp-leads", meta:"Clicks", icon:MessageCircle },
   { id:"tours", label:"Tours", href:"/admin/tours", icon:Globe },

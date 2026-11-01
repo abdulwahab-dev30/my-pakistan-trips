@@ -5,6 +5,7 @@ import{Helmet}from"react-helmet-async";
 import{ArrowDown,ArrowUp,Images,LogOut,RefreshCw,Save,Upload,Menu,X,Trash2,CheckSquare,Square}from"lucide-react";
 import{supabase,supabaseConfigured}from"../lib/supabase";
 import AdminConfirmDialog from "../components/AdminConfirmDialog";
+import { logAdminActivity } from "../lib/adminActivity";
 
 const CLOUD_NAME=import.meta.env.VITE_CLOUDINARY_CLOUD_NAME||"lvv2vfug";
 const GALLERY_TAG="gallery";
@@ -74,7 +75,7 @@ export default function AdminGallery(){
    const remaining=images.filter(image=>!deleted.includes(image.public_id));
    setImages(remaining);setSelected(current=>current.filter(id=>!deleted.includes(id)));setConfirmDelete(false);window.dispatchEvent(new Event("gallery-images-updated"));localStorage.setItem("gallery-images-updated",String(Date.now()));
    if(deleted.length){const{error:orderError}=await supabase!.from("gallery_settings").upsert({id:1,image_order:remaining.map(image=>image.public_id),updated_at:new Date().toISOString()},{onConflict:"id"});if(orderError)throw orderError;}
-   setNotice("Deleted "+deleted.length+" image(s)."+((result.failed||[]).length?" Some images could not be deleted.":""));
+   if(deleted.length)await logAdminActivity(session.access_token,{action:"Deleted",entity:"gallery",description:"Deleted "+deleted.length+" Cloudinary gallery image(s)",metadata:{count:deleted.length}});setNotice("Deleted "+deleted.length+" image(s)."+((result.failed||[]).length?" Some images could not be deleted.":""));
   }catch(e:any){setError(e?.message||"Could not delete selected images.");}
   finally{setDeleting(false);}
  }
@@ -83,7 +84,7 @@ export default function AdminGallery(){
   setSaving(true);setError("");setNotice("");
   try{
    const{error:saveError}=await supabase!.from("gallery_settings").upsert({id:1,image_order:images.map(x=>x.public_id),updated_at:new Date().toISOString()},{onConflict:"id"});
-   if(saveError)throw saveError;
+   if(saveError)throw saveError;await logAdminActivity(session.access_token,{action:"Reordered",entity:"gallery",description:"Updated gallery image display order",metadata:{count:images.length}});
    setNotice("Gallery order saved. The public gallery will now use this order after its update is deployed.");
   }catch(e:any){setError(e?.message||"Could not save the gallery order. Check the gallery-cms.sql setup and admin permissions.");}
   finally{setSaving(false);}
