@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { verifyCmsPermission } from './_lib/search-console.js';
 
 const GALLERY_TAG = 'gallery';
 
@@ -22,15 +23,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   });
   if (!userResponse.ok) return res.status(401).json({ error: 'Your admin session is invalid or expired.' });
   const user: any = await userResponse.json();
-  const adminResponse = await fetch(
-    supabaseUrl + '/rest/v1/tour_cms_admins?select=user_id&user_id=eq.' + encodeURIComponent(user.id),
-    { headers: { apikey: supabaseAnonKey, Authorization: 'Bearer ' + token } },
-  );
-  if (!adminResponse.ok) return res.status(403).json({ error: 'Could not verify admin permissions.' });
-  const admins: any[] = await adminResponse.json();
-  if (!admins.some((admin) => admin.user_id === user.id)) {
-    return res.status(403).json({ error: 'Only authorized CMS admins can view the gallery count.' });
-  }
+  const access=await verifyCmsPermission(req as any,"gallery");
+  if(!access.ok)return res.status(access.status).json({error:access.error});
 
   const cloudName = process.env.CLOUDINARY_CLOUD_NAME || process.env.VITE_CLOUDINARY_CLOUD_NAME;
   const apiKey = process.env.CLOUDINARY_API_KEY;

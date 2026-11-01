@@ -117,3 +117,24 @@ export async function searchAnalytics(accessToken: string, siteUrl: string, star
   if (!response.ok) throw new Error(data?.error?.message || "Google Search Console could not return analytics.");
   return Array.isArray(data.rows) ? data.rows : [];
 }
+
+export async function verifyCmsPermission(req: ApiRequest, permission: string): Promise<{ ok: true; userId: string; isOwner: boolean } | { ok: false; status: number; error: string }> {
+  const rawAuthorization=req.headers.authorization;
+  const authorization=Array.isArray(rawAuthorization)?rawAuthorization[0]||"":rawAuthorization||"";
+  const token=authorization.startsWith("Bearer ")?authorization.slice(7):"";
+  const supabaseUrl=(process.env.SUPABASE_URL||process.env.VITE_SUPABASE_URL||"").replace(/\/$/,"");
+  const supabaseKey=process.env.SUPABASE_ANON_KEY||process.env.VITE_SUPABASE_PUBLISHABLE_KEY||process.env.VITE_SUPABASE_ANON_KEY;
+  if(!token||!supabaseUrl||!supabaseKey)return {ok:false,status:401,error:"A valid team session is required."};
+  try{
+    const userResponse=await fetch(supabaseUrl+"/auth/v1/user",{headers:{apikey:supabaseKey,Authorization:"Bearer "+token}});
+    if(!userResponse.ok)return {ok:false,status:401,error:"Your session is invalid or expired."};
+    const user:any=await userResponse.json();if(!user?.id)return {ok:false,status:401,error:"Could not verify account."};
+    const ownerResponse=await fetch(supabaseUrl+"/rest/v1/tour_cms_admins?select=user_id&user_id=eq."+encodeURIComponent(user.id),{headers:{apikey:supabaseKey,Authorization:"Bearer "+token}});
+    if(ownerResponse.ok){const owners:any[]=await ownerResponse.json();if(owners.some(x=>x.user_id===user.id))return {ok:true,userId:user.id,isOwner:true};}
+    const memberResponse=await fetch(supabaseUrl+"/rest/v1/team_members?select=role,status,permissions&user_id=eq."+encodeURIComponent(user.id),{headers:{apikey:supabaseKey,Authorization:"Bearer "+token}});
+    if(!memberResponse.ok)return {ok:false,status:403,error:"Could not verify team permissions."};
+    const rows:any[]=await memberResponse.json();const member=rows[0];
+    if(member?.role!=="team_member"||member?.status!=="active"||member?.permissions?.[permission]!==true)return {ok:false,status:403,error:"You do not have permission to access this module."};
+    return {ok:true,userId:user.id,isOwner:false};
+  }catch{return {ok:false,status:503,error:"Team permission verification is temporarily unavailable."};}
+}
