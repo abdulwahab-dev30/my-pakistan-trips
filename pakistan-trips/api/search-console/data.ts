@@ -1,5 +1,5 @@
-import type { ApiRequest, ApiResponse } from "../_lib/search-console";
-import { getCookie, REFRESH_COOKIE, refreshGoogleAccessToken, searchAnalytics, verifyCmsAdmin, clearCookie, dateString } from "../_lib/search-console";
+import type { ApiRequest, ApiResponse } from "../_lib/search-console.js";
+import { getCookie, REFRESH_COOKIE, refreshGoogleAccessToken, searchAnalytics, verifyCmsAdmin, clearCookie, dateString } from "../_lib/search-console.js";
 
 export default async function handler(req: ApiRequest, res: ApiResponse) {
   res.setHeader("Cache-Control", "no-store");
