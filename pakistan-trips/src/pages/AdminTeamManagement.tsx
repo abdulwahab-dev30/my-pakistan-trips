@@ -10,13 +10,13 @@ type Member={user_id:string;email:string;full_name:string|null;role:"owner"|"tea
 const modules=[["dashboard","Dashboard"],["tours","Tours CMS"],["international","International Tours"],["gallery","Gallery"],["homepage","Homepage Builder"],["faqs","FAQs"],["founder","Founder Profile"],["legal","Terms & Privacy"],["contact","Contact Information"],["leads","WhatsApp Leads"],["inbox","WhatsApp Inbox"],["analytics","Website Analytics"],["growth","Growth & SEO"],["activity","Activity Logs"],["team","Team Management"]];
 const defaults=Object.fromEntries(modules.map(([key])=>[key,false])) as Record<string,boolean>;
 export default function AdminTeamManagement(){
- const[session,setSession]=useState<any>(undefined),[authorized,setAuthorized]=useState(false),[menuOpen,setMenuOpen]=useState(false);
+ const[session,setSession]=useState<any>(undefined),[authorized,setAuthorized]=useState(false),[authChecked,setAuthChecked]=useState(false),[menuOpen,setMenuOpen]=useState(false);
  const[members,setMembers]=useState<Member[]>([]),[loading,setLoading]=useState(false),[saving,setSaving]=useState(false),[error,setError]=useState(""),[notice,setNotice]=useState("");
  const[email,setEmail]=useState(""),[fullName,setFullName]=useState(""),[permissions,setPermissions]=useState<Record<string,boolean>>({...defaults,tours:true,gallery:true,faqs:true,leads:true});
  const[editing,setEditing]=useState<string|null>(null);
- useEffect(()=>{let active=true;if(!supabaseConfigured||!supabase){setSession(null);return;}
- async function check(s:any){if(!s?.user){if(active){setSession(null);setAuthorized(false);}return;}if(active)setSession(s);try{const ok=await isCmsAdmin(s.user.id);if(active)setAuthorized(ok);}catch{if(active)setAuthorized(false);}}
- supabase.auth.getSession().then(({data})=>check(data.session));const{data:{subscription}}=supabase.auth.onAuthStateChange((_e,s)=>check(s));return()=>{active=false;subscription.unsubscribe();};
+ useEffect(()=>{let active=true;if(!supabaseConfigured||!supabase){setSession(null);setAuthChecked(true);return;}
+ async function check(nextSession:any){if(!active)return;setAuthChecked(false);if(!nextSession?.user){setSession(null);setAuthorized(false);setAuthChecked(true);return;}setSession(nextSession);try{const{data,error}=await supabase.auth.getUser();if(error||!data?.user){if(active)setAuthorized(false);return;}const ok=await isCmsAdmin(data.user.id);if(active)setAuthorized(ok);}catch{if(active)setAuthorized(false);}finally{if(active)setAuthChecked(true);}}
+ supabase.auth.getSession().then(({data})=>check(data.session));const{data:{subscription}}=supabase.auth.onAuthStateChange((_e,nextSession)=>{Promise.resolve().then(()=>check(nextSession));});return()=>{active=false;subscription.unsubscribe();};
  },[]);
  const request=useCallback(async(method="GET",body?:any)=>{if(!session?.access_token)throw new Error("Admin session expired. Please sign in again.");const response=await fetch("/api/team",{method,headers:{"Content-Type":"application/json",Authorization:"Bearer "+session.access_token},credentials:"same-origin",cache:"no-store",...(body?{body:JSON.stringify(body)}:{})});const data=await response.json();if(!response.ok)throw new Error(data.error||"Team request failed.");return data;},[session]);
  const load=useCallback(async()=>{setLoading(true);setError("");try{const data=await request();setMembers(data.members||[]);}catch(e:any){setError(e.message||"Could not load team.");}finally{setLoading(false);}},[request]);
@@ -24,7 +24,7 @@ export default function AdminTeamManagement(){
  async function invite(e:React.FormEvent){e.preventDefault();setSaving(true);setError("");setNotice("");try{await request("POST",{email:email.trim(),full_name:fullName.trim(),permissions});setEmail("");setFullName("");setNotice("Invitation sent. The member can join using the email invitation.");await load();}catch(e:any){setError(e.message||"Could not invite team member.");}finally{setSaving(false);}}
  async function savePermissions(member:Member){setSaving(true);setError("");setNotice("");try{await request("PATCH",{user_id:member.user_id,permissions:member.permissions});setEditing(null);setNotice("Team member permissions updated.");await load();}catch(e:any){setError(e.message||"Could not update permissions.");}finally{setSaving(false);}}
  async function toggleStatus(member:Member){if(member.role==="owner")return;const next=member.status==="disabled"?"active":"disabled";if(!window.confirm(next==="disabled"?"Disable this team member's dashboard access?":"Restore this team member's dashboard access?"))return;setSaving(true);setError("");try{await request("PATCH",{user_id:member.user_id,status:next});setNotice(next==="disabled"?"Team member disabled.":"Team member access restored.");await load();}catch(e:any){setError(e.message||"Could not update member.");}finally{setSaving(false);}}
- if(session===undefined)return <div className="grid min-h-screen place-items-center bg-slate-950 text-white">Checking admin session…</div>;
+ if(session===undefined||!authChecked)return <div className="grid min-h-screen place-items-center bg-slate-950 text-white">Checking admin session…</div>;
  if(!session)return <Navigate to="/admin/login" replace/>;
  if(!authorized)return <Navigate to="/admin/dashboard" replace/>;
  const owner=members.find(m=>m.role==="owner");
