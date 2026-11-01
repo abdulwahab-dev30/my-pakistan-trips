@@ -412,7 +412,7 @@ export default function AdminDashboard() {
             <section className="min-w-0 rounded-2xl border border-slate-800 bg-slate-900/70 p-4 sm:p-5">
               <div className="flex items-center gap-2"><Activity className="shrink-0 text-emerald-300" size={19}/><div className="min-w-0"><h3 className="font-bold">Analytics connections</h3><p className="mt-1 text-xs text-slate-500">External data sources for business analytics</p></div></div>
               <div className="mt-4 space-y-3">
-                <NotConnected title="Google Analytics 4" description="Connect GA4 separately to display visitors, sessions, page views, devices and traffic sources." icon={BarChart3}/>
+                <div className="flex min-w-0 items-center gap-3 rounded-xl border border-emerald-400/20 bg-emerald-400/5 p-3 sm:p-4"><div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-400/10 text-emerald-300"><BarChart3 size={18}/></div><div className="min-w-0 flex-1"><p className="font-semibold text-slate-200">Google Analytics 4</p><p className="mt-1 text-sm leading-6 text-slate-500">Visitors, devices, traffic sources, page views and key events.</p><a href="/admin/analytics" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-emerald-300 hover:text-emerald-200">Open Website Analytics <ExternalLink size={13}/></a></div></div>
               </div>
             </section>
           </div>
