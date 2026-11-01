@@ -82,7 +82,7 @@ export const Navbar: React.FC = () => {
             className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold text-sm flex items-center gap-2 shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all duration-300 border border-emerald-400/30"
           >
             <Phone className="w-4 h-4" />
-            <span>Book Inquiries</span>
+            <span>Book Trips</span>
           </motion.a>
         </div>
 
@@ -128,7 +128,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-full py-3 rounded-xl bg-emerald-500 text-white font-bold text-center block shadow-lg shadow-emerald-500/20"
                 >
-                  Book Inquiries
+                  Book Trips
                 </a>
               </div>
             </div>
