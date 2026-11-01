@@ -17,7 +17,7 @@ import { randomBytes } from "node:crypto";
 
 export const REFRESH_COOKIE = "mptr_sc_refresh";
 export const STATE_COOKIE = "mptr_sc_state";
-export const SCOPES = "https://www.googleapis.com/auth/webmasters.readonly";
+export const SCOPES = "https://www.googleapis.com/auth/webmasters.readonly https://www.googleapis.com/auth/analytics.readonly";
 
 export function getCookie(req: ApiRequest, name: string): string {
   const raw = req.headers.cookie;
