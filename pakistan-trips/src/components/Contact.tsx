@@ -218,6 +218,8 @@ export const CTA: React.FC = () => {
                   >
                     <option value="Lahore" className="bg-slate-900 text-white">Lahore</option>
                     <option value="Islamabad / Rawalpindi" className="bg-slate-900 text-white">Islamabad / Rawalpindi</option>
+                    <option value="Faisalabad" className="bg-slate-900 text-white">Faisalabad</option>
+                    <option value="Gujranwala" className="bg-slate-900 text-white">Gujranwala</option>
                     <option value="Other City" className="bg-slate-900 text-white">Other City</option>
                   </select>
                 </div>
