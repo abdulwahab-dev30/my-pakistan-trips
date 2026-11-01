@@ -105,7 +105,7 @@ export default function AdminGallery(){
     uploaded.push({public_id:result.public_id,version:result.version,format:result.format,secure_url:result.secure_url,created_at:result.created_at});
    }
    setImages(current=>[...current,...uploaded]);
-   setNotice("Uploaded "+uploaded.length+" image(s) with the fixed gallery tag. Save order to keep their position.");
+   setNotice("Uploaded "+uploaded.length+" image(s) with the fixed gallery tag. Save order to keep their position.");await logAdminActivity(session.access_token,{action:"Uploaded",entity:"gallery",description:"Uploaded "+uploaded.length+" Cloudinary gallery image(s)",metadata:{count:uploaded.length}});
   }catch(e:any){setError(e?.message||"Image upload failed.");}
   finally{setUploading(false);}
  }
