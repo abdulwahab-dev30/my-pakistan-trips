@@ -1,4 +1,5 @@
 import React from "react";
+import { Plane, Mountain } from "lucide-react";
 
 const DiscountBanner: React.FC = () => (
   <aside
@@ -14,9 +15,9 @@ const DiscountBanner: React.FC = () => (
             aria-hidden={item === 1}
           >
             <span>DISCOVER SKARDU & HUNZA BY AIR</span>
-            <span className="text-emerald-100" aria-hidden="true">✦</span>
+            <Plane className="h-4 w-4 shrink-0 text-emerald-100" aria-hidden="true" />
             <span className="font-medium">FLY TO THE MOUNTAINS · COMFORTABLE, HASSLE-FREE TOUR PACKAGES</span>
-            <span className="text-emerald-100" aria-hidden="true">✦</span>
+            <Mountain className="h-4 w-4 shrink-0 text-emerald-100" aria-hidden="true" />
           </div>
         ))}
       </div>
