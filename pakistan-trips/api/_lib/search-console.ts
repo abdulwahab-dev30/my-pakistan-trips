@@ -1,28 +1,43 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
+export type ApiRequest = {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  query: Record<string, string | string[] | undefined>;
+  body?: unknown;
+};
+export type ApiResponse = {
+  setHeader(name: string, value: string | string[]): void;
+  getHeader(name: string): string | string[] | number | undefined;
+  status(code: number): ApiResponse;
+  json(value: unknown): unknown;
+  send(value: string): unknown;
+  redirect(status: number, url: string): unknown;
+};
+
 import { randomBytes } from "node:crypto";
 
 export const REFRESH_COOKIE = "mptr_sc_refresh";
 export const STATE_COOKIE = "mptr_sc_state";
 export const SCOPES = "https://www.googleapis.com/auth/webmasters.readonly";
 
-export function getCookie(req: VercelRequest, name: string): string {
-  const header = req.headers.cookie || "";
-  const match = header.split(";").map(v => v.trim()).find(v => v.startsWith(name + "="));
+export function getCookie(req: ApiRequest, name: string): string {
+  const raw = req.headers.cookie;
+  const header = Array.isArray(raw) ? raw.join(";") : raw || "";
+  const match = header.split(";").map((value: string) => value.trim()).find((value: string) => value.startsWith(name + "="));
   return match ? decodeURIComponent(match.slice(name.length + 1)) : "";
 }
 
-function appendCookie(res: VercelResponse, cookie: string) {
+function appendCookie(res: ApiResponse, cookie: string) {
   const current = res.getHeader("Set-Cookie");
   const values = Array.isArray(current) ? current.map(String) : current ? [String(current)] : [];
   res.setHeader("Set-Cookie", [...values, cookie]);
 }
 
-export function setCookie(res: VercelResponse, name: string, value: string, maxAge: number) {
+export function setCookie(res: ApiResponse, name: string, value: string, maxAge: number) {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
   appendCookie(res, name + "=" + encodeURIComponent(value) + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=" + maxAge + secure);
 }
 
-export function clearCookie(res: VercelResponse, name: string) {
+export function clearCookie(res: ApiResponse, name: string) {
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
   appendCookie(res, name + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + secure);
 }
@@ -31,7 +46,7 @@ export function getRedirectUri() {
   return process.env.SEARCH_CONSOLE_REDIRECT_URI || "https://mypakistantrips.com/api/search-console/callback";
 }
 
-export function requireGoogleConfig(res: VercelResponse): boolean {
+export function requireGoogleConfig(res: ApiResponse): boolean {
   if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     res.status(503).json({ error: "Google Search Console is not configured yet. Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to Vercel Environment Variables." });
     return false;
@@ -39,8 +54,9 @@ export function requireGoogleConfig(res: VercelResponse): boolean {
   return true;
 }
 
-export async function verifyCmsAdmin(req: VercelRequest): Promise<{ ok: true; userId: string } | { ok: false; status: number; error: string }> {
-  const authorization = req.headers.authorization || "";
+export async function verifyCmsAdmin(req: ApiRequest): Promise<{ ok: true; userId: string } | { ok: false; status: number; error: string }> {
+  const rawAuthorization = req.headers.authorization;
+  const authorization = Array.isArray(rawAuthorization) ? rawAuthorization[0] || "" : rawAuthorization || "";
   const token = authorization.startsWith("Bearer ") ? authorization.slice(7) : "";
   const supabaseUrl = (process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || "").replace(/\/$/, "");
   const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY;
